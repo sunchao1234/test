@@ -30,8 +30,19 @@
 	
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="/assets/plugins/pace/pace.min.js"></script>
+	<script src="/assets/plugins/sweetalert/sweetalert.min.js"></script>
+
+	<script src="/assets/plugins/angular/angular.js"></script>
 	<!-- ================== END BASE JS ================== -->
 </head>
+<style>
+	.slimScrollDiv .centent_list{
+		display: none;
+	}
+	.modal-backdrop{
+		display: none;
+	}
+</style>
 <body>
 	<!-- begin #page-loader -->
 	<div id="page-loader" class="fade in"><span class="spinner"></span></div>

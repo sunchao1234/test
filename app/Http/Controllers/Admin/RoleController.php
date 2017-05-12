@@ -56,7 +56,16 @@ class RoleController extends BaseController
 
     public function getAddusage(){
         return view('admin.usage.add');
+    }
 
+    public function getAddusage1(){
+        return view('admin.usage.find');
+    }
+    public function getAddusage2(){
+        return view('admin.usage.change');
+    }
+    public function getAddusage3(){
+        return view('admin.usage.add');
     }
 
     /**
