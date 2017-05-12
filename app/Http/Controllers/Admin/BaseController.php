@@ -1,4 +1,5 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php
+namespace App\Http\Controllers\Admin;
 
 /**
 *    +----------------------------------------------------------------------
@@ -17,6 +18,8 @@ use App\Models\Admin\AdminModModel,
     App\Models\Admin\AdminRoleGroupModel;
 
 use Illuminate\Routing\Controller;
+use Validator;
+use Request;
 
 class BaseController extends Controller
 {
@@ -93,6 +96,23 @@ class BaseController extends Controller
         }
 
         $this->ca = get_in();
+    }
+    protected function valid($valid, $message=[]) {
+        $request = Request::input();
+        if('POST' == Request::method()) {
+            if(Request::has('_token')) {
+                die(json_encode(['code'=>5102,'msg'=>'_token不能为空','data'=>[]]));
+            }
+        }
+        
+        $validator = Validator::make($request, $vaild, $message);
+
+        dd($validator);
+        dd(1);
+        if ($validator->fails()) {
+            die(json_encode(['code'=>5108,'msg'=>$validator->errors()->first(),'data'=>[]]));
+        }
+        return $request();
     }
 
 
