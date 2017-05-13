@@ -40,6 +40,13 @@ class UploadPic extends BaseModel {
         if(empty($request)) {
             throw new \Exception('images不能为空');
         }
+        
+        $this->insertData($request);
+    }
+    public function insertData($request = []) {
+        if(empty($request)) {
+            $request = Request::input();
+        }
 
         $insertData = [];
         foreach($request as $key=>$val) {

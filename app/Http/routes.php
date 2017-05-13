@@ -11,5 +11,6 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     Route::get('/registration/index', 'RegistrationController@index');
     Route::post('/registration/register', 'RegistrationController@register');
     Route::post('/registration/upload', 'RegistrationController@upload');
+    Route::post('/registration/fill_permit', 'RegistrationController@fillPermit');
 });
 

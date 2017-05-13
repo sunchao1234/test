@@ -47,4 +47,8 @@ class MiddleModels {
             return ['code'=>5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
         }
     }
+    public function fillPermit() {
+        $this->uploadModel->insertData();
+        return ['code'=>0,'msg'=>'success','data'=>[]];
+    }
 }
