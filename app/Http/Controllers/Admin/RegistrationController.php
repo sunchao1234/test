@@ -7,6 +7,7 @@ use Request;
 use App\Models\Registration\Registration;
 use App\Models\Registration\DriverInfo;
 use App\Models\Registration\RegistrationDetail;
+use App\Models\Registration\MiddleModels;
 
 class RegistrationController extends BaseController {
 
@@ -41,6 +42,10 @@ class RegistrationController extends BaseController {
 
     public function getDetail(RegistrationDetail $detail) {
         $res = $detail->getDetail();
+        return response()->json($res);
+    }
+    public function upload(MiddleModels $middle) {
+        $res = $middle->upload();
         return response()->json($res);
     }
 }

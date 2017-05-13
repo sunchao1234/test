@@ -14,5 +14,6 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     Route::get('/registration/get_driver_info', 'RegistrationController@getDriverInfo');
     Route::get('/registration/add_detail', 'RegistrationController@addDetail');
     Route::get('/registration/get_detail', 'RegistrationController@getDetail');
+    Route::post('/registration/upload', 'RegistrationController@upload');
 });
 

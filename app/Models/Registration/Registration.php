@@ -41,7 +41,26 @@ class Registration extends BaseModel {
                 ->orderBy('id','desc')
                 ->first();
 
-        return ['code'=>0,'msg'=>'success','data'=>$result];
+        return $result;
+    }
+    public function updateData() {
+
+        $id = Request::input('id');
+        $request = Request::input();
+        $updateData = [
+            'number'        => $request['number'],
+            'license_plate' => $request['license_plate'],
+            'product'       => $request['product'],
+            'use_unit'      => $request['use_unit'],
+            'car_brand'     => $request['cat_brand'],
+            'install_unit'  => $request['install_unit'],
+            'install_date'  => strtotime($request['install_date']),
+            'update_time'   => time()
+        ];
+        $res = app('db')->table('admin_registration')->where('id',$id)->update($updateData);
+        if(!$res) {
+            throw new \Exception('更新数据失败');
+        }
     }
     protected function setWhere($db,$where) {
         $request = Request::input();
