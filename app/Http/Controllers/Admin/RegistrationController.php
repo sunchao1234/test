@@ -19,9 +19,9 @@ class RegistrationController extends BaseController {
         }
         return response()->json($res);
     }
-    public function index(Registration $reg) {
+    public function index(MiddleModels $mid) {
         try{
-            $res = $reg->index();
+            $res = $mid->index();
         } catch(\Exception $e) {
             $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
         }

@@ -58,7 +58,14 @@ class UploadPic extends BaseModel {
         }
     }
     public function getData($number) {
+        if(empty($number)) {
+            throw new \Exception('number不能为空');
+        }
         $result = app('db')->table('admin_registration_pic')
-                ->where('delete_time',0);
+                ->where('delete_time',0)
+                ->where('number',$number)
+                ->select('id','number','pic_url','type')
+                ->get();
+        return $result;
     }
 }

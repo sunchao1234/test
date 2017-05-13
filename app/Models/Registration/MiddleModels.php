@@ -17,25 +17,25 @@ class MiddleModels {
     }
     public function register() {
 
-        try{
-            $number = $this->regModel->register();
-            $this->driverModel->addInfo($number);
-            $this->regDetailModel->addDetail($number);
-            $this->uploadModel->addData($number);
-            return ['code'=>0,'msg'=>'success','data'=>[]];
-        } catch(\Exception $e) {
-            return ['code'=>5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
-        }
+        $number = $this->regModel->register();
+        $this->driverModel->addInfo($number);
+        $this->regDetailModel->addDetail($number);
+        $this->uploadModel->addData($number);
+        return ['code'=>0,'msg'=>'success','data'=>[]];
     }
     public function index() {
-        try {
+        $reg = $this->regModel->index();
+        if(!empty($reg)) {
+            $driver = $this->driverModel->getInfo($reg->number);
+            $imgs   = $this->uploadModel->getData($reg->number);
+            $detail = $this->regDetailModel->getDetail($reg->number);
+            $res    = ['registration'=>$reg,'driver_info'=>$driver,
+                       'imgs'=>$imgs,'detail'=>$detail];
+        }else {
+            $res    = [];
+        }
 
-            $reg = $this->regModel->index();
-            if(empty($reg)) {
-            }
-            $regDetail = $this->regDetailModel->getDetail($reg->number);
-
-        }catch(\Exception $e){}
+        return ['code'=>0,'msg'=>'success','data'=>$res];
     }
 
     public function upload() {
