@@ -21,6 +21,7 @@ class Registration extends BaseModel {
             'car_brand'     => $request['cat_brand'],
             'install_unit'  => $request['install_unit'],
             'install_date'  => strtotime($request['install_date']),
+            'is_personal'   => (int)$request['is_personal'],
             'create_time'   => time(),
             'update_time'   => time()
         ];
@@ -28,7 +29,7 @@ class Registration extends BaseModel {
         if(!res) {
             throw new \Exception('写入数据失败');
         }
-        return ['code'=>0,'msg'=>'success','data'=>$insertData];
+        return $request['number'];
     }
     public function index() {
         $where = ['number','license_plate'];
@@ -39,6 +40,7 @@ class Registration extends BaseModel {
                               'car_brand','install_date','install_unit','create_time')
                 // ->paginate(self::$pageNumber);
                 ->orderBy('id','desc')
+                ->where('delete_time',0)
                 ->first();
 
         return $result;

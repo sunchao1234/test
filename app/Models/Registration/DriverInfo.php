@@ -7,11 +7,17 @@ use Request;
 
 class DriverInfo extends BaseModel {
 
-    public function addInfo() {
+    public function addInfo($number) {
         $request = Request::input('driver_data');
-        $insertData = array_map(function($key,$val) {
+        if(empty($request)) {
+            throw new \Exception('driver_data不能为空');
+        }
+        if(empty($number)) {
+            throw new \Exception('number不能为空');
+        }
+        $insertData = array_map(function($key,$val)use ($number) {
             return [
-                'number'        => $val['number'],
+                'number'        => $number,
                 'name'          => $val['name'],
                 'id_card'       => $val['id_card'],
                 'remark'        => $val['remark'],
@@ -27,6 +33,9 @@ class DriverInfo extends BaseModel {
         return ['code'=>0,'msg'=>'success','data'=>$insertData];
     }
     public function getInfo($number) {
+        if(empty($number)) {
+            throw new \Exception('number不能为空');
+        }
         // $number = Request::input('number','');
         // if(empty($number)) {
         //     throw new \Exception('number不能为空');

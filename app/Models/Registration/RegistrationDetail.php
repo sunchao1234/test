@@ -7,14 +7,17 @@ use Request;
 
 class RegistrationDetail extends BaseModel {
 
-    public function addDetail() {
+    public function addDetail($number) {
         $request = Request::input('reg_det_data');
         if(empty($request)) {
-            throw new \Exception('请不要漏填');
+            throw new \Exception('reg_det_data不能为空');
         }
-        $insertData = array_map(function($key,$val) {
+        if(empty($number)) {
+            throw new \Exception('number不能为空');
+        }
+        $insertData = array_map(function($key,$val)use ($number) {
             return [
-                'number'        => $val['number'],
+                'number'        => $number,
                 'device_number' => $val['device_number'],
                 'made_unit'     => $val['made_unit'],
                 'made_date'     => $val['made_date'],
@@ -32,16 +35,19 @@ class RegistrationDetail extends BaseModel {
         return ['code'=>0,'msg'=>'success','data'=>$insertData];
     }
     public function getDetail($number) {
+        if(empty($number)) {
+            throw new \Exception('number不能为空');
+        }
         // $number = Request::input('number');
         // if(empty($number)) {
         //     throw new \Exception('id不能为空');
         // }
-        $result = $db->where('number',$number)
+        $result = app('db')->where('number',$number)
                 ->select('id','number','device_number','made_unit','made_date',
                          'product_number','volume','next_time_check_date','create_time')
                 ->where('detele_time',0)
                 ->get();
-        return ['code'=>0,'msg'=>'success','data'=>$result];
+        return $result;
     }
     public function check() {
         try{

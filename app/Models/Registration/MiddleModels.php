@@ -18,9 +18,10 @@ class MiddleModels {
     public function register() {
 
         try{
-            $this->regModel->register();
-            $this->driverModel->addInfo();
-            $this->regDetailModel->addDetail();
+            $numnber = $this->regModel->register();
+            $this->driverModel->addInfo($number);
+            $this->regDetailModel->addDetail($number);
+            $this->uploadModel->addData($number);
             return ['code'=>0,'msg'=>'success','data'=>[]];
         } catch(\Exception $e) {
             return ['code'=>5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];

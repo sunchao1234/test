@@ -14,17 +14,49 @@ class UploadPic extends BaseModel {
             throw new \Exception('img不能为空');
         }
         $pics = Request::file('img');
+        $type = Request::input('type');
+        if(empty($type)) {
+            throw new \Exception('type不能为空');
+        }
+        $type = ['type'=>$type];
         $file_path = 'upload';
         if(!file_exists($file_path)) mkdir($file_path,0777,true);
 
         $new_path = [];
+        $url = [];
         foreach($pics as $pic) {
             $client_name = $pic->getClientOriginalName();
             $extension   = $pic->getClientOriginalExtension();
             $new_name    = md5(date('ymdhis').$client_name).".".$extension;
             $path        = $pic->move($file_path,$new_name);
-            array_push($new_path, $file_path . '/' . $new_name);
+            array_push($url, $file_path . '/' . $new_name);
         }
+        $new_path = array_merge($url,$type);
         return $new_path;
+    }
+    public function addData($number) {
+        $request = Request::input('images',[]);
+        if(empty($request)) {
+            throw new \Exception('images不能为空');
+        }
+
+        $insertData = array_map(function($key,$val) use ($number) {
+            return [
+                'number'  => $number,
+                'pic_url' => $val['pic_url'],
+                'type'    => $key,
+                'cteate_time' => time(),
+                'update_time' => time()
+            ];
+        }, $request);
+        $res = app('db')->table('admin_registration_pic')->insert($insertData);
+
+        if(!$res) {
+            throw new \Exception('写入数据失败');
+        }
+    }
+    public function getData($number) {
+        $result = app('db')->table('admin_registration_pic')
+                ->where('delete_time',0)
     }
 }

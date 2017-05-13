@@ -10,10 +10,6 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     Route::controller('/role',     'RoleController');
     Route::get('/registration/index', 'RegistrationController@index');
     Route::get('/registration/register', 'RegistrationController@register');
-    Route::get('/registration/add_driver_info', 'RegistrationController@addDriverInfo');
-    Route::get('/registration/get_driver_info', 'RegistrationController@getDriverInfo');
-    Route::get('/registration/add_detail', 'RegistrationController@addDetail');
-    Route::get('/registration/get_detail', 'RegistrationController@getDetail');
     Route::post('/registration/upload', 'RegistrationController@upload');
 });
 

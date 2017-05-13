@@ -11,9 +11,9 @@ use App\Models\Registration\MiddleModels;
 
 class RegistrationController extends BaseController {
 
-    public function register(Registration $reg) {
+    public function register(MiddleModels $mid) {
         try{
-            $res = $reg->register();
+            $res = $mid->register();
         } catch(\Exception $e) {
             $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
         }
