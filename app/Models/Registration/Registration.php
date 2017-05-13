@@ -18,7 +18,7 @@ class Registration extends BaseModel {
             'license_plate' => $request['license_plate'],
             'product'       => $request['product'],
             'use_unit'      => $request['use_unit'],
-            'car_brand'     => $request['cat_brand'],
+            'car_brand'     => $request['car_brand'],
             'install_unit'  => $request['install_unit'],
             'install_date'  => strtotime($request['install_date']),
             'is_personal'   => (int)$request['is_personal'],

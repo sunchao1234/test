@@ -15,7 +15,7 @@ class DriverInfo extends BaseModel {
         if(empty($number)) {
             throw new \Exception('number不能为空');
         }
-        $insertData = array_map(function($key,$val)use ($number) {
+        $insertData = array_map(function($val)use ($number) {
             return [
                 'number'        => $number,
                 'name'          => $val['name'],

@@ -41,15 +41,16 @@ class UploadPic extends BaseModel {
             throw new \Exception('images不能为空');
         }
 
-        $insertData = array_map(function($key,$val) use ($number) {
-            return [
+        $insertData = [];
+        foreach($request as $key=>$val) {
+            $insertData = [
                 'number'  => $number,
-                'pic_url' => $val['pic_url'],
+                'pic_url' => $val,
                 'type'    => $key,
-                'cteate_time' => time(),
+                'create_time' => time(),
                 'update_time' => time()
             ];
-        }, $request);
+        }
         $res = app('db')->table('admin_registration_pic')->insert($insertData);
 
         if(!$res) {

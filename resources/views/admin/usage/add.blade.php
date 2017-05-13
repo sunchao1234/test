@@ -209,7 +209,7 @@
                                     </div>
 
                                     <form id="uploadForm" style="display: none">
-                                        <input name='_token' class='hide' value='<?php echo e(csrf_token()); ?>'>
+                                        <input name='_token' class='hide' id='token' value='<?php echo e(csrf_token()); ?>'>
                                         <input type="hidden" name="type" value='1'/>
                                         <input type="file" multiple="multiple" id='uploadFile' name='img[]'>
                                     </form>
@@ -610,7 +610,7 @@
                 success: function (data) {
                     if (data.code == 0) {
                         var type = imgType;
-                        addImg(data.data, type);
+                        addImg(data.data.imgs, type);
                         console.log(imgType);
                     }
                 },
@@ -688,10 +688,11 @@
             $scope.save = function(){
                 var data = $scope.data;
                 data.images = $scope.imgs;
+                data._token = $("#token").val();
                 $.ajax({
                     url:"../../admin/registration/register",
                     data:data,
-                    type:'get',
+                    type:'post',
                     success:function(data){
                         console.log(data);
                     }

@@ -18,7 +18,7 @@ class MiddleModels {
     public function register() {
 
         try{
-            $numnber = $this->regModel->register();
+            $number = $this->regModel->register();
             $this->driverModel->addInfo($number);
             $this->regDetailModel->addDetail($number);
             $this->uploadModel->addData($number);
