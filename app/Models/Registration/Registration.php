@@ -110,7 +110,9 @@ class Registration extends BaseModel {
 
         $where = ['license_plate'];
         $db = $this->setLIKE($db,$where);
-        $result = $db->select('license_plate')->get();
+        $result = $db->select('license_plate')
+                ->limit(50)
+                ->get();
 
         return $result;
     }
