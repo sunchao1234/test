@@ -27,21 +27,28 @@ class RegistrationController extends BaseController {
         }
         return response()->json($res);
     }
-    public function addDriverInfo(DriverInfo $info) {
-        $res = $reg->addInfo();
+    public function fillPermit(MiddleModels $mid) {
+        try{
+            $res = $mid->fillPermit();
+        } catch(\Exception $e) {
+            $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
+        }
         return response()->json($res);
     }
-    public function getDriverInfo(DriverInfo $info) {
-        $res = $reg->getInfo();
+    public function replacement(MiddleModels $mid) {
+        try{
+            $res = $mid->replacement();
+        } catch(\Exception $e) {
+            $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
+        }
         return response()->json($res);
     }
-    public function addDetail(RegistrationDetail $detail) {
-        $res = $detail->addDetail();
-        return response()->json($res);
-    }
-
-    public function getDetail(RegistrationDetail $detail) {
-        $res = $detail->getDetail();
+    public function cancellation(MiddleModels $mid) {
+        try{
+            $res = $mid->cancellation();
+        } catch(\Exception $e) {
+            $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
+        }
         return response()->json($res);
     }
     public function upload(MiddleModels $middle) {

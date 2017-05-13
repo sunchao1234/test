@@ -48,7 +48,17 @@ class MiddleModels {
         }
     }
     public function fillPermit() {
-        $this->uploadModel->insertData();
+        $this->uploadModel->modifyData();
+        $this->regModel->updateData();
+        return ['code'=>0,'msg'=>'success','data'=>[]];
+    }
+    public function replacement() {
+        $this->uploadModel->modifyData();
+        return ['code'=>0,'msg'=>'success','data'=>[]];
+    }
+    public function cancellation() {
+        $this->regModel->updateData(['cancellation'=>time()]);
+        $this->uploadModel->modifyData();
         return ['code'=>0,'msg'=>'success','data'=>[]];
     }
 }

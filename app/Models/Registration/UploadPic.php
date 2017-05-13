@@ -40,14 +40,6 @@ class UploadPic extends BaseModel {
         if(empty($request)) {
             throw new \Exception('images不能为空');
         }
-        
-        $this->insertData($request);
-    }
-    public function insertData($request = []) {
-        if(empty($request)) {
-            $request = Request::input();
-        }
-
         $insertData = [];
         foreach($request as $key=>$val) {
             $insertData = [
@@ -63,6 +55,40 @@ class UploadPic extends BaseModel {
         if(!$res) {
             throw new \Exception('写入数据失败');
         }
+    }
+    public function modifyData() {
+        $request = Request::input();
+
+        if(empty($request)) {
+            throw new \Exception('没有数据');
+        }
+
+        $insertData = [];
+        foreach($request['images'] as $key=>$val) {
+            if(app('db')->table('admin_registration_pic')
+               ->where('delete_time',0)
+               ->where('number',$request['number'])
+               ->where('type',$key)->exists()) {
+                app('db')->table('admin_registration_pic')
+                    ->where('delete_time',0)
+                    ->where('number',$request['number'])
+                    ->where('type',$key)
+                    ->update(['pic_url'=>$val,'update_time'=>time()]);
+            }else {
+                $insertData = [
+                    'number'  => $request['number'],
+                    'pic_url' => $val,
+                    'type'    => $key,
+                    'create_time' => time(),
+                    'update_time' => time()
+                ];
+            }
+        }
+        $res = app('db')->table('admin_registration_pic')->insert($insertData);
+
+        if(!$res) {
+            throw new \Exception('写入数据失败');
+        }            
     }
     public function getData($number) {
         if(empty($number)) {

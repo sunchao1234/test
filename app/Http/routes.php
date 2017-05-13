@@ -12,5 +12,7 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     Route::post('/registration/register', 'RegistrationController@register');
     Route::post('/registration/upload', 'RegistrationController@upload');
     Route::post('/registration/fill_permit', 'RegistrationController@fillPermit');
+    Route::post('/registration/replacement', 'RegistrationController@replacement');
+    Route::post('/registration/cancellation', 'RegistrationController@cancellation');
 });
 

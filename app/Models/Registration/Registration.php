@@ -45,20 +45,28 @@ class Registration extends BaseModel {
 
         return $result;
     }
-    public function updateData() {
+    public function updateData($update = []) {
 
         $id = Request::input('id');
+        if(empty($id)) {
+            throw new \Exception('id不能为空');
+        }
         $request = Request::input();
-        $updateData = [
-            'number'        => $request['number'],
-            'license_plate' => $request['license_plate'],
-            'product'       => $request['product'],
-            'use_unit'      => $request['use_unit'],
-            'car_brand'     => $request['cat_brand'],
-            'install_unit'  => $request['install_unit'],
-            'install_date'  => strtotime($request['install_date']),
-            'update_time'   => time()
-        ];
+        $columns = ['number','license_plate','product','use_unit','car_brand','install_unit','install_date'];
+
+        $updateData = array_where($request,function($key,$val) use ($columns) {
+            return in_array($key,$columns);
+        });
+        if(isset($updateData['install_date'])) {
+            $updateData['install_date'] = strtotime($updateData['install_date']);
+        }
+        if(!empty($update)) {
+            $updateData = array_merge($updateData,$update);
+        }
+        if(empty($updateData)) {
+            throw new \Exception('没有更新数据');
+        }
+        $updateData = array_add($updateData,'update_time',time());
         $res = app('db')->table('admin_registration')->where('id',$id)->update($updateData);
         if(!$res) {
             throw new \Exception('更新数据失败');
