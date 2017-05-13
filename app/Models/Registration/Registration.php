@@ -37,7 +37,8 @@ class Registration extends BaseModel {
         $db = $this->setWhere($db,$where);
 
         $result = $db->select('id','number','license_plate','product','use_unit',
-                              'car_brand','install_date','install_unit','create_time')
+                              'car_brand','install_date','install_unit',
+                              'create_time','is_personal','cancellation')
                 // ->paginate(self::$pageNumber);
                 ->orderBy('id','desc')
                 ->where('delete_time',0)
