@@ -39,13 +39,14 @@
                             <div data-scrollbar="true" data-height="100%" class="wrapper" style="background:#FFF;">
                                 <div class="panel panel-default" data-sortable-id="ui-widget-1">
                                     <style>
-                                        #printContent1,#printContent2{
+                                        #printContent1, #printContent2 {
                                             display: none;
                                         }
                                     </style>
 
                                     <div id="printContent1" style="border: 1px solid #000;">
-                                        <h1 style="padding: 180px  0px;font-weight:bolder;text-align: center">车用气瓶使用登记证</h1>
+                                        <h1 style="padding: 180px  0px;font-weight:bolder;text-align: center">
+                                            车用气瓶使用登记证</h1>
                                         <style>
                                             .label_font {
                                                 font-size: 15px;
@@ -95,29 +96,33 @@
                                     </div>
 
 
-
                                     <div id="printContent2" style="">
                                         <style>
-                                            #printContent2 table thead{
+                                            #printContent2 table thead {
                                                 font-size: 14px;
                                             }
-                                            #printContent2 tbody{
+
+                                            #printContent2 tbody {
                                                 font-size: 13px;
                                             }
-                                            .print_span{
+
+                                            .print_span {
                                                 font-size: 14px;
                                             }
-                                            .print_span span{
+
+                                            .print_span span {
                                                 display: inherit;
                                             }
-                                            .header_p{
+
+                                            .header_p {
                                                 font-weight: bolder;
                                                 text-align: center;
                                                 margin: 0px;
                                             }
                                         </style>
                                         <div style="border: 1px solid #000">
-                                            <h2 style="margin: 20px  0px;font-weight:bolder;text-align: center">车用气瓶使用登记证</h2>
+                                            <h2 style="margin: 20px  0px;font-weight:bolder;text-align: center">
+                                                车用气瓶使用登记证</h2>
                                             <table class="table table-bordered" style="background-color:#fff">
                                                 <thead>
                                                 <tr>
@@ -176,7 +181,8 @@
 
                                             <div class="print_span">
                                                 <p class="header_p">气瓶使用注意事项</p>
-                                                <p  class="header_p">气瓶应当按照安全技术规范的规定，在安全检验合格的有效期内使用</p>
+
+                                                <p class="header_p">气瓶应当按照安全技术规范的规定，在安全检验合格的有效期内使用</p>
                                                 <span>1.严格按照使用说明书的要求使用气瓶</span>
                                                 <span>2.充装前后应当对气瓶及附件进行安全状况检查</span>
                                                 <span>3.禁止与油脂、化学品、硬件等物质接触，严禁划伤、磕碰、腐蚀和挤压</span>
@@ -188,11 +194,13 @@
                                                 <span>9.应当经常对气瓶及安全附件进行检查和日常维护，做到清洁、紧固、无漏、正常工作</span>
                                                 <span>10.不得充装不合格燃气</span>
                                                 <span>11.气瓶应当按时送检，不得使用超期未检气瓶。</span>
-                                                <p  class="header_p" style="margin: 10px 0px">本证件不得转让、涂改，如有遗失、损坏，须向发证机关申请补发</p>
+
+                                                <p class="header_p" style="margin: 10px 0px">
+                                                    本证件不得转让、涂改，如有遗失、损坏，须向发证机关申请补发</p>
                                             </div>
                                         </div>
 
-                                        <div >
+                                        <div>
                                             <p>《特种设备安全法》第三十三条规定：“特种设备使用单位应当在特种设
                                                 备投入使用前或者投入使用后三十日内，向负责特种设备安全监督的部门办理使用
                                                 登记，取得使用登记证书。登记标志应当置于该特种设备的显著位置。”
@@ -200,13 +208,16 @@
                                         </div>
                                     </div>
 
-
-
+                                    <form id="uploadForm" style="display: none">
+                                        <input name='_token' class='hide' value='<?php echo e(csrf_token()); ?>'>
+                                        <input type="hidden" name="type" value='1'/>
+                                        <input type="file" multiple="multiple" id='uploadFile' name='img[]'>
+                                    </form>
 
                                     <div id="validate" role="form" name="create_form"
-                                          class="form-horizontal form-bordered"
-                                          action=""
-                                          method="post" enctype="multipart/form-data">
+                                         class="form-horizontal form-bordered"
+                                         action=""
+                                         method="post" enctype="multipart/form-data">
                                         <div class="form-body">
                                             <!-- 默认开启了 csrf验证 非POST请求token必须加  -->
 
@@ -214,7 +225,8 @@
                                                 <label class='control-label col-md-2'>登记证编号</label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
-                                                    <input id="" name="" class="form-control" type="text"/>
+                                                    <input id="" name="" class="form-control" ng-model="data.number"
+                                                           type="text"/>
                                                 </div>
                                             </div>
 
@@ -222,7 +234,8 @@
                                                 <label class="control-label col-md-2">车牌号码</label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
-                                                    <input id="" name="" class="form-control" type="text"/>
+                                                    <input id="" name="" class="form-control"
+                                                           ng-model="data.license_plate" type="text"/>
                                                 </div>
                                             </div>
 
@@ -230,10 +243,10 @@
                                                 <label class="control-label col-md-2">充装介质</label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
-                                                    <select class="form-control">
-                                                        <option>压缩天然气</option>
-                                                        <option>液化天然气</option>
-                                                        <option>液化石油气</option>
+                                                    <select class="form-control" ng-model="data.product">
+                                                        <option value="0">压缩天然气</option>
+                                                        <option value="1">液化天然气</option>
+                                                        <option value="2">液化石油气</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -242,7 +255,8 @@
                                                 <label class="control-label col-md-2">使用单位</label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
-                                                    <input id="" name="" class="form-control" type="text"/>
+                                                    <input id="" name="" class="form-control" ng-model="data.use_unit"
+                                                           type="text"/>
                                                 </div>
                                             </div>
 
@@ -250,7 +264,8 @@
                                                 <label class="control-label col-md-2">车 种</label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
-                                                    <input id="" name="" class="form-control" type="text"/>
+                                                    <input id="" name="" class="form-control" ng-model="data.car_brand"
+                                                           type="text"/>
                                                 </div>
                                             </div>
 
@@ -258,7 +273,8 @@
                                                 <label class="control-label col-md-2">安装单位</label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
-                                                    <input id="" name="" class="form-control" type="text"/>
+                                                    <input id="" name="" class="form-control"
+                                                           ng-model="data.install_unit" type="text"/>
                                                 </div>
                                             </div>
 
@@ -266,88 +282,172 @@
                                                 <label class="control-label col-md-2">日期</label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
-                                                    <input id="" name="" class="form-control datepicker" type="text"/>
+                                                    <input id="" name="" class="form-control datepicker"
+                                                           ng-model="data.install_date" type="text"/>
                                                 </div>
                                             </div>
 
-                                            <div clas="form-group">
-                                                <button type="button" class='btn'>上传合格证</button>
-                                            </div>
+
                                             <div class="form-group">
-                                                <button type="button" class='btn'>上传监督检验证书</button>
+                                                <label class="control-label col-md-2">
+                                                    合格证
+                                                </label>
+
+                                                <div>
+                                                    <a ng-repeat="item in imgs[1]" style="margin: 5px;float:left">
+                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                    </a>
+                                                </div>
+                                                <button type="button" ng-click="upload(1)" class='btn btn-info'>上传
+                                                </button>
+
                                             </div>
+
+
                                             <div class="form-group">
-                                                <button type="button" class='btn'>上传监证明书证书</button>
+                                                <label class="control-label col-md-2">
+                                                    监督检验证书
+                                                </label>
+                                                <div>
+                                                    <a ng-repeat="item in imgs[2]" style="margin: 5px;float:left">
+                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                    </a>
+                                                </div>
+                                                <button type="button" class='btn  btn-info' ng-click="upload(2)">上传
+                                                </button>
                                             </div>
+
+
                                             <div class="form-group">
-                                                <button type="button" class='btn'>上传特种设备监督检验证书</button>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="button" class='btn'>上传特种设备监督检验证书</button>
+                                                <label class="control-label col-md-2">
+                                                    检验质量证明书证书
+                                                </label>
+                                                <div>
+                                                    <a ng-repeat="item in imgs[3]" style="margin: 5px;float:left">
+                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                    </a>
+                                                </div>
+                                                <button type="button" ng-click="upload(3)" class='btn btn-info'>上传
+                                                </button>
                                             </div>
 
                                             <div class="form-group">
-                                                <button type="button" class='btn'>上传汽车行驶证</button>
+                                                <label class="control-label col-md-2">
+                                                    特种设备监督检验证书
+                                                </label>
+                                                <div>
+                                                    <a ng-repeat="item in imgs[4]" style="margin: 5px;float:left">
+                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                    </a>
+                                                </div>
+                                                <button type="button" ng-click="upload(4)" class='btn btn-info'>上传
+                                                </button>
                                             </div>
 
                                             <div class="form-group">
-                                                <input type='checkbox'/>
-                                                <button type="button" class='btn'>上传运营证</button>
+                                                <label class="control-label col-md-2">
+                                                    汽车行驶证
+                                                </label>
+                                                <div>
+                                                    <a ng-repeat="item in imgs[5]" style="margin: 5px;float:left">
+                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                    </a>
+                                                </div>
+                                                <button type="button" ng-click="upload(5)" class='btn btn-info'>上传
+                                                </button>
                                             </div>
 
                                             <div class="form-group">
-                                                <button type="button" class='btn'>上传驾驶证</button>
+                                                <label class="control-label col-md-2">
+                                                    运营证
+                                                </label>
+                                                <input type='checkbox' ng-model="data.is_personal"/>
+                                                <div ng-model="data.is_personal">
+                                                    <a ng-repeat="item in imgs[6]" style="margin: 5px;float:left">
+                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                    </a>
+                                                </div>
+                                                <button type="button" ng-click="upload(6)" ng-if="data.is_personal"
+                                                        class='btn btn-info'>上传
+                                                </button>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2">
+                                                    驾驶证
+                                                </label>
+                                                <div>
+                                                    <a ng-repeat="item in imgs[7]" style="margin: 5px;float:left">
+                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                    </a>
+                                                </div>
+                                                <button type="button" ng-click="upload(7)" class='btn btn-info'>上传
+                                                </button>
                                             </div>
                                         </div>
 
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#myModal">
                                             添加
                                         </button>
 
                                         <!-- Modal -->
-                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                             aria-labelledby="myModalLabel">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close"><span
+                                                                    aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title" id="">Modal title</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="form-group">
-                                                            <label for="" >设备编号</label>
-                                                            <input type="text" class="form-control" ng-model="regDetData.device_number" id="">
-                                                        </div>
+                                                        <form id="regDetData">
+                                                            <div class="form-group">
+                                                                <label for="">设备编号</label>
+                                                                <input type="text" class="form-control"
+                                                                       name="device_number">
+                                                            </div>
 
-                                                        <div class="form-group">
-                                                            <label for="recipient-name">制造单位</label>
-                                                            <input type="text" class="form-control" ng-model="regDetData.made_unit">
-                                                        </div>
+                                                            <div class="form-group">
+                                                                <label for="recipient-name">制造单位</label>
+                                                                <input type="text" class="form-control"
+                                                                       name="made_unit">
+                                                            </div>
 
-                                                        <div class="form-group">
-                                                            <label for="recipient-name">制造日期</label>
-                                                            <input class='form-control made_date' readonly ng-model="regDetData.made_date"  />
-                                                        </div>
+                                                            <div class="form-group">
+                                                                <label for="recipient-name">制造日期</label>
+                                                                <input class='form-control made_date' readonly
+                                                                       name="made_date"/>
+                                                            </div>
 
-                                                        <div class='form-group'>
-                                                            <label>产品编号</label>
-                                                            <input class="form-control" ng-model="regDetData.product_number">
-                                                        </div>
+                                                            <div class='form-group'>
+                                                                <label>产品编号</label>
+                                                                <input class="form-control"
+                                                                       name="product_number">
+                                                            </div>
 
-                                                        <div class="form-group">
-                                                            <label>容积</label>
-                                                            <input class='form-control' ng-model="regDetData.volume"/>
-                                                        </div>
+                                                            <div class="form-group">
+                                                                <label>容积</label>
+                                                                <input class='form-control' name="volume"/>
+                                                            </div>
 
-                                                        <div class="form-group">
-                                                            <label for="recipient-name" >下次检测日期</label>
-                                                            <input class='form-control made_date' ng-model="regDetData.next_time_check_date" />
-                                                        </div>
-
+                                                            <div class="form-group">
+                                                                <label for="recipient-name">下次检测日期</label>
+                                                                <input class='form-control made_date'
+                                                                       name="next_time_check_date"/>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                                        <button type="button" class="btn btn-primary" ng-click="saveRegDet()">保存</button>
+                                                        <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">关闭
+                                                        </button>
+                                                        <button type="button" class="btn btn-primary"
+                                                                ng-click="saveRegDet()">保存
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -356,63 +456,71 @@
 
                                         <table class="table table-bordered" style="background-color:#fff">
                                             <thead>
-                                                <tr>
-                                                    <td>序号</td>
-                                                    <td>设备代码</td>
-                                                    <td>制造单位</td>
-                                                    <td>产品编号</td>
-                                                    <td>容积(L)</td>
-                                                    <td>下次检测日期</td>
-                                                </tr>
+                                            <tr>
+                                                <td>序号</td>
+                                                <td>设备代码</td>
+                                                <td>制造单位</td>
+                                                <td>产品编号</td>
+                                                <td>容积(L)</td>
+                                                <td>下次检测日期</td>
+                                            </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat="item in data.reg_det_data">
-                                                    <td>@{{ item.device_number }}</td>
-                                                    <td>@{{ item.made_unit}}</td>
-                                                    <td>@{{ item.made_date }}</td>
-                                                    <td>@{{ item.product_number }}</td>
-                                                    <td>@{{ item.volume }}</td>
-                                                    <td>@{{ item.next_time_check_date }}</td>
+                                            <tr ng-repeat="item in data.reg_det_data">
+                                                <td>@{{ item.device_number }}</td>
+                                                <td>@{{ item.made_unit}}</td>
+                                                <td>@{{ item.made_date }}</td>
+                                                <td>@{{ item.product_number }}</td>
+                                                <td>@{{ item.volume }}</td>
+                                                <td>@{{ item.next_time_check_date }}</td>
 
-                                                </tr>
+                                            </tr>
                                             </tbody>
                                         </table>
 
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal_1">
-                                           添加
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#myModal_1">
+                                            添加
                                         </button>
 
                                         <!-- Modal -->
-                                        <div class="modal fade" id="myModal_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal fade" id="myModal_1" tabindex="-1" role="dialog"
+                                             aria-labelledby="myModalLabel">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close"><span
+                                                                    aria-hidden="true">&times;</span></button>
                                                         <h4 class="modal-title" id="myModalLabel">驾驶人员信息</h4>
                                                     </div>
                                                     <div class="modal-body">
                                                         <form id="driverData">
                                                             <div class="form-group">
-                                                                <label for="recipient-name" >姓名</label>
+                                                                <label for="recipient-name">姓名</label>
                                                                 <input type="text" class="form-control" name="name">
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label for="recipient-name" >身份证号</label>
+                                                                <label for="recipient-name">身份证号</label>
                                                                 <input type="text" class="form-control" name='id_card'>
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label for="recipient-name" >备注</label>
-                                                                <input class='form-control made_date' name='remark' />
+                                                                <label for="recipient-name">备注</label>
+                                                                <input class='form-control' name='remark'/>
                                                             </div>
                                                         </form>
 
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary" ng-click="saveDriverData()">Save changes</button>
+                                                        <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">关闭
+                                                        </button>
+                                                        <button type="button" class="btn btn-primary"
+                                                                ng-click="saveDriverData()">确定
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -421,20 +529,27 @@
 
                                         <table class="table table-bordered" style="background-color:#fff">
                                             <thead>
-                                                <tr>
-                                                    <td>序号</td>
-                                                    <td>姓名</td>
-                                                    <td>身份证号</td>
-                                                    <td>备注</td>
-                                                </tr>
+                                            <tr>
+                                                <td>序号</td>
+                                                <td>姓名</td>
+                                                <td>身份证号</td>
+                                                <td>备注</td>
+                                            </tr>
                                             </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in data.driver_data">
+                                                <td>@{{item.name}}</td>
+                                                <td>@{{ item.id_card }}</td>
+                                                <td>@{{ item.remark }}</td>
+                                            </tr>
+                                            </tbody>
                                         </table>
 
                                         <div class="panel-footer text-right">
 
                                             <button class="btn btn-success pull-right" id="print2">打印反面</button>
                                             <button class="btn pull-right btn-success" id="print1">打印正面</button>
-                                            <button class="btn btn-primary pull-right" type="submit">保存</button>
+                                            <button class="btn btn-primary pull-right" type="submit" ng-click="save()">保存</button>
 
                                         </div>
                                     </div>
@@ -479,101 +594,112 @@
                     format: 'yyyy-mm',
                     autoclose: true,
                     startView: 'year',
-                    maxView:'year'
+                    maxView: 'year'
                 }
-        ).on("changeMonth",function(ev){
+        ).on("changeMonth", function (ev) {
             console.log(ev);
         });
+
+        var imgType;
+        var uploadFile = function () {
+            var formData = new FormData($("#uploadForm")[0]);
+            $.ajax({
+                url: '../../admin/registration/upload',  //server script to process data
+                type: 'POST',
+                //Ajax事件
+                success: function (data) {
+                    if (data.code == 0) {
+                        var type = imgType;
+                        addImg(data.data, type);
+                        console.log(imgType);
+                    }
+                },
+                error: function () {
+                    console.log('error');
+                },
+                // Form数据
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        };
+        var serializeObject = function (form) {
+            var o = {};
+            $.each(form.serializeArray(), function (index) {
+                if (o[this['name']]) {
+                    o[this['name']] = o[this['name']] + "," + this['value'];
+                } else {
+                    o[this['name']] = this['value'];
+                }
+            });
+            return o;
+        };
+
         var app = angular.module('add', []);
         app.controller('addController', function ($scope) {
-
-            $scope.data ={
-                number:'',
-                license_plate:"",
-                product:"",
-                use_unit:"",
-                car_brand:"",
-                install_unit:"",
-                install_date:"",
-                reg_det_data:[],
-                driver_data:[]
-            }
-
-            $scope.regDetData = {
-                device_number:"",
-                made_unit:"",
-                made_date:'',
-                product_number:"",
-                volume:"",
-                next_time_check_date:""
+            $scope.domain = document.domain;
+            $scope.data = {
+                number: '',
+                license_plate: "",
+                product: "0",
+                use_unit: "",
+                car_brand: "",
+                install_unit: "",
+                install_date: "",
+                is_personal: true,//1
+                reg_det_data: [],
+                driver_data: []
             };
 
-            $scope.driverData = {
-                name:'',
-                id_card:"",
-                remark:""
+            $scope.file = '';
+
+            $scope.imgs = {
+            };
+
+            $scope.upload = function (action) {
+                imgType = action;
+                $("#uploadFile").click();
             }
-            $scope.saveDriverData = function(){
-                var data = $('#driverData').serialize();
-                console.log(data);
+
+
+            addImg = function (data, type) {
+                $scope.$apply(function () {
+                    $scope.imgs[type] = data;
+                })
             }
-            $scope.saveRegDet = function(){
-                console.log($scope.regDetData);
-                for(var i in $scope.regDetData ){
-                    if($scope.regDetData[i] == ''){
-                    }
-                }
-                var data = $scope.regDetData;
+
+            $("#uploadFile").on("change", function (e) {
+                uploadFile();
+            });
+
+            $scope.saveDriverData = function () {
+                var data = serializeObject($('#driverData'));
+                $scope.data.driver_data.push(data);
+                $("#myModal_1").modal('hide');
+            };
+
+            $scope.saveRegDet = function () {
+                var data = serializeObject($('#regDetData'))
                 $scope.data.reg_det_data.push(data);
                 $("#myModal").modal('hide');
-//                swal("OMG!", "请完善输入信息", "error");
             }
+
+            $scope.save = function(){
+                var data = $scope.data;
+                data.images = $scope.imgs;
+                $.ajax({
+                    url:"../../admin/registration/register",
+                    data:data,
+                    type:'get',
+                    success:function(data){
+                        console.log(data);
+                    }
+                })
+            }
+
         });
-        {{--jQuery.validator.addMethod("isChinese", function (value, element) {--}}
-            {{--return this.optional(element) || /^[\u0391-\uFFE5]+$/.test(value);--}}
-        {{--}, "只能纯中文字符。");--}}
-        {{--// 手机号码验证--}}
-        {{--jQuery.validator.addMethod("isMobile", function (value, element) {--}}
-            {{--var length = value.length;--}}
-            {{--return this.optional(element) || (length == 11 && /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value));--}}
-        {{--}, "请正确填写您的手机号码。");--}}
 
-        {{--var validate = $("#validate").validate({--}}
-            {{--ignore: [],--}}
-            {{--submitHandler: function (form) {//表单提交句柄,为一回调函数，带一个参数：form = this--}}
-                {{--form.submit();//提交表单--}}
-            {{--},--}}
-            {{--rules: {--}}
-                {{--user_name: {--}}
-                    {{--required: true,--}}
-                    {{--minlength: 1--}}
-                {{--},--}}
-                {{--nick_name: {--}}
-                    {{--required: true,--}}
-                    {{--isChinese: true,--}}
-                    {{--minlength: 2,--}}
-                    {{--maxlength: 8--}}
-                {{--},--}}
-                {{--@if(!$user_list)--}}
-                {{--password: {--}}
-                    {{--required: true,--}}
-                    {{--minlength: 5,--}}
-                    {{--maxlength: 10--}}
-                {{--},--}}
-                {{--@endif--}}
-
-                {{--phone: {--}}
-                    {{--required: true,--}}
-                    {{--isMobile: true--}}
-                {{--},--}}
-
-                {{--email: {--}}
-                    {{--required: true,--}}
-                    {{--email: true--}}
-                {{--}--}}
-
-            {{--}--}}
-        {{--});--}}
 
 
     </script>

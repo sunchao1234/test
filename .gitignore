@@ -3,3 +3,4 @@
 .env
 /.idea
 /.env.example
+/public/upload

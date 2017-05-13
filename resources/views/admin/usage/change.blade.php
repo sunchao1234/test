@@ -45,9 +45,26 @@
                                         }
                                     </style>
 
-                                    <div class="panel-toolbar" style="border-bottom:1px solid #fff;padding: 10px 0px;">
+                                    <div class="panel-body">
+                                        <div class="panel-toolbar" style="border-bottom:1px solid #fff;padding: 10px 0px;">
+                                            <form id="user_list_form mb5" name="user_list_form" action="{{action('Admin\RoleController@getIndex')}}" method="get">
 
+                                                <div class="btn-group  col-md-2"  style="padding-left: 0px;">
+                                                    <label class="control-label m-r-10  m-t-10"> 设置分页</label>
+                                                    <input type="text" class="form-control" />
+                                                </div>
+
+
+                                                <div class="btn-group  col-md-2  m-t-10"  style="padding-left: 0px;">
+                                                    <div class="checkbox m-r-10 ">
+                                                        <button class="btn btn-default m-r-5 m-b-5 m-t-10 btn-group" id="search_submit">搜索</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
+
+
 
                                     <div id="printContent1" style="border: 1px solid #000;">
                                         <h1 style="padding: 180px  0px;font-weight:bolder;text-align: center">车用气瓶使用登记证</h1>
