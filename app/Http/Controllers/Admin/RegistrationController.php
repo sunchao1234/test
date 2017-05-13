@@ -67,6 +67,14 @@ class RegistrationController extends BaseController {
         }
         return response()->json($res);
     }
+    public function reReg(MiddleModels $mid) {
+        try{
+            $res = $mid->reReg();
+        }catch(\Exception $e) {
+            $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
+        }
+        return response()->json($res);
+    }
     public function upload(MiddleModels $middle) {
         $res = $middle->upload();
         return response()->json($res);

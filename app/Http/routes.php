@@ -16,5 +16,6 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     Route::post('/registration/cancellation', 'RegistrationController@cancellation');
     Route::get('/registration/getname', 'RegistrationController@getName');
     Route::post('/registration/newfillpermit', 'RegistrationController@newFillPermit');
+    Route::post('/registration/modifyreg', 'RegistrationController@reReg');
 });
 

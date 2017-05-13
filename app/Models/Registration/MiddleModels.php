@@ -69,4 +69,8 @@ class MiddleModels {
         $this->uploadModel->modifyData();
         return ['code'=>0,'msg'=>'success','data'=>[]];
     }
+    public function reReg() {
+        $this->regModel->updateData();
+        return ['code'=>0,'msg'=>'success','data'=>[]];
+    }
 }
