@@ -47,9 +47,9 @@ class Registration extends BaseModel {
     }
     public function updateData($update = []) {
 
-        $id = Request::input('id');
-        if(empty($id)) {
-            throw new \Exception('id不能为空');
+        $number = Request::input('number');
+        if(empty($number)) {
+            throw new \Exception('number不能为空');
         }
         $request = Request::input();
         $columns = ['number','license_plate','product','use_unit','car_brand','install_unit','install_date'];
@@ -67,7 +67,7 @@ class Registration extends BaseModel {
             throw new \Exception('没有更新数据');
         }
         $updateData = array_add($updateData,'update_time',time());
-        $res = app('db')->table('admin_registration')->where('id',$id)->update($updateData);
+        $res = app('db')->table('admin_registration')->where('number',$number)->update($updateData);
         if(!$res) {
             throw new \Exception('更新数据失败');
         }
