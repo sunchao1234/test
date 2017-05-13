@@ -40,7 +40,7 @@ class DriverInfo extends BaseModel {
         // if(empty($number)) {
         //     throw new \Exception('number不能为空');
         // }
-        $result = $db->where('number',$number)
+        $result = app('db')->table('admin_driver_info')->where('number',$number)
                 ->select('id','number','name','id_card','remark','create_time')
                 ->where('delete_time',0)
                 ->get();

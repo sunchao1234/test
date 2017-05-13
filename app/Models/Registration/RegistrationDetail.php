@@ -42,10 +42,10 @@ class RegistrationDetail extends BaseModel {
         // if(empty($number)) {
         //     throw new \Exception('id不能为空');
         // }
-        $result = app('db')->where('number',$number)
+        $result = app('db')->table('admin_registration_detail')->where('number',$number)
                 ->select('id','number','device_number','made_unit','made_date',
                          'product_number','volume','next_time_check_date','create_time')
-                ->where('detele_time',0)
+                ->where('delete_time',0)
                 ->get();
         return $result;
     }

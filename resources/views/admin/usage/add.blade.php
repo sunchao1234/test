@@ -60,30 +60,30 @@
                                         <div style="bottom: 0px;">
                                             <div style="margin: 10px 5px">
                                                 <span class="label_font">登记证编号:</span><span
-                                                        class="write_font">QP-100-000001</span>
+                                                        class="write_font">@{{ data.number }}</span>
                                             </div>
                                             <table class="table table-bordered">
                                                 <tr>
                                                     <td class="label_font">车牌号码</td>
-                                                    <td class="write_font">浙A·T·0104</td>
+                                                    <td class="write_font">@{{ data.license_plate }}</td>
                                                     <td class="label_font">充装介质</td>
-                                                    <td class="write_font">压缩天然气</td>
+                                                    <td class="write_font">@{{ getSelect(data.product) }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="label_font">使用单位</td>
-                                                    <td colspan="3" class="write_font">杭州八达客运旅游有限公司</td>
+                                                    <td colspan="3" class="write_font">@{{ data.use_unit }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="label_font">车种</td>
-                                                    <td colspan="3" class="write_font">北京现代</td>
+                                                    <td colspan="3" class="write_font">@{{ data.car_brand }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="label_font">安装单位</td>
-                                                    <td colspan="3" class="write_font">北京现代汽车有限公司</td>
+                                                    <td colspan="3" class="write_font">@{{ data.install_unit }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="label_font">安装日期</td>
-                                                    <td colspan="3" class="write_font">2014年11月29日</td>
+                                                    <td colspan="3" class="write_font">@{{ data.install_date }}</td>
                                                 </tr>
                                             </table>
 
@@ -136,14 +136,15 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>5-33-100-000001</td>
-                                                    <td>北京天海工业有限公司</td>
-                                                    <td>2014年9月</td>
-                                                    <td>40413132</td>
-                                                    <td>87</td>
-                                                    <td>2016年9月</td>
+                                                <tr ng-repeat="item in data.reg_det_data track by $index">
+                                                    <td>@{{ $index+1 }}</td>
+                                                    <td>@{{ item.device_number }}</td>
+                                                    <td>@{{ item.made_unit}}</td>
+                                                    <td>@{{ item.made_date }}</td>
+                                                    <td>@{{ item.product_number }}</td>
+                                                    <td>@{{ item.volume }}</td>
+                                                    <td>@{{ item.next_time_check_date }}</td>
+
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -158,23 +159,11 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>付贞飞</td>
-                                                    <td>362323197712213917</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>付贞飞</td>
-                                                    <td>362323197712213917</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                <tr ng-repeat="item in data.driver_data track by $index">
+                                                    <td>@{{ $index+1 }}</td>
+                                                    <td>@{{item.name}}</td>
+                                                    <td>@{{ item.id_card }}</td>
+                                                    <td>@{{ item.remark }}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -215,9 +204,7 @@
                                     </form>
 
                                     <div id="validate" role="form" name="create_form"
-                                         class="form-horizontal form-bordered"
-                                         action=""
-                                         method="post" enctype="multipart/form-data">
+                                         class="form-horizontal form-bordered">
                                         <div class="form-body">
                                             <!-- 默认开启了 csrf验证 非POST请求token必须加  -->
 
@@ -282,7 +269,7 @@
                                                 <label class="control-label col-md-2">日期</label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
-                                                    <input id="" name="" class="form-control datepicker"
+                                                    <input id="install_date" name="" class="form-control datepicker"
                                                            ng-model="data.install_date" type="text"/>
                                                 </div>
                                             </div>
@@ -684,6 +671,18 @@
                 $scope.data.reg_det_data.push(data);
                 $("#myModal").modal('hide');
             }
+            var obj = ['压缩天然气','液化天然气','液化石油气'];
+            $scope.getSelect = function(key){
+
+                return obj[key];
+            };
+
+            $('#install_date').on("change",function(){
+                var self = this;
+                $scope.$apply(function(){
+                    $scope.data.install_date = $(self).val();
+                })
+            })
 
             $scope.save = function(){
                 var data = $scope.data;

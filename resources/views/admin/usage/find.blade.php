@@ -31,16 +31,127 @@
                 </div>
             </div>
         </div>
-        <div class="vertical-box-column" ng-app="add">
-            <div class="vertical-box" ng-controller="addController">
+        <div class="vertical-box-column" ng-app="app">
+            <div class="vertical-box" ng-controller="findController">
                 <div class="vertical-box-row">
                     <div class="vertical-box-cell">
                         <div class="vertical-box-inner-cell">
                             <div data-scrollbar="true" data-height="100%" class="wrapper" style="background:#FFF;">
                                 <div class="panel panel-default" data-sortable-id="ui-widget-1">
+
+
+                                    <div class="panel-body">
+                                        <div class="panel-toolbar" style="border-bottom:1px solid #fff;padding: 10px 0px;">
+                                            <form id="user_list_form mb5" name="user_list_form" action="{{action('Admin\RoleController@getIndex')}}" method="get">
+
+                                                <div class="btn-group  col-md-2"  style="padding-left: 0px;">
+                                                    <label class="control-label m-r-10  m-t-10"> 车牌号码</label>
+                                                    <input type="text" class="form-control" />
+                                                </div>
+
+                                                <div class="btn-group  col-md-2  m-t-10"  style="padding-left: 0px;">
+                                                    <div class="checkbox m-r-10 ">
+                                                        <button class="btn btn-default m-r-5 m-b-5 m-t-10 btn-group" id="search_submit">搜索</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+
+                                    <div style="bottom: 0px;">
+                                        <div style="margin: 10px 5px">
+                                            <span class="label_font">登记证编号:</span><span
+                                                    class="write_font">QP-100-000001</span>
+                                        </div>
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <td class="label_font">车牌号码</td>
+                                                <td class="write_font">浙A·T·0104</td>
+                                                <td class="label_font">充装介质</td>
+                                                <td class="write_font">压缩天然气</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label_font">使用单位</td>
+                                                <td colspan="3" class="write_font">杭州八达客运旅游有限公司</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label_font">车种</td>
+                                                <td colspan="3" class="write_font">北京现代</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label_font">安装单位</td>
+                                                <td colspan="3" class="write_font">北京现代汽车有限公司</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label_font">安装日期</td>
+                                                <td colspan="3" class="write_font">2014年11月29日</td>
+                                            </tr>
+                                        </table>
+
+
+                                        <table class="table table-bordered" style="background-color:#fff">
+                                            <thead>
+                                            <tr>
+                                                <td>序号</td>
+                                                <td>设备代码</td>
+                                                <td>制造单位</td>
+                                                <td>制造日期</td>
+                                                <td>产品编号</td>
+                                                <td>容积(L)</td>
+                                                <td>下次检测日期</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>5-33-100-000001</td>
+                                                <td>北京天海工业有限公司</td>
+                                                <td>2014年9月</td>
+                                                <td>40413132</td>
+                                                <td>87</td>
+                                                <td>2016年9月</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <table class="table table-bordered" style="background-color:#fff">
+                                            <thead>
+                                            <tr>
+                                                <td>序号</td>
+                                                <td>姓名</td>
+                                                <td>身份证号</td>
+                                                <td>备注</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>付贞飞</td>
+                                                <td>362323197712213917</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>付贞飞</td>
+                                                <td>362323197712213917</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+
                                     <style>
                                         #printContent1,#printContent2{
-                                            /*display: none;*/
+                                            display: none;
                                             margin-top:10px ;
                                         }
                                     </style>
@@ -94,8 +205,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
 
                                     <div id="printContent2" style="">
                                         <style>
@@ -221,81 +330,19 @@
 
 
     <script type="text/javascript">
-        $("#print1").click(function () {
-            $("#printContent1").printArea();
-        })
 
-        $("#print2").click(function () {
-            $("#printContent2").printArea();
-        })
-
-        $('.datepicker').datepicker(
-                {
-                    format: 'yyyy-mm-dd',
-                    autoclose: true
+        var app = angular.module('app', []);
+        app.controller('findController', function ($scope) {
+            $.ajax({
+                url:"../../admin/registration/index",
+                type:'get',
+                data:{license_plate:'11'},
+                success:function(data){
+                    console.log(data);
                 }
-        );
 
-        $(".made_date").datepicker(
-                {
-                    format: 'yyyy-mm',
-                    autoclose: true,
-                    startView: 'year',
-                    maxView:'year'
-                }
-        ).on("changeMonth",function(ev){
-            console.log(ev);
-        })
-        var app = angular.module('app', ['ngResource', 'ngSanitize']);
-        app.controller('addController', function ($rootScope, $scope, $resource) {
-
+            })
         });
-        {{--jQuery.validator.addMethod("isChinese", function (value, element) {--}}
-            {{--return this.optional(element) || /^[\u0391-\uFFE5]+$/.test(value);--}}
-        {{--}, "只能纯中文字符。");--}}
-        {{--// 手机号码验证--}}
-        {{--jQuery.validator.addMethod("isMobile", function (value, element) {--}}
-            {{--var length = value.length;--}}
-            {{--return this.optional(element) || (length == 11 && /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value));--}}
-        {{--}, "请正确填写您的手机号码。");--}}
-
-        {{--var validate = $("#validate").validate({--}}
-            {{--ignore: [],--}}
-            {{--submitHandler: function (form) {//表单提交句柄,为一回调函数，带一个参数：form = this--}}
-                {{--form.submit();//提交表单--}}
-            {{--},--}}
-            {{--rules: {--}}
-                {{--user_name: {--}}
-                    {{--required: true,--}}
-                    {{--minlength: 1--}}
-                {{--},--}}
-                {{--nick_name: {--}}
-                    {{--required: true,--}}
-                    {{--isChinese: true,--}}
-                    {{--minlength: 2,--}}
-                    {{--maxlength: 8--}}
-                {{--},--}}
-                {{--@if(!$user_list)--}}
-                {{--password: {--}}
-                    {{--required: true,--}}
-                    {{--minlength: 5,--}}
-                    {{--maxlength: 10--}}
-                {{--},--}}
-                {{--@endif--}}
-
-                {{--phone: {--}}
-                    {{--required: true,--}}
-                    {{--isMobile: true--}}
-                {{--},--}}
-
-                {{--email: {--}}
-                    {{--required: true,--}}
-                    {{--email: true--}}
-                {{--}--}}
-
-            {{--}--}}
-        {{--});--}}
-
 
     </script>
 
