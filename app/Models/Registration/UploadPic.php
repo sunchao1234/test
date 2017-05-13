@@ -31,6 +31,7 @@ class UploadPic extends BaseModel {
             $path        = $pic->move($file_path,$new_name);
             array_push($url, $file_path . '/' . $new_name);
         }
+        $url = ['imgs'=>$url];
         $new_path = array_merge($url,$type);
         return $new_path;
     }
@@ -57,6 +58,6 @@ class UploadPic extends BaseModel {
     }
     public function getData($number) {
         $result = app('db')->table('admin_registration_pic')
-                ->where('delete_time',0)
+                ->where('delete_time',0);
     }
 }

@@ -9,7 +9,7 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     Route::any('/login/submit',  [ 'as' => 'admin', 'uses' => 'AuthController@postLogin']);
     Route::controller('/role',     'RoleController');
     Route::get('/registration/index', 'RegistrationController@index');
-    Route::get('/registration/register', 'RegistrationController@register');
+    Route::post('/registration/register', 'RegistrationController@register');
     Route::post('/registration/upload', 'RegistrationController@upload');
 });
 
