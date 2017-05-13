@@ -51,6 +51,22 @@ class RegistrationController extends BaseController {
         }
         return response()->json($res);
     }
+    public function getName(MiddleModels $mid) {
+        try{
+            $res = $mid->getName();
+        }catch(\Exception $e) {
+            $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
+        }
+        return response()->json($res);
+    }
+    public function newFillPermit(MiddleModels $mid) {
+        try{
+            $res = $mid->newFillPermit();
+        }catch(\Exception $e) {
+            $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
+        }
+        return response()->json($res);
+    }
     public function upload(MiddleModels $middle) {
         $res = $middle->upload();
         return response()->json($res);

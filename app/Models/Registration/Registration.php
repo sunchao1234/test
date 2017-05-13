@@ -102,6 +102,18 @@ class Registration extends BaseModel {
 
         return $db;
     }
+    public function getName() {
+        $request = Request::input();
+
+        $db = app('db')->table('admin_registration')
+            ->where('delete_time',0);
+
+        $where = ['license_plate'];
+        $db = $this->setLIKE($db,$where);
+        $result = $db->select('license_plate')->get();
+
+        return $result;
+    }
     public function getRegistration() {
         try{
             $id = Request::input('id',0);

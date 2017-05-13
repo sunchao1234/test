@@ -61,4 +61,12 @@ class MiddleModels {
         $this->uploadModel->modifyData();
         return ['code'=>0,'msg'=>'success','data'=>[]];
     }
+    public function getName() {
+        $res = $this->regModel->getName();
+        return ['code'=>0,'msg'=>'success','data'=>$res];
+    }
+    public function newFillPermit() {
+        $this->uploadModel->modifyData();
+        return ['code'=>0,'msg'=>'success','data'=>[]];
+    }
 }
