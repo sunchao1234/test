@@ -347,6 +347,20 @@
                                                 </button>
                                             </div>
 
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2">
+                                                    驾驶证
+                                                </label>
+                                                <div>
+                                                    <a ng-repeat="item in imgs[7]" style="margin: 5px;float:left">
+                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                    </a>
+                                                </div>
+                                                <button type="button" ng-click="upload(7)" class='btn btn-info'>上传
+                                                </button>
+                                            </div>
+
                                             <div class="form-group">
                                                 <label class="control-label col-md-2">
                                                     运营证
@@ -363,18 +377,8 @@
                                                 </button>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label class="control-label col-md-2">
-                                                    驾驶证
-                                                </label>
-                                                <div>
-                                                    <a ng-repeat="item in imgs[7]" style="margin: 5px;float:left">
-                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                    </a>
-                                                </div>
-                                                <button type="button" ng-click="upload(7)" class='btn btn-info'>上传
-                                                </button>
-                                            </div>
+
+
                                         </div>
 
                                         <!-- Button trigger modal -->
