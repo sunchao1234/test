@@ -9,9 +9,6 @@ class DriverInfo extends BaseModel {
 
     public function addInfo($number) {
         $request = Request::input('driver_data');
-        if(empty($request)) {
-            throw new \Exception('driver_data不能为空');
-        }
         if(empty($number)) {
             throw new \Exception('number不能为空');
         }
@@ -30,7 +27,7 @@ class DriverInfo extends BaseModel {
         if(!res) {
             throw new \Exception('写入数据失败');
         }
-        return ['code'=>0,'msg'=>'success','data'=>$insertData];
+        return $insertData;
     }
     public function getInfo($number) {
         if(empty($number)) {
@@ -45,5 +42,15 @@ class DriverInfo extends BaseModel {
                 ->where('delete_time',0)
                 ->get();
         return $result;
+    }
+    public function deleteData() {
+        $id = Request::input('id');
+        $res = app('db')->table('admin_driver_info')
+            ->where('delete_time',0)
+            ->where('id',$id)
+            ->update(['delete_time'=>time()]);
+        if(!$res) {
+            throw new \Exception('删除失败');
+        }
     }
 }

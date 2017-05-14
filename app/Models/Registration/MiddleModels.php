@@ -40,12 +40,8 @@ class MiddleModels {
 
     public function upload() {
 
-        try{
-            $res = $this->uploadModel->upload();
-            return ['code'=>0,'msg'=>'success','data'=>$res];
-        }catch(\Execption $e) {
-            return ['code'=>5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
-        }
+        $res = $this->uploadModel->upload();
+        return ['code'=>0,'msg'=>'success','data'=>$res];
     }
     public function fillPermit() {
         $this->uploadModel->modifyData();
@@ -71,6 +67,14 @@ class MiddleModels {
     }
     public function reReg() {
         $this->regModel->updateData();
+        return ['code'=>0,'msg'=>'success','data'=>[]];
+    }
+    public function detailDel() {
+        $this->regDetailModel->deleteData();
+        return ['code'=>0,'msg'=>'success','data'=>[]];
+    }
+    public function driverDel() {
+        $this->regDriverModel->deleteData();
         return ['code'=>0,'msg'=>'success','data'=>[]];
     }
 }

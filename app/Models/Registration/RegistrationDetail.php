@@ -8,13 +8,10 @@ use Request;
 class RegistrationDetail extends BaseModel {
 
     public function addDetail($number) {
-        $request = Request::input('reg_det_data');
-        if(empty($request)) {
-            throw new \Exception('reg_det_data不能为空');
-        }
         if(empty($number)) {
             throw new \Exception('number不能为空');
         }
+        $request = Request::input('reg_det_data');
         $insertData = array_map(function($val)use ($number) {
             return [
                 'number'        => $number,
@@ -59,12 +56,22 @@ class RegistrationDetail extends BaseModel {
 
             $condition = ['number'=>$number];
 
-            if(app('db')->table('admin_registration')->where($condition)->exists()) {
+            if(app('db')->table('admin_registration')->where($condition)->where('delete_time',0)->exists()) {
                 throw new \Exception('已存在');
             }
             return ['code'=>0,'msg'=>'未存在','data'=>[]];
         }catch (\Exception $e) {
             return ['code'=>5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
+        }
+    }
+    public function deleteData() {
+        $id = Request::input('id');
+        $res = app('db')->table('admin_registration_detail')
+            ->where('delete_time',0)
+            ->where('id',$id)
+            ->update(['delete_time'=>time()]);
+        if(!$res) {
+            throw new \Exception('删除失败');
         }
     }
 }

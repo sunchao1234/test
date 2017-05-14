@@ -15,9 +15,6 @@ class UploadPic extends BaseModel {
         }
         $pics = Request::file('img');
         $type = Request::input('type');
-        if(empty($type)) {
-            throw new \Exception('type不能为空');
-        }
         $type = ['type'=>$type];
         $file_path = 'upload';
         if(!file_exists($file_path)) mkdir($file_path,0777,true);
@@ -68,23 +65,25 @@ class UploadPic extends BaseModel {
 
         $insertData = [];
         foreach($request['images'] as $key=>$val) {
-            if(app('db')->table('admin_registration_pic')
-               ->where('delete_time',0)
-               ->where('number',$request['number'])
-               ->where('type',$key)->exists()) {
-                app('db')->table('admin_registration_pic')
-                    ->where('delete_time',0)
-                    ->where('number',$request['number'])
-                    ->where('type',$key)
-                    ->update(['pic_url'=>$val,'update_time'=>time()]);
-            }else {
-                $insertData = [
-                    'number'  => $request['number'],
-                    'pic_url' => $val,
-                    'type'    => $key,
-                    'create_time' => time(),
-                    'update_time' => time()
-                ];
+            foreach ($val as $v) {
+                if(app('db')->table('admin_registration_pic')
+                   ->where('delete_time',0)
+                   ->where('number',$request['number'])
+                   ->where('type',$key)->exists()) {
+                    app('db')->table('admin_registration_pic')
+                        ->where('delete_time',0)
+                        ->where('number',$request['number'])
+                        ->where('type',$key)
+                        ->update(['pic_url'=>$v,'update_time'=>time()]);
+                }else {
+                    $insertData = [
+                        'number'  => $request['number'],
+                        'pic_url' => $v,
+                        'type'    => $key,
+                        'create_time' => time(),
+                        'update_time' => time()
+                    ];
+                }
             }
         }
         $res = app('db')->table('admin_registration_pic')->insert($insertData);

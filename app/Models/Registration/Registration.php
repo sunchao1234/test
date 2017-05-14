@@ -122,7 +122,9 @@ class Registration extends BaseModel {
             $license_plate = Request::input('license_plate','');
 
             if(app('db')->table('admin_registration')->where('number',$number)
-                ->orWhere('license_plate',$license_plate)->exists()) {
+               ->orWhere('license_plate',$license_plate)
+               ->where('delete_time',0)
+               ->exists()) {
                 throw new \Exception('已存在');
             }
             return ['code'=>0,'msg'=>'未存在','data'=>[]];

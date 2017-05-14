@@ -26,5 +26,9 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     Route::post('/registration/newfillpermit', 'RegistrationController@newFillPermit');
     // 修改登记表信息
     Route::post('/registration/modifyreg', 'RegistrationController@reReg');
+    // 删除车用气瓶使用登记表
+    Route::post('/registration/deldetail', 'RegistrationController@delDetail');
+    // 删除驾驶员信息
+    Route::post('/registration/deldriver', 'RegistrationController@delDriver');
 });
 
