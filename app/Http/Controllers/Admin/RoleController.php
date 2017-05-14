@@ -57,15 +57,31 @@ class RoleController extends BaseController
     public function getAddusage(){
         return view('admin.usage.add');
     }
-
+    //换证
     public function getAddusage1(){
         return view('admin.usage.find');
     }
+    //补证
     public function getAddusage2(){
         return view('admin.usage.change');
     }
+    //注销
     public function getAddusage3(){
-        return view('admin.usage.add');
+        return view('admin.usage.cancel');
+    }
+
+    //变更
+    public function getAddusage4(){
+        return view('admin.usage.amend');
+    }
+
+    //编辑
+    public function getEditusage(){
+        return view('admin.usage.edit');
+    }
+
+    public function getLookusage(){
+        return view('admin.usage.look');
     }
 
     /**

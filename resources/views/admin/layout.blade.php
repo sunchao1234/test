@@ -3,6 +3,11 @@
 <!--[if !IE]><!-->
 <html lang="zh">
 <!--<![endif]-->
+<style>
+	.width-200{
+		display: none !important;
+	}
+</style>
 <head>
 	<meta charset="utf-8" />
 	<title>管理中心</title>
@@ -24,10 +29,14 @@
     <link href="/assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" />
     <link href="/assets/plugins/bootstrap-calendar/css/bootstrap_calendar.css" rel="stylesheet" />
     <link href="/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+	<link href="/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+	<link href="/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+
 
 	<!-- ================== END PAGE LEVEL CSS STYLE ================== -->
 	
 	<!-- ================== BEGIN BASE JS ================== -->
+
 	<script src="/assets/plugins/pace/pace.min.js"></script>
 	<script src="/assets/plugins/sweetalert/sweetalert.min.js"></script>
 
@@ -160,6 +169,8 @@
 			<script src="/assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
 			<script src="/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
 			<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+			<script src="/assets/plugins/select2/dist/js/select2.full.min.js"></script>
+
 			<!--[if lt IE 9]>
 				<script src="/assets/crossbrowserjs/html5shiv.js"></script>
 				<script src="/assets/crossbrowserjs/respond.min.js"></script>

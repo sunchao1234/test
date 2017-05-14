@@ -120,9 +120,10 @@
                                                 margin: 0px;
                                             }
                                         </style>
+                                        <h2 style="margin: 20px  0px;font-weight:bolder;text-align: center">
+                                            车用气瓶使用登记证</h2>
                                         <div style="border: 1px solid #000">
-                                            <h2 style="margin: 20px  0px;font-weight:bolder;text-align: center">
-                                                车用气瓶使用登记证</h2>
+
                                             <table class="table table-bordered" style="background-color:#fff">
                                                 <thead>
                                                 <tr>
@@ -148,6 +149,8 @@
                                                 </tr>
                                                 </tbody>
                                             </table>
+
+                                           <h3 style="text-align: center">驾驶人员信息</h3>
 
                                             <table class="table table-bordered" style="background-color:#fff">
                                                 <thead>
@@ -348,7 +351,8 @@
                                                 <label class="control-label col-md-2">
                                                     运营证
                                                 </label>
-                                                <input type='checkbox' ng-model="data.is_personal"/>
+                                                <label for="isPerson" style='float:left'>是否为个人名字</label>
+                                                <input type='checkbox' ng-model="data.is_personal" name="isPerson"/>
                                                 <div ng-model="data.is_personal">
                                                     <a ng-repeat="item in imgs[6]" style="margin: 5px;float:left">
                                                         <img src="/@{{ item }}" width="100px" ;height="100px">
@@ -447,20 +451,21 @@
                                                 <td>序号</td>
                                                 <td>设备代码</td>
                                                 <td>制造单位</td>
+                                                <td>制造日期</td>
                                                 <td>产品编号</td>
                                                 <td>容积(L)</td>
                                                 <td>下次检测日期</td>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr ng-repeat="item in data.reg_det_data">
+                                            <tr ng-repeat="item in data.reg_det_data track by $index">
+                                                <td>@{{ $index+1 }}</td>
                                                 <td>@{{ item.device_number }}</td>
                                                 <td>@{{ item.made_unit}}</td>
                                                 <td>@{{ item.made_date }}</td>
                                                 <td>@{{ item.product_number }}</td>
                                                 <td>@{{ item.volume }}</td>
                                                 <td>@{{ item.next_time_check_date }}</td>
-
                                             </tr>
                                             </tbody>
                                         </table>
@@ -524,7 +529,8 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr ng-repeat="item in data.driver_data">
+                                            <tr ng-repeat="item in data.driver_data track by $index">
+                                                <td>@{{ $index+1 }}</td>
                                                 <td>@{{item.name}}</td>
                                                 <td>@{{ item.id_card }}</td>
                                                 <td>@{{ item.remark }}</td>
@@ -664,12 +670,14 @@
                 var data = serializeObject($('#driverData'));
                 $scope.data.driver_data.push(data);
                 $("#myModal_1").modal('hide');
+                swal('','成功','success');
             };
 
             $scope.saveRegDet = function () {
                 var data = serializeObject($('#regDetData'))
                 $scope.data.reg_det_data.push(data);
                 $("#myModal").modal('hide');
+                swal('','成功','success');
             }
             var obj = ['压缩天然气','液化天然气','液化石油气'];
             $scope.getSelect = function(key){
@@ -693,6 +701,12 @@
                     data:data,
                     type:'post',
                     success:function(data){
+                        if(data.code == 0){
+                            swal('','成功','success');
+                        }else{
+                            swal('',data.msg,'error');
+                        }
+
                         console.log(data);
                     }
                 })

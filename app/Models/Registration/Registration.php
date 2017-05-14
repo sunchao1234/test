@@ -114,33 +114,13 @@ class Registration extends BaseModel {
 
         return $result;
     }
-    public function getRegistration() {
-        try{
-            $id = Request::input('id',0);
-            if(empty($id)) {
-                throw new \Exception('id不能为空');
-            }
-            $result = $db->where('id',$id)
-                    ->select('id','number','license_plate','product','use_unit',
-                        'car_brand','install_date','install_unit','create_time')
-                    ->first();
-            return ['code'=>0,'msg'=>'success','data'=>$result];
-        }catch(\Exception $e) {
-            return ['code'=>5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
-        }
-    }
     public function check() {
         try{
             $number = Request::input('number','');
             $license_plate = Request::input('license_plate','');
 
-            if(empty($number) && empty($license_plate)) {
-                throw new \Exception('登记证编号和车牌号码不能都为空');
-            }
-
-            $condition = !empty($number)?['number'=>$number]:['license_plate'=>$license_plate];
-
-            if(app('db')->table('admin_registration')->where($condition)->exists()) {
+            if(app('db')->table('admin_registration')->where('number',$number)
+                ->orWhere('license_plate',$license_plate)->exists()) {
                 throw new \Exception('已存在');
             }
             return ['code'=>0,'msg'=>'未存在','data'=>[]];

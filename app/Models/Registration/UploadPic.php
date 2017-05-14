@@ -42,13 +42,16 @@ class UploadPic extends BaseModel {
         }
         $insertData = [];
         foreach($request as $key=>$val) {
-            $insertData = [
-                'number'  => $number,
-                'pic_url' => $val,
-                'type'    => $key,
-                'create_time' => time(),
-                'update_time' => time()
-            ];
+            foreach($val as $v) {
+
+                $insertData[] = [
+                    'number'  => $number,
+                    'pic_url' => $v,
+                    'type'    => $key,
+                    'create_time' => time(),
+                    'update_time' => time()
+                ];
+            }
         }
         $res = app('db')->table('admin_registration_pic')->insert($insertData);
 

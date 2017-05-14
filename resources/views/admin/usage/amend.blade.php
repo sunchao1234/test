@@ -84,7 +84,9 @@
                                             <tr>
                                                 <td class="label_font">使用单位</td>
                                                 <td colspan="3"
-                                                    class="write_font">@{{ data.registration.use_unit }}</td>
+                                                    class="write_font">
+                                                    <input type="text" ng-model="data.registration.use_unit"/>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="label_font">车种</td>
@@ -94,7 +96,10 @@
                                             <tr>
                                                 <td class="label_font">安装单位</td>
                                                 <td colspan="3"
-                                                    class="write_font">@{{ data.registration.install_unit }}</td>
+                                                    class="write_font">
+                                                    @{{ data.registration.install_unit }}
+
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="label_font">安装日期</td>
@@ -148,8 +153,8 @@
                                             </tbody>
                                         </table>
 
-                                          <div id="validate" role="form" name="create_form"
-                                                class="form-horizontal form-bordered">
+                                        <div id="validate" role="form" name="create_form"
+                                             class="form-horizontal form-bordered">
                                             <div class="form-body">
                                                 <div class="form-group">
                                                     <label class='control-label col-md-2'>新一期气瓶检测报告</label>
@@ -239,7 +244,6 @@
                                             <button class="btn btn-primary pull-right" type="submit" ng-click="save()">保存</button>
 
                                         </div>
-
 
                                     </div>
 
@@ -406,6 +410,8 @@
                                         </p>
                                     </div>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -433,6 +439,8 @@
         $('body').on("click",'#print2',function(){
             $("#printContent2").printArea();
         })
+
+
         var imgType;
         var uploadFile = function () {
             var formData = new FormData($("#uploadForm")[0]);
@@ -461,7 +469,6 @@
 
         var app = angular.module('app', []);
         app.controller('findController', function ($scope) {
-
             $("#license_plate").select2({
                 placeholder: "请输入车牌号码超找",
                 allowClear: true,
@@ -506,26 +513,6 @@
                 })
             }
 
-
-
-            $scope.save = function(){
-                var data = {};
-                data.number = $scope.data.registration.number;
-                data.images = $scope.imgs;
-                data._token = $("#token").val();
-                $.ajax({
-                    url:"../../admin/registration/replacement",
-                    type:'post',
-                    data:data,
-                    success:function(data){
-
-                    },
-                    error:function(data){
-
-                    }
-                })
-            }
-
             $scope.search = function () {
                 var license_plate = $("#license_plate").val();
                 if (!license_plate) return
@@ -538,6 +525,26 @@
                             $scope.data = data.data;
                             console.log($scope.data);
                         })
+                    }
+                })
+            }
+
+
+            $scope.save = function(){
+                var data = {};
+                data.number = $scope.data.registration.number;
+                data.use_unit  =$scope.data.registration.use_unit;
+                data.images = $scope.imgs;
+                data._token = $("#token").val();
+                $.ajax({
+                    url:"../../admin/registration/fillpermit",
+                    type:'post',
+                    data:data,
+                    success:function(data){
+
+                    },
+                    error:function(data){
+
                     }
                 })
             }
