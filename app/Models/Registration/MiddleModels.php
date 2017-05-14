@@ -67,6 +67,8 @@ class MiddleModels {
     }
     public function reReg() {
         $this->regModel->updateData();
+        $this->regDetailModel->addDetail();
+        $this->driverModel->addInfo();
         return ['code'=>0,'msg'=>'success','data'=>[]];
     }
     public function detailDel() {

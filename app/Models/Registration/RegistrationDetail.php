@@ -11,25 +11,28 @@ class RegistrationDetail extends BaseModel {
         if(empty($number)) {
             throw new \Exception('number不能为空');
         }
-        $request = Request::input('reg_det_data');
-        $insertData = array_map(function($val)use ($number) {
-            return [
-                'number'        => $number,
-                'device_number' => $val['device_number'],
-                'made_unit'     => $val['made_unit'],
-                'made_date'     => $val['made_date'],
-                'product_number'=> $val['product_number'],
-                'volume'        => $val['volume'],
-                'next_time_check_date'  => strtotime($val['next_time_check_date']),
-                'create_time'   => time(),
-                'update_time'   => time()
-            ];
-        },$request);
-        $res = app('db')->table('admin_registration_detail')->insert($insertData);
-        if(!res) {
-            throw new \Exception('写入数据失败');
+        $request = Request::input('reg_det_data','');
+        if(!empty($request)) {
+            $insertData = array_map(function($val)use ($number) {
+                return [
+                    'number'        => $number,
+                    'device_number' => $val['device_number'],
+                    'made_unit'     => $val['made_unit'],
+                    'made_date'     => $val['made_date'],
+                    'product_number'=> $val['product_number'],
+                    'volume'        => $val['volume'],
+                    'next_time_check_date'  => strtotime($val['next_time_check_date']),
+                    'create_time'   => time(),
+                    'update_time'   => time()
+                ];
+            },$request);
+            $res = app('db')->table('admin_registration_detail')->insert($insertData);
+            if(!res) {
+                throw new \Exception('写入数据失败');
+            }
+            return $insertData;
         }
-        return ['code'=>0,'msg'=>'success','data'=>$insertData];
+        
     }
     public function getDetail($number) {
         if(empty($number)) {

@@ -72,6 +72,7 @@ class Registration extends BaseModel {
         if(!$res) {
             throw new \Exception('更新数据失败');
         }
+        return $number;
     }
     protected function setWhere($db,$where) {
         $request = Request::input();
