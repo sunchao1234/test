@@ -70,7 +70,7 @@
                                             <label class='control-label col-md-2'>登记证编号</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control" ng-model="data.number"
+                                                <input id="" name="" class="form-control" ng-model="data.registration.number"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -80,7 +80,7 @@
 
                                             <div class="col-md-6 col-xs-12 p_top2">
                                                 <input id="" name="" class="form-control"
-                                                       ng-model="data.license_plate" type="text"/>
+                                                       ng-model="data.registration.license_plate" type="text"/>
                                             </div>
                                         </div>
 
@@ -88,7 +88,7 @@
                                             <label class="control-label col-md-2">充装介质</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <select class="form-control" ng-model="data.product">
+                                                <select class="form-control" ng-model="data.registration.product">
                                                     <option value="0">压缩天然气</option>
                                                     <option value="1">液化天然气</option>
                                                     <option value="2">液化石油气</option>
@@ -100,7 +100,7 @@
                                             <label class="control-label col-md-2">使用单位</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control" ng-model="data.use_unit"
+                                                <input id="" name="" class="form-control" ng-model="data.registration.use_unit"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -109,7 +109,7 @@
                                             <label class="control-label col-md-2">车 种</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control" ng-model="data.car_brand"
+                                                <input id="" name="" class="form-control" ng-model="data.registration.car_brand"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -119,7 +119,7 @@
 
                                             <div class="col-md-6 col-xs-12 p_top2">
                                                 <input id="" name="" class="form-control"
-                                                       ng-model="data.install_unit" type="text"/>
+                                                       ng-model="data.registration.install_unit" type="text"/>
                                             </div>
                                         </div>
 
@@ -128,9 +128,174 @@
 
                                             <div class="col-md-6 col-xs-12 p_top2">
                                                 <input id="install_date" name="" class="form-control datepicker"
-                                                       ng-model="data.install_date" type="text"/>
+                                                       ng-model="data.registration.install_date"  type="text"/>
                                             </div>
                                         </div>
+
+
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#myModal">
+                                            添加
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                             aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close"><span
+                                                                    aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title" id="">Modal title</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form id="regDetData">
+                                                            <div class="form-group">
+                                                                <label for="">设备编号</label>
+                                                                <input type="text" class="form-control"
+                                                                       name="device_number">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="recipient-name">制造单位</label>
+                                                                <input type="text" class="form-control"
+                                                                       name="made_unit">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="recipient-name">制造日期</label>
+                                                                <input class='form-control made_date' readonly
+                                                                       name="made_date"/>
+                                                            </div>
+
+                                                            <div class='form-group'>
+                                                                <label>产品编号</label>
+                                                                <input class="form-control"
+                                                                       name="product_number">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label>容积</label>
+                                                                <input class='form-control' name="volume"/>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="recipient-name">下次检测日期</label>
+                                                                <input class='form-control made_date'
+                                                                       name="next_time_check_date"/>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">关闭
+                                                        </button>
+                                                        <button type="button" class="btn btn-primary"
+                                                                ng-click="saveRegDet()">保存
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <table class="table table-bordered" style="background-color:#fff">
+                                            <thead>
+                                            <tr>
+                                                <td>序号</td>
+                                                <td>设备代码</td>
+                                                <td>制造单位</td>
+                                                <td>制造日期</td>
+                                                <td>产品编号</td>
+                                                <td>容积(L)</td>
+                                                <td>下次检测日期</td>
+                                                <td>操作</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in data.detail track by $index">
+                                                <td>@{{ $index+1 }}</td>
+                                                <td>@{{ item.device_number }}</td>
+                                                <td>@{{ item.made_unit}}</td>
+                                                <td>@{{ item.made_date }}</td>
+                                                <td>@{{ item.product_number }}</td>
+                                                <td>@{{ item.volume }}</td>
+                                                <td>@{{ item.next_time_check_date }}</td>
+                                                <td ng-click="delDetail($index)">删除 </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#myModal_1">
+                                            添加
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="myModal_1" tabindex="-1" role="dialog"
+                                             aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close"><span
+                                                                    aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title" id="myModalLabel">驾驶人员信息</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form id="driverData">
+                                                            <div class="form-group">
+                                                                <label for="recipient-name">姓名</label>
+                                                                <input type="text" class="form-control" name="name">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="recipient-name">身份证号</label>
+                                                                <input type="text" class="form-control" name='id_card'>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="recipient-name">备注</label>
+                                                                <input class='form-control' name='remark'/>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">关闭
+                                                        </button>
+                                                        <button type="button" class="btn btn-primary"
+                                                                ng-click="saveDriverData()">确定
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <table class="table table-bordered" style="background-color:#fff">
+                                            <thead>
+                                            <tr>
+                                                <td>序号</td>
+                                                <td>姓名</td>
+                                                <td>身份证号</td>
+                                                <td>备注</td>
+                                                <td>编辑</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in data.driver_info track by $index">
+                                                <td>@{{ $index+1 }}</td>
+                                                <td>@{{item.name}}</td>
+                                                <td>@{{ item.id_card }}</td>
+                                                <td>@{{ item.remark }}</td>
+                                                <td ng-click="delDriver($index)">删除</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
                                     </div>
 
                                 </div>
@@ -158,42 +323,38 @@
 
 
     <script type="text/javascript">
-        $('body').on("click",'#print1',function(){
-            $("#printContent1").printArea();
-        })
-        $('body').on("click",'#print2',function(){
-            $("#printContent2").printArea();
-        })
 
+        $('.datepicker').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    autoclose: true
+                }
+        );
 
-        var imgType;
-        var uploadFile = function () {
-            var formData = new FormData($("#uploadForm")[0]);
-            $.ajax({
-                url: '../../admin/registration/upload',  //server script to process data
-                type: 'POST',
-                //Ajax事件
-                success: function (data) {
-                    if (data.code == 0) {
-                        var type = imgType;
-                        addImg(data.data.imgs, type);
-                        console.log(imgType);
-                    }
-                },
-                error: function () {
-                    console.log('error');
-                },
-                // Form数据
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false
+        $(".made_date").datepicker(
+                {
+                    format: 'yyyy-mm',
+                    autoclose: true,
+                    startView: 'year',
+                    maxView: 'year'
+                }
+        ).on("changeMonth", function (ev) {
+            console.log(ev);
+        });
+
+        var serializeObject = function (form) {
+            var o = {};
+            $.each(form.serializeArray(), function (index) {
+                if (o[this['name']]) {
+                    o[this['name']] = o[this['name']] + "," + this['value'];
+                } else {
+                    o[this['name']] = this['value'];
+                }
             });
+            return o;
         };
-
-
         var app = angular.module('app', []);
-        app.controller('findController', function ($scope) {
+        app.controller('findController', function ($scope,$filter) {
             $("#license_plate").select2({
                 placeholder: "请输入车牌号码超找",
                 allowClear: true,
@@ -224,19 +385,6 @@
             };
 
 
-            $scope.upload = function (action) {
-                imgType = action;
-                $("#uploadFile").click();
-            };
-            $("#uploadFile").on("change", function (e) {
-                uploadFile();
-            });
-            $scope.imgs ={};
-            addImg = function (data, type) {
-                $scope.$apply(function () {
-                    $scope.imgs[type] = data;
-                })
-            }
 
             $scope.search = function () {
                 var license_plate =$("#license_plate").val();
@@ -247,13 +395,40 @@
                     data: {license_plate: license_plate},
                     success: function (data) {
                         $scope.$apply(function () {
+
                             $scope.data = data.data;
+                            $scope.data.registration.product = $scope.data.registration.product.toString();
+                            $scope.data.registration.install_date = $filter("date")( $scope.data.registration.install_date,
+                                    "yyyy-MM-dd");
                             console.log($scope.data);
                         })
                     }
                 })
             }
 
+            $scope.saveDriverData = function () {
+                var data = serializeObject($('#driverData'));
+                data.flag = true;
+                $scope.data.driver_info.push(data);
+                $("#myModal_1").modal('hide');
+                swal('','成功','success');
+            };
+
+            $scope.saveRegDet = function () {
+                var data = serializeObject($('#regDetData'));
+                data.flag = true;
+                $scope.data.detail.push(data);
+                $("#myModal").modal('hide');
+                swal('','成功','success');
+            };
+
+            $scope.delDetail = function(index){
+                $scope.data.detail.splice(index,1);
+            }
+
+            $scope.delDriver = function(index){
+                $scope.data.driver_info.splice(index,1);
+            }
 
             $scope.save = function(){
                 var data = {};

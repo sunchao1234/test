@@ -103,16 +103,14 @@ class BaseController extends Controller
         if('POST' == Request::method()) {
             if(Request::has('_token')) {
                 throw new \Exception('_token不能为空');
-                die(json_encode(['code'=>5102,'msg'=>'_token不能为空','data'=>[]]));
             }
         }
-        
         $validator = Validator::make($request, $valid, $message);
 
         if ($validator->fails()) {
             throw new \Exception($validator->errors()->first());
         }
-        return $request();
+        return $request;
     }
 
 

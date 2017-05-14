@@ -33,7 +33,7 @@ class RegistrationController extends BaseController {
     public function index(MiddleModels $mid) {
         try{
             $this->valid([
-                'number' => 'required'
+                'license_plate' => 'required'
             ]);
             $res = $mid->index();
         } catch(\Exception $e) {
