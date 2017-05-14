@@ -43,6 +43,7 @@ class Registration extends BaseModel {
                 ->orderBy('id','desc')
                 ->where('delete_time',0)
                 ->first();
+        $result->install_date = date("Y-m-d",$result->install_date);
 
         return $result;
     }
