@@ -195,14 +195,16 @@
                                                     <label class="control-label col-md-2">
                                                         驾驶证
                                                     </label>
-
-                                                    <div>
-                                                        <a ng-repeat="item in imgs[7]" style="margin: 5px;float:left">
-                                                            <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                        </a>
+                                                    <div class="col-md-6 col-xs-12 p_top2">
+                                                        <div>
+                                                            <a ng-repeat="item in imgs[7]" style="margin: 5px;float:left">
+                                                                <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                            </a>
+                                                        </div>
+                                                        <button type="button" ng-click="upload(7)" class='btn btn-info'>上传
+                                                        </button>
                                                     </div>
-                                                    <button type="button" ng-click="upload(7)" class='btn btn-info'>上传
-                                                    </button>
+
                                                 </div>
 
                                                 <div class="form-group">
@@ -210,30 +212,38 @@
                                                         (旧)气瓶登记使用证
                                                     </label>
 
-                                                    <div>
-                                                        <a ng-repeat="item in imgs[9]" style="margin: 5px;float:left">
-                                                            <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                        </a>
+                                                    <div class="col-md-6 col-xs-12 p_top2">
+                                                        <div>
+                                                            <a ng-repeat="item in imgs[9]" style="margin: 5px;float:left">
+                                                                <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                            </a>
+                                                        </div>
+                                                        <button type="button" ng-click="upload(9)" class='btn btn-info'>上传
+                                                        </button>
                                                     </div>
-                                                    <button type="button" ng-click="upload(9)" class='btn btn-info'>上传
-                                                    </button>
+
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label class="control-label col-md-2">
                                                         运营证
                                                     </label>
-                                                    <label for="isPerson" style='float:left'>是否为个人名字</label>
-                                                    <input type='checkbox' ng-model="data.is_personal"/>
 
-                                                    <div ng-model="data.is_personal">
-                                                        <a ng-repeat="item in imgs[6]" style="margin: 5px;float:left">
-                                                            <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                        </a>
+
+                                                    <div class="col-md-6 col-xs-12 p_top2">
+                                                        <label for="isPerson" style='float:left'>是否为个人名字</label>
+                                                        <input type='checkbox' ng-model="data.is_personal"/>
+
+                                                        <div ng-model="data.is_personal">
+                                                            <a ng-repeat="item in imgs[6]" style="margin: 5px;float:left">
+                                                                <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                            </a>
+                                                        </div>
+                                                        <button type="button" ng-click="upload(6)" ng-if="data.is_personal"
+                                                                class='btn btn-info'>上传
+                                                        </button>
                                                     </div>
-                                                    <button type="button" ng-click="upload(6)" ng-if="data.is_personal"
-                                                            class='btn btn-info'>上传
-                                                    </button>
+
                                                 </div>
 
                                             </div>

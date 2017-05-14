@@ -114,7 +114,8 @@
                                                 <td>产品编号</td>
                                                 <td>容积(L)</td>
                                                 <td>下次检测日期</td>
-                                            </tr>license_plate
+                                            </tr>
+                                            license_plate
                                             </thead>
                                             <tbody>
                                             <tr ng-repeat="item in data.detail track by $index">
@@ -169,20 +170,23 @@
                                                 </div>
 
 
-
-
                                                 <div class="form-group">
                                                     <label class="control-label col-md-2">
                                                         驾驶证
                                                     </label>
 
-                                                    <div>
-                                                        <a ng-repeat="item in imgs[7]" style="margin: 5px;float:left">
-                                                            <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                        </a>
+                                                    <div class="col-md-6 col-xs-12 p_top2">
+                                                        <div>
+                                                            <a ng-repeat="item in imgs[7]"
+                                                               style="margin: 5px;float:left">
+                                                                <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                            </a>
+                                                        </div>
+                                                        <button type="button" ng-click="upload(7)" class='btn btn-info'>
+                                                            上传
+                                                        </button>
                                                     </div>
-                                                    <button type="button" ng-click="upload(7)" class='btn btn-info'>上传
-                                                    </button>
+
                                                 </div>
 
                                                 <div class="form-group">
@@ -190,29 +194,41 @@
                                                         (旧)气瓶登记使用证
                                                     </label>
 
-                                                    <div>
-                                                        <a ng-repeat="item in imgs[9]" style="margin: 5px;float:left">
-                                                            <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                        </a>
+                                                    <div class="col-md-6 col-xs-12 p_top2">
+                                                        <div>
+                                                            <a ng-repeat="item in imgs[9]"
+                                                               style="margin: 5px;float:left">
+                                                                <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                            </a>
+                                                        </div>
+                                                        <button type="button" ng-click="upload(9)" class='btn btn-info'>
+                                                            上传
+                                                        </button>
                                                     </div>
-                                                    <button type="button" ng-click="upload(9)" class='btn btn-info'>上传
-                                                    </button>
+
+
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label class="control-label col-md-2">
                                                         运营证
                                                     </label>
-                                                    <input type='checkbox' ng-model="data.is_personal"/>
+                                                    <div class="col-md-6 col-xs-12 p_top2">
+                                                        <label for="isPerson" style='float:left'>是否为个人名字</label>
 
-                                                    <div ng-model="data.is_personal">
-                                                        <a ng-repeat="item in imgs[6]" style="margin: 5px;float:left">
-                                                            <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                        </a>
-                                                    </div>
-                                                    <button type="button" ng-click="upload(6)" ng-if="data.is_personal"
-                                                            class='btn btn-info'>上传
-                                                    </button>
+                                                        <input type='checkbox' ng-model="data.is_personal"/>
+
+                                                        <div ng-model="data.is_personal">
+                                                            <a ng-repeat="item in imgs[6]" style="margin: 5px;float:left">
+                                                                <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                            </a>
+                                                        </div>
+                                                        <button type="button" ng-click="upload(6)" ng-if="data.is_personal"
+                                                                class='btn btn-info'>上传
+                                                        </button>
+                                                        </div>
+
+
                                                 </div>
 
                                             </div>
@@ -283,20 +299,20 @@
             $("#license_plate").select2({
                 placeholder: "请输入车牌号码超找",
                 allowClear: true,
-                ajax:{
-                    url:function(params){
+                ajax: {
+                    url: function (params) {
                         console.log(params);
-                        return '../../admin/registration/name?license_plate='+params.term
+                        return '../../admin/registration/name?license_plate=' + params.term
                     },
-                    processResults:function(data){
-                        var dataArray=[];
-                        if(data){
-                            for(var i = 0 ;i < data.data.length;i++){
-                                dataArray.push({id:data.data[i].license_plate,text:data.data[i].license_plate});
+                    processResults: function (data) {
+                        var dataArray = [];
+                        if (data) {
+                            for (var i = 0; i < data.data.length; i++) {
+                                dataArray.push({id: data.data[i].license_plate, text: data.data[i].license_plate});
                             }
                         }
                         return {
-                            results:dataArray
+                            results: dataArray
                         }
 
                     }
@@ -325,26 +341,26 @@
                 })
             }
 
-            $scope.save = function(){
+            $scope.save = function () {
                 var data = {};
                 data.number = $scope.data.registration.number;
                 data.images = $scope.imgs;
                 data._token = $("#token").val();
                 $.ajax({
-                    url:"../../admin/registration/cancellation",
-                    type:'post',
-                    data:data,
-                    success:function(data){
+                    url: "../../admin/registration/cancellation",
+                    type: 'post',
+                    data: data,
+                    success: function (data) {
 
                     },
-                    error:function(data){
+                    error: function (data) {
 
                     }
                 })
             }
 
             $scope.search = function () {
-                var license_plate =$("#license_plate").val();
+                var license_plate = $("#license_plate").val();
                 if (!license_plate) return;
                 $.ajax({
                     url: "../../admin/registration/index",

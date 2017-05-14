@@ -296,6 +296,9 @@
                                             </tbody>
                                         </table>
 
+                                        <button class="btn btn-primary pull-right"  ng-click="save()">保存</button>
+
+
                                     </div>
 
                                 </div>
@@ -398,7 +401,7 @@
 
                             $scope.data = data.data;
                             $scope.data.registration.product = $scope.data.registration.product.toString();
-                            $scope.data.registration.install_date = $filter("date")( $scope.data.registration.install_date,
+                            $scope.data.registration.install_date = $filter("date")( $scope.data.registration.install_date * 1000,
                                     "yyyy-MM-dd");
                             console.log($scope.data);
                         })
@@ -431,12 +434,14 @@
             }
 
             $scope.save = function(){
+                alert("ss");
                 var data = {};
-                data.number = $scope.data.registration.number;
-                data.images = $scope.imgs;
+                $.extend(data,$scope.data.registration);
+                data.reg_det_data = $scope.data.detail;
+                data.driver_data =$scope.data.driver_info;
                 data._token = $("#token").val();
                 $.ajax({
-                    url:"../../admin/registration/newfillpermit",
+                    url:"../../admin/registration/newfillpermit1",
                     type:'post',
                     data:data,
                     success:function(data){

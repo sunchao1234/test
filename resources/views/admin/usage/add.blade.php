@@ -202,7 +202,7 @@
 
                                     <form id="uploadForm" style="display: none">
                                         <input name='_token' class='hide' id='token' value='<?php echo e(csrf_token()); ?>'>
-                                        <input type="hidden" name="type" value='1'/>
+                                        <input type="hidden" name="type" id='img_type' value='1'/>
                                         <input type="file" multiple="multiple" id='uploadFile' name='img[]'>
                                     </form>
 
@@ -581,14 +581,14 @@
 
         $('.datepicker').datepicker(
                 {
-                    format: 'yyyy-mm-dd',
+                    format: 'yyyy年mm月dd日',
                     autoclose: true
                 }
         );
 
         $(".made_date").datepicker(
                 {
-                    format: 'yyyy-mm',
+                    format: 'yyyy年mm月',
                     autoclose: true,
                     startView: 'year',
                     maxView: 'year'
@@ -599,6 +599,8 @@
 
         var imgType;
         var uploadFile = function () {
+
+            $("#img_type").val(imgType);
             var formData = new FormData($("#uploadForm")[0]);
             $.ajax({
                 url: '../../admin/registration/upload',  //server script to process data
@@ -607,7 +609,7 @@
                 success: function (data) {
                     if (data.code == 0) {
                         var type = imgType;
-                        addImg(data.data.imgs, type);
+                        addImg(data.data.imgs, data.data.type);
                         console.log(imgType);
                     }
                 },

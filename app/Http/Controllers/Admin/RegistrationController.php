@@ -100,7 +100,7 @@ class RegistrationController extends BaseController {
         }
         return response()->json($res);
     }
-    public function reReg(MiddleModels $mid) {
+    public function newfillpermit1(MiddleModels $mid) {
         try{
             $res = $mid->reReg();
         }catch(\Exception $e) {
@@ -111,7 +111,6 @@ class RegistrationController extends BaseController {
     public function upload(MiddleModels $middle) {
         try{
             $this->valid([
-                'img'  => 'required',
                 'type' => 'required'
             ]);
             $res = $middle->upload();
