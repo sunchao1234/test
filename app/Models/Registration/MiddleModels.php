@@ -66,9 +66,9 @@ class MiddleModels {
         return ['code'=>0,'msg'=>'success','data'=>[]];
     }
     public function reReg() {
-        $this->regModel->updateData();
-        $this->regDetailModel->addDetail();
-        $this->driverModel->addInfo();
+        $number = $this->regModel->updateData();
+        $this->regDetailModel->addDetail($number);
+        $this->driverModel->addInfo($number);
         return ['code'=>0,'msg'=>'success','data'=>[]];
     }
     public function detailDel() {

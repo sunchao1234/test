@@ -111,7 +111,6 @@ class RegistrationController extends BaseController {
     public function upload(MiddleModels $middle) {
         try{
             $this->valid([
-                'img'  => 'required',
                 'type' => 'required'
             ]);
             $res = $middle->upload();
