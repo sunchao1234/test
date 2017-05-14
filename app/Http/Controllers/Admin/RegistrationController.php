@@ -115,10 +115,10 @@ class RegistrationController extends BaseController {
                 'type' => 'required'
             ]);
             $res = $middle->upload();
-            return response()->json($res);
         }catch(\Exception $e) {
             $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
         }
+        return response()->json($res);
     }
     public function delDetail(MiddleModels $mid) {
         try{
