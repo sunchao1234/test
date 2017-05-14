@@ -12,22 +12,25 @@ class DriverInfo extends BaseModel {
         if(empty($number)) {
             throw new \Exception('number不能为空');
         }
-        $insertData = array_map(function($val)use ($number) {
-            return [
-                'number'        => $number,
-                'name'          => $val['name'],
-                'id_card'       => $val['id_card'],
-                'remark'        => $val['remark'],
-                'create_time'   => time(),
-                'update_time'   => time()
-            ];
-        },$request);
+        if(!empty($request)) {
+            $insertData = array_map(function($val)use ($number) {
+                return [
+                    'number'        => $number,
+                    'name'          => $val['name'],
+                    'id_card'       => $val['id_card'],
+                    'remark'        => $val['remark'],
+                    'create_time'   => time(),
+                    'update_time'   => time()
+                ];
+            },$request);
             
-        $res = app('db')->table('admin_driver_info')->insert($insertData);
-        if(!res) {
-            throw new \Exception('写入数据失败');
+            $res = app('db')->table('admin_driver_info')->insert($insertData);
+            if(!res) {
+                throw new \Exception('写入数据失败');
+            }
+            return $insertData;
         }
-        return $insertData;
+        
     }
     public function getInfo($number) {
         if(empty($number)) {

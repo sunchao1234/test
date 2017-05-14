@@ -101,7 +101,7 @@ class BaseController extends Controller
     protected function valid($valid, $message=[]) {
         $request = Request::input();
         if('POST' == Request::method()) {
-            if(Request::has('_token')) {
+            if(!Request::has('_token')) {
                 throw new \Exception('_token不能为空');
             }
         }
