@@ -16,7 +16,7 @@ class Registration extends BaseModel {
         $imgType = array_keys($request['images']);
         $imgType = array_unique($imgType);
         $typeSum = array_sum($imgType);
-        $request['is_personal'] = (bool)$request['is_personal'];
+        $request['is_personal'] = $this->is_true($request['is_personal']);
         if($request['is_personal']) {
             if(28 != $typeSum) {
                 throw new \Exception('少上传文件');
@@ -43,6 +43,10 @@ class Registration extends BaseModel {
             throw new \Exception('写入数据失败');
         }
         return $request['number'];
+    }
+    protected function is_true($val, $return_null=false){
+        $boolval = ( is_string($val) ? filter_var($val, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) : (bool) $val );
+        return ( $boolval===null && !$return_null ? false : $boolval );
     }
     public function index() {
         $where = ['number','license_plate'];
