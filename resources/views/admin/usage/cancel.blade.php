@@ -351,7 +351,11 @@
                     type: 'post',
                     data: data,
                     success: function (data) {
-
+                        if(data.code == 0){
+                            swal('','成功','success');
+                        }else{
+                            swal('',data.msg,'error');
+                        }
                     },
                     error: function (data) {
 

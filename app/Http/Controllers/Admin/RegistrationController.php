@@ -22,7 +22,8 @@ class RegistrationController extends BaseController {
                 'install_unit'   => 'required|string',
                 'install_date'   => 'required',
                 'reg_det_data'   => 'required',
-                'driver_data'    => 'required'
+                'driver_data'    => 'required',
+                'images'          => 'required'
             ]);
             $res = $mid->register();
         } catch(\Exception $e) {

@@ -117,7 +117,7 @@
                                             <div class="write_font" style="text-align: right;margin-top: 70px">
                                                 <p style="margin: 70px 10px">登记机关:(加盖公章):杭州市质量技术监督局</p>
 
-                                                <p style="margin: 80px 10px">发证日期: 2016 年 05 月 06 日</p>
+                                                <p style="margin: 80px 10px">发证日期: @{{ getToday() }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -167,10 +167,10 @@
                                                     <td>@{{ $index+1 }}</td>
                                                     <td>@{{ item.device_number }}</td>
                                                     <td>@{{ item.made_unit}}</td>
-                                                    <td>@{{ item.made_date }}</td>
+                                                    <td>@{{ DateShow1(item.made_date) }}</td>
                                                     <td>@{{ item.product_number }}</td>
                                                     <td>@{{ item.volume }}</td>
-                                                    <td>@{{ item.next_time_check_date }}</td>
+                                                    <td>@{{ DateShow1(item.next_time_check_date) }}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -265,9 +265,7 @@
                                                     <button type="button" class="btn btn-default"
                                                             data-dismiss="modal">关闭
                                                     </button>
-                                                    <button type="button" class="btn btn-primary"
-                                                            ng-click="saveDriverData()">确定
-                                                    </button>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -325,7 +323,22 @@
 
 
         var app = angular.module('app', []);
-        app.controller('findController', function ($scope) {
+        app.controller('findController', function ($scope,$filter) {
+            $scope.getToday =function(){
+                return $filter("date")(new Date().getTime(), "yyyy年MM月dd日");
+            }
+
+            $scope.DateShow = function(str){
+                if(!str) return
+                return $filter("date")(new Date(str).getTime(), "yyyy年MM月dd日");
+            }
+
+
+            $scope.DateShow1 = function(str){
+                if(!str) return;
+                return $filter("date")(new Date(str).getTime(), "yyyy年MM月");
+            }
+
             $("#license_plate").select2({
                 placeholder: "请输入车牌号码超找",
                 allowClear: true,

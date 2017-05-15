@@ -83,14 +83,15 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="label_font">安装日期</td>
-                                                    <td colspan="3" class="write_font">@{{ data.install_date }}</td>
+                                                    <td colspan="3"
+                                                        class="write_font">@{{ DateShow(data.install_date) }}</td>
                                                 </tr>
                                             </table>
 
                                             <div class="write_font" style="text-align: right;margin-top: 70px">
                                                 <p style="margin: 70px 10px">登记机关:(加盖公章):杭州市质量技术监督局</p>
 
-                                                <p style="margin: 80px 10px">发证日期: 2016 年 05 月 06 日</p>
+                                                <p style="margin: 80px 10px">发证日期: @{{ getToday() }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -122,6 +123,7 @@
                                         </style>
                                         <h2 style="margin: 20px  0px;font-weight:bolder;text-align: center">
                                             车用气瓶使用登记证</h2>
+
                                         <div style="border: 1px solid #000">
 
                                             <table class="table table-bordered" style="background-color:#fff">
@@ -141,16 +143,16 @@
                                                     <td>@{{ $index+1 }}</td>
                                                     <td>@{{ item.device_number }}</td>
                                                     <td>@{{ item.made_unit}}</td>
-                                                    <td>@{{ item.made_date }}</td>
+                                                    <td>@{{ DateShow1(item.made_date)}}</td>
                                                     <td>@{{ item.product_number }}</td>
                                                     <td>@{{ item.volume }}</td>
-                                                    <td>@{{ item.next_time_check_date }}</td>
+                                                    <td>@{{ DateShow1(item.next_time_check_date)}}</td>
 
                                                 </tr>
                                                 </tbody>
                                             </table>
 
-                                           <h3 style="text-align: center">驾驶人员信息</h3>
+                                            <h3 style="text-align: center">驾驶人员信息</h3>
 
                                             <table class="table table-bordered" style="background-color:#fff">
                                                 <thead>
@@ -201,7 +203,8 @@
                                     </div>
 
                                     <form id="uploadForm" style="display: none">
-                                        <input name='_token' class='hide' id='token' value='<?php echo e(csrf_token()); ?>'>
+                                        <input name='_token' class='hide' id='token'
+                                               value='<?php echo e(csrf_token()); ?>'>
                                         <input type="hidden" name="type" id='img_type' value='1'/>
                                         <input type="file" multiple="multiple" id='uploadFile' name='img[]'>
                                     </form>
@@ -283,13 +286,15 @@
                                                     合格证
                                                 </label>
 
-                                                <div>
-                                                    <a ng-repeat="item in imgs[1]" style="margin: 5px;float:left">
-                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                    </a>
+                                                <div class="col-md-6 col-xs-12 p_top2">
+                                                    <div>
+                                                        <a ng-repeat="item in imgs[1]" style="margin: 5px;float:left">
+                                                            <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                        </a>
+                                                    </div>
+                                                    <button type="button" ng-click="upload(1)" class='btn btn-info'>上传
+                                                    </button>
                                                 </div>
-                                                <button type="button" ng-click="upload(1)" class='btn btn-info'>上传
-                                                </button>
 
                                             </div>
 
@@ -298,13 +303,17 @@
                                                 <label class="control-label col-md-2">
                                                     监督检验证书
                                                 </label>
-                                                <div>
-                                                    <a ng-repeat="item in imgs[2]" style="margin: 5px;float:left">
-                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                    </a>
+
+                                                <div class="col-md-6 col-xs-12 p_top2">
+                                                    <div>
+                                                        <a ng-repeat="item in imgs[2]" style="margin: 5px;float:left">
+                                                            <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                        </a>
+                                                    </div>
+                                                    <button type="button" class='btn  btn-info' ng-click="upload(2)">上传
+                                                    </button>
                                                 </div>
-                                                <button type="button" class='btn  btn-info' ng-click="upload(2)">上传
-                                                </button>
+
                                             </div>
 
 
@@ -312,39 +321,52 @@
                                                 <label class="control-label col-md-2">
                                                     检验质量证明书证书
                                                 </label>
-                                                <div>
-                                                    <a ng-repeat="item in imgs[3]" style="margin: 5px;float:left">
-                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                    </a>
+
+                                                <div class="col-md-6 col-xs-12 p_top2">
+                                                    <div>
+                                                        <a ng-repeat="item in imgs[3]" style="margin: 5px;float:left">
+                                                            <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                        </a>
+                                                    </div>
+                                                    <button type="button" ng-click="upload(3)" class='btn btn-info'>上传
+                                                    </button>
                                                 </div>
-                                                <button type="button" ng-click="upload(3)" class='btn btn-info'>上传
-                                                </button>
+
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="control-label col-md-2">
                                                     特种设备监督检验证书
                                                 </label>
-                                                <div>
-                                                    <a ng-repeat="item in imgs[4]" style="margin: 5px;float:left">
-                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                    </a>
+
+                                                <div class="col-md-6 col-xs-12 p_top2">
+                                                    <div>
+                                                        <a ng-repeat="item in imgs[4]" style="margin: 5px;float:left">
+                                                            <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                        </a>
+                                                    </div>
+                                                    <button type="button" ng-click="upload(4)" class='btn btn-info'>上传
+                                                    </button>
                                                 </div>
-                                                <button type="button" ng-click="upload(4)" class='btn btn-info'>上传
-                                                </button>
+
+
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="control-label col-md-2">
                                                     汽车行驶证
                                                 </label>
-                                                <div>
-                                                    <a ng-repeat="item in imgs[5]" style="margin: 5px;float:left">
-                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                    </a>
+
+                                                <div class="col-md-6 col-xs-12 p_top2">
+                                                    <div>
+                                                        <a ng-repeat="item in imgs[5]" style="margin: 5px;float:left">
+                                                            <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                        </a>
+                                                    </div>
+                                                    <button type="button" ng-click="upload(5)" class='btn btn-info'>上传
+                                                    </button>
                                                 </div>
-                                                <button type="button" ng-click="upload(5)" class='btn btn-info'>上传
-                                                </button>
+
                                             </div>
 
 
@@ -352,31 +374,39 @@
                                                 <label class="control-label col-md-2">
                                                     驾驶证
                                                 </label>
-                                                <div>
-                                                    <a ng-repeat="item in imgs[7]" style="margin: 5px;float:left">
-                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                    </a>
+
+                                                <div class="col-md-6 col-xs-12 p_top2">
+                                                    <div>
+                                                        <a ng-repeat="item in imgs[7]" style="margin: 5px;float:left">
+                                                            <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                        </a>
+                                                    </div>
+                                                    <button type="button" ng-click="upload(7)" class='btn btn-info'>上传
+                                                    </button>
                                                 </div>
-                                                <button type="button" ng-click="upload(7)" class='btn btn-info'>上传
-                                                </button>
+
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="control-label col-md-2">
                                                     运营证
                                                 </label>
-                                                <label for="isPerson" style='float:left'>是否为个人名字</label>
-                                                <input type='checkbox' ng-model="data.is_personal" name="isPerson"/>
-                                                <div ng-model="data.is_personal">
-                                                    <a ng-repeat="item in imgs[6]" style="margin: 5px;float:left">
-                                                        <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                    </a>
-                                                </div>
-                                                <button type="button" ng-click="upload(6)" ng-if="data.is_personal"
-                                                        class='btn btn-info'>上传
-                                                </button>
-                                            </div>
 
+                                                <div class="col-md-6 col-xs-12 p_top2">
+                                                    <label for="isPerson" style='float:left'>是否为个人名字</label>
+                                                    <input type='checkbox' ng-model="data.is_personal" name="isPerson"/>
+
+                                                    <div ng-model="data.is_personal">
+                                                        <a ng-repeat="item in imgs[6]" style="margin: 5px;float:left">
+                                                            <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                        </a>
+                                                    </div>
+                                                    <button type="button" ng-click="upload(6)" ng-if="data.is_personal"
+                                                            class='btn btn-info'>上传
+                                                    </button>
+                                                </div>
+
+                                            </div>
 
 
                                         </div>
@@ -469,7 +499,7 @@
                                                 <td>@{{ item.made_date }}</td>
                                                 <td>@{{ item.product_number }}</td>
                                                 <td>@{{ item.volume }}</td>
-                                                <td>@{{ item.next_time_check_date }}</td>
+                                                <td>@{{item.next_time_check_date }}</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -546,7 +576,9 @@
 
                                             <button class="btn btn-success pull-right" id="print2">打印反面</button>
                                             <button class="btn pull-right btn-success" id="print1">打印正面</button>
-                                            <button class="btn btn-primary pull-right" type="submit" ng-click="save()">保存</button>
+                                            <button class="btn btn-primary pull-right" type="submit" ng-click="save()">
+                                                保存
+                                            </button>
 
                                         </div>
                                     </div>
@@ -581,14 +613,14 @@
 
         $('.datepicker').datepicker(
                 {
-                    format: 'yyyy年mm月dd日',
+                    format: 'yyyy-mm-dd',
                     autoclose: true
                 }
         );
 
         $(".made_date").datepicker(
                 {
-                    format: 'yyyy年mm月',
+                    format: 'yyyy-mm',
                     autoclose: true,
                     startView: 'year',
                     maxView: 'year'
@@ -636,7 +668,7 @@
         };
 
         var app = angular.module('add', []);
-        app.controller('addController', function ($scope) {
+        app.controller('addController', function ($scope, $filter) {
             $scope.domain = document.domain;
             $scope.data = {
                 number: '',
@@ -651,10 +683,24 @@
                 driver_data: []
             };
 
+            $scope.getToday = function () {
+                return $filter("date")(new Date().getTime(), "yyyy年MM月dd日");
+            }
+
             $scope.file = '';
 
-            $scope.imgs = {
-            };
+            $scope.imgs = {};
+
+            $scope.DateShow = function (str) {
+                if (!str) return
+                return $filter("date")(new Date(str).getTime(), "yyyy年MM月dd日");
+            }
+
+
+            $scope.DateShow1 = function (str) {
+                if (!str) return;
+                return $filter("date")(new Date(str).getTime(), "yyyy年MM月");
+            }
 
             $scope.upload = function (action) {
                 imgType = action;
@@ -676,41 +722,41 @@
                 var data = serializeObject($('#driverData'));
                 $scope.data.driver_data.push(data);
                 $("#myModal_1").modal('hide');
-                swal('','成功','success');
+                swal('', '成功', 'success');
             };
 
             $scope.saveRegDet = function () {
                 var data = serializeObject($('#regDetData'))
                 $scope.data.reg_det_data.push(data);
                 $("#myModal").modal('hide');
-                swal('','成功','success');
+                swal('', '成功', 'success');
             }
-            var obj = ['压缩天然气','液化天然气','液化石油气'];
-            $scope.getSelect = function(key){
+            var obj = ['压缩天然气', '液化天然气', '液化石油气'];
+            $scope.getSelect = function (key) {
 
                 return obj[key];
             };
 
-            $('#install_date').on("change",function(){
+            $('#install_date').on("change", function () {
                 var self = this;
-                $scope.$apply(function(){
+                $scope.$apply(function () {
                     $scope.data.install_date = $(self).val();
                 })
             })
 
-            $scope.save = function(){
+            $scope.save = function () {
                 var data = $scope.data;
                 data.images = $scope.imgs;
                 data._token = $("#token").val();
                 $.ajax({
-                    url:"../../admin/registration/register",
-                    data:data,
-                    type:'post',
-                    success:function(data){
-                        if(data.code == 0){
-                            swal('','成功','success');
-                        }else{
-                            swal('',data.msg,'error');
+                    url: "../../admin/registration/register",
+                    data: data,
+                    type: 'post',
+                    success: function (data) {
+                        if (data.code == 0) {
+                            swal('', '成功', 'success');
+                        } else {
+                            swal('', data.msg, 'error');
                         }
 
                         console.log(data);
@@ -719,7 +765,6 @@
             }
 
         });
-
 
 
     </script>

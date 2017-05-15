@@ -65,7 +65,7 @@
                                         </div>
                                     </div>
 
-                                    <div  class="form-horizontal form-bordered">
+                                    <div  class="form-horizontal form-bordered" style="display:none">
                                         <div class="form-group">
                                             <label class='control-label col-md-2'>登记证编号</label>
 
@@ -358,6 +358,7 @@
         };
         var app = angular.module('app', []);
         app.controller('findController', function ($scope,$filter) {
+
             $("#license_plate").select2({
                 placeholder: "请输入车牌号码超找",
                 allowClear: true,
@@ -404,6 +405,7 @@
                             $scope.data.registration.install_date = $filter("date")( $scope.data.registration.install_date * 1000,
                                     "yyyy-MM-dd");
                             console.log($scope.data);
+                            $(".form-horizontal ").show();
                         })
                     }
                 })
@@ -434,7 +436,6 @@
             }
 
             $scope.save = function(){
-                alert("ss");
                 var data = {};
                 $.extend(data,$scope.data.registration);
                 data.reg_det_data = $scope.data.detail;
@@ -445,7 +446,11 @@
                     type:'post',
                     data:data,
                     success:function(data){
-
+                        if(data.code == 0){
+                            swal('','成功','success');
+                        }else{
+                            swal('',data.msg,'error');
+                        }
                     },
                     error:function(data){
 

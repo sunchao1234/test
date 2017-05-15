@@ -98,13 +98,13 @@ class BaseController extends Controller
 
         $this->ca = get_in();
     }
-    protected function valid($valid, $message=[]) {
-        $request = Request::input();
+    protected function valid($valid, $message=[], $request='') {
         if('POST' == Request::method()) {
             if(!Request::has('_token')) {
                 throw new \Exception('_token不能为空');
             }
         }
+        $request = !empty($request)?$request:Request::input();
         $validator = Validator::make($request, $valid, $message);
 
         if ($validator->fails()) {

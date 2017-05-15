@@ -76,7 +76,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li>
 						<form class="navbar-form full-width">
-							<div class="form-group">
+							<div class="form-group" style="display: none">
 								<input type="text" class="form-control" placeholder="订单ID" />
 								<button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
 							</div>

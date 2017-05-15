@@ -14,14 +14,6 @@ class RegistrationDetail extends BaseModel {
         $request = Request::input('reg_det_data','');
         if(!empty($request)) {
             $insertData = array_map(function($val)use ($number) {
-                $this->valid($val,[
-                'device_number'   => 'required',
-                'made_unit'       => 'required',
-                'made_date'       => 'required',
-                'product_number'  => 'required',
-                'volume'          => 'required',
-                'next_time_check_date' => 'required',
-            ]);
                 return [
                     'number'        => $number,
                     'device_number' => $val['device_number'],
@@ -57,7 +49,7 @@ class RegistrationDetail extends BaseModel {
                 ->get();
         foreach($result as $v) {
             $v->made_date = date("Y-m",$v->made_date);
-            $v->next_time_check_date = data("Y-m",$v->next_time_check_date);
+            $v->next_time_check_date = date("Y-m",$v->next_time_check_date);
         }
         return $result;
     }

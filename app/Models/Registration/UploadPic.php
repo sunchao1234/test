@@ -34,19 +34,8 @@ class UploadPic extends BaseModel {
     }
     public function addData($number) {
         $request = Request::input('images',[]);
-        $isPersonal = Request::input('is_personal',false);
         if(empty($request)) {
             throw new \Exception('images不能为空');
-        }
-        $typeSum = array_sum(array_key($request));
-        if($isPersonal) {
-            if(28 != $typeSum) {
-                throw new \Exception('少上传文件');
-            }
-        }else {
-            if(22 != $typeSum) {
-                throw new \Exception('少上传文件');
-            }
         }
         $insertData = [];
         foreach($request as $key=>$val) {
