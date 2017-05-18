@@ -37,6 +37,20 @@ class MiddleModels {
 
         return ['code'=>0,'msg'=>'success','data'=>$res];
     }
+    public function query() {
+        $reg = $this->regModel->query();
+        if(!empty($reg)) {
+            $driver = $this->driverModel->getInfo($reg->number);
+            $imgs   = $this->uploadModel->getData($reg->number);
+            $detail = $this->regDetailModel->getDetail($reg->number);
+            $res    = ['registration'=>$reg,'driver_info'=>$driver,
+                       'imgs'=>$imgs,'detail'=>$detail];
+        }else {
+            $res    = [];
+        }
+
+        return ['code'=>0,'msg'=>'success','data'=>$res];
+    }
 
     public function upload() {
 
@@ -79,4 +93,5 @@ class MiddleModels {
         $this->regDriverModel->deleteData();
         return ['code'=>0,'msg'=>'success','data'=>[]];
     }
+    public function 
 }

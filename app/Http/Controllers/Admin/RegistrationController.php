@@ -57,6 +57,22 @@ class RegistrationController extends BaseController {
         }
         return response()->json($res);
     }
+    public function query(MiddleModels $mid) {
+        try{
+            $msg = [
+                'license_plate.required' => '车牌号不能为空',
+                'number.required'        => '编号不能为空',
+            ];
+            $this->valid([
+                'license_plate' => 'required',
+                'number'        => 'required'
+            ],$msg);
+            $res = $mid->index();
+        } catch(\Exception $e) {
+            $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
+        }
+        return response()->json($res);
+    }
     public function fillPermit(MiddleModels $mid) {
         try{
             $msg = [

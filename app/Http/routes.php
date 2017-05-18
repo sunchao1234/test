@@ -10,6 +10,8 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     Route::controller('/role',     'RoleController');
     // 获取登记表数据
     Route::get('/registration/index', 'RegistrationController@index');
+    // 查询登记表数据 和上面返回数据一样，区别在与必须同时满足两个条件
+    Route::get('/registration/query', 'RegistrationController@query');
     // 添加登记表数据
     Route::post('/registration/register', 'RegistrationController@register');
     // 文件上传

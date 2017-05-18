@@ -27,7 +27,6 @@ class Registration extends BaseModel {
             }
         }
         $insertData = [
-            'number'        => $request['number'],
             'license_plate' => $request['license_plate'],
             'product'       => $request['product'],
             'use_unit'      => $request['use_unit'],
@@ -38,11 +37,16 @@ class Registration extends BaseModel {
             'create_time'   => time(),
             'update_time'   => time()
         ];
-        $res = app('db')->table('admin_registration')->insert($insertData);
+        $id = app('db')->table('admin_registration')->insertGetId($insertData);
         if(!res) {
             throw new \Exception('写入数据失败');
         }
-        return $request['number'];
+        $number = str_pad($number,5,'0',STR_PAD_LEFT).'('.date('y').')';
+        app('db')->table('admin_registration')
+            ->where('delete_time',0)
+            ->where('id',$id)
+            ->update(['number'=>$number]);
+        return $number;
     }
     protected function is_true($val, $return_null=false){
         $boolval = ( is_string($val) ? filter_var($val, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) : (bool) $val );
@@ -52,6 +56,23 @@ class Registration extends BaseModel {
         $where = ['number','license_plate'];
         $db = app('db')->table('admin_registration');
         $db = $this->setWhere($db,$where);
+
+        $result = $db->select('id','number','license_plate','product','use_unit',
+                              'car_brand','install_date','install_unit',
+                              'create_time','is_personal','cancellation')
+                // ->paginate(self::$pageNumber);
+                ->orderBy('id','desc')
+                ->where('delete_time',0)
+                ->first();
+        $result->install_date = date("Y-m-d",$result->install_date);
+
+        return $result;
+    }
+    public function query() {
+        $request = Request::input();
+        $db = app('db')->table('admin_registration');
+        $db = $db->where('number',$request['number'])
+            ->where('license_plate',$request['license_plate']);
 
         $result = $db->select('id','number','license_plate','product','use_unit',
                               'car_brand','install_date','install_unit',
