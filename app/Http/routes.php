@@ -32,5 +32,7 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     Route::post('/registration/deldetail', 'RegistrationController@delDetail');
     // 删除驾驶员信息
     Route::post('/registration/deldriver', 'RegistrationController@delDriver');
+    // 首页列表，显示20条信息
+    Route::post('/registration/reglist', 'RegistrationController@regList');
 });
 

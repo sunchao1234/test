@@ -172,4 +172,13 @@ class Registration extends BaseModel {
             return ['code'=>5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
         }
     }
+    public function regList() {
+        $res = app('db')->table('admin_registration')
+             ->orderBy('id','desc')
+             ->where('delete_time',0)
+             ->select('number','license_plate','install_unit','product','install_date')
+             ->limit(20)
+             ->get();
+        return $res;
+    }
 }

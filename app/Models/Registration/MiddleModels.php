@@ -93,5 +93,8 @@ class MiddleModels {
         $this->regDriverModel->deleteData();
         return ['code'=>0,'msg'=>'success','data'=>[]];
     }
-    public function 
+    public function regList() {
+        $res = $this->regModel->regList();
+        return ['code'=>0,'msg'=>'success','data'=>$res];
+    }
 }

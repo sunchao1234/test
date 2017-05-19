@@ -188,10 +188,10 @@ class RegistrationController extends BaseController {
                 'id'  => 'required',
             ],$msg);
             $res = $mid->detailDel();
-            return response()->json($res);
         }catch(\Exception $e) {
             $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
         }
+        return response()->json($res);
     }
     public function delDriver(MiddleModels $mid) {
         try{
@@ -202,9 +202,17 @@ class RegistrationController extends BaseController {
                 'id'  => 'required',
             ],$msg);
             $res = $mid->driverDel();
-            return response()->json($res);
         }catch(\Exception $e) {
             $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
         }
+        return response()->json($res);
+    }
+    public function regList(MiddleModels $mid) {
+        try{
+            $res = $mid->regList();
+        }catch(\Exception $e) {
+            $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
+        }
+        return response()->json($res);
     }
 }
