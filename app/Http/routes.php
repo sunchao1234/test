@@ -38,5 +38,7 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     Route::post('/registration/singleupload', 'RegistrationController@singleUpload');
     // 更新内容
     Route::post('/registration/updateinfo', 'RegistrationController@updateInfo');
+    // 添加图片信息
+    Route::post('/registration/addpicinfo', 'RegistrationController@addPicInfo');
 });
 
