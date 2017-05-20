@@ -101,7 +101,7 @@ class UploadPic extends BaseModel {
                         ->where('type',$key)
                         ->update(['pic_url'=>$v,'update_time'=>time()]);
                 }else {
-                    $insertData = [
+                    $insertData[] = [
                         'number'  => $request['number'],
                         'pic_url' => $v,
                         'type'    => $key,
