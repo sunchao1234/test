@@ -52,7 +52,12 @@
 
                                             <div class="btn-group  col-md-2" style="padding-left: 0px;">
                                                 <label class="control-label m-r-10  m-t-10"> 车牌号码</label>
-                                                <select type="text" class="form-control" id="license_plate"></select>
+                                                <input type="text" class="form-control" id="license_plate" ng-model="searchData.license_plate"/>
+                                            </div>
+
+                                            <div class="btn-group  col-md-2" style="padding-left: 0px;">
+                                                <label class="control-label m-r-10  m-t-10"> 登记编号</label>
+                                                <input type="text" class="form-control" id="number" ng-model="searchData.number"/>
                                             </div>
 
                                             <div class="btn-group  col-md-2  m-t-10" style="padding-left: 0px;">
@@ -71,7 +76,8 @@
                                         }
                                     </style>
 
-                                    <div id="printContent1" ng-if="data.registration.number"  style="border: 1px solid #000;">
+                                    <div id="printContent1" ng-if="data.registration.number"
+                                         style="border: 1px solid #000;">
                                         <h1 style="padding: 180px  0px;font-weight:bolder;text-align: center">
                                             车用气瓶使用登记证</h1>
                                         <style>
@@ -98,19 +104,23 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="label_font">使用单位</td>
-                                                    <td colspan="3" class="write_font">@{{ data.registration.use_unit }}</td>
+                                                    <td colspan="3"
+                                                        class="write_font">@{{ data.registration.use_unit }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="label_font">车种</td>
-                                                    <td colspan="3" class="write_font">@{{ data.registration.car_brand }}</td>
+                                                    <td colspan="3"
+                                                        class="write_font">@{{ data.registration.car_brand }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="label_font">安装单位</td>
-                                                    <td colspan="3" class="write_font">@{{ data.registration.install_unit }}</td>
+                                                    <td colspan="3"
+                                                        class="write_font">@{{ data.registration.install_unit }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="label_font">安装日期</td>
-                                                    <td colspan="3" class="write_font">@{{ data.registration.install_date }}</td>
+                                                    <td colspan="3"
+                                                        class="write_font">@{{ data.registration.install_date }}</td>
                                                 </tr>
                                             </table>
 
@@ -148,6 +158,7 @@
                                         </style>
                                         <h2 style="margin: 20px  0px;font-weight:bolder;text-align: center">
                                             车用气瓶使用登记证</h2>
+
                                         <div style="border: 1px solid #000">
 
                                             <table class="table table-bordered" style="background-color:#fff">
@@ -232,7 +243,7 @@
                                     </button>
 
                                     <style>
-                                        #myModal_1 li{
+                                        #myModal_1 li {
                                             display: inline-block;
                                             width: 100px;
                                             height: 100px;
@@ -254,7 +265,9 @@
                                                         <li ng-repeat="imgObj in data.imgs">
                                                             <div>
                                                                 <a href="/@{{ imgObj.pic_url}}" target="_blank">
-                                                                    <img  src="/@{{ imgObj.pic_url}}" width="100px" height="100px" alt="@{{ getTypeName(imgObj.type) }}"/>
+                                                                    <img src="/@{{ imgObj.pic_url}}" width="100px"
+                                                                         height="100px"
+                                                                         alt="@{{ getTypeName(imgObj.type) }}"/>
                                                                 </a>
                                                                 <span>@{{ getTypeName(imgObj.type) }}</span>
                                                             </div>
@@ -323,44 +336,21 @@
 
 
         var app = angular.module('app', []);
-        app.controller('findController', function ($scope,$filter) {
-            $scope.getToday =function(){
+        app.controller('findController', function ($scope, $filter) {
+            $scope.getToday = function () {
                 return $filter("date")(new Date().getTime(), "yyyy年MM月dd日");
             }
 
-            $scope.DateShow = function(str){
-                if(!str) return
+            $scope.DateShow = function (str) {
+                if (!str) return
                 return $filter("date")(new Date(str).getTime(), "yyyy年MM月dd日");
             }
 
 
-            $scope.DateShow1 = function(str){
-                if(!str) return;
+            $scope.DateShow1 = function (str) {
+                if (!str) return;
                 return $filter("date")(new Date(str).getTime(), "yyyy年MM月");
             }
-
-            $("#license_plate").select2({
-                placeholder: "请输入车牌号码",
-                allowClear: true,
-                ajax:{
-                    url:function(params){
-                        console.log(params);
-                        return '../../admin/registration/name?license_plate='+params.term
-                    },
-                    processResults:function(data){
-                        var dataArray=[];
-                        if(data){
-                            for(var i = 0 ;i < data.data.length;i++){
-                                dataArray.push({id:data.data[i].license_plate,text:data.data[i].license_plate});
-                            }
-                        }
-                        return {
-                            results:dataArray
-                        }
-
-                    }
-                }
-            });
 
 
             var obj = ['压缩天然气', '液化天然气', '液化石油气'];
@@ -384,19 +374,19 @@
                 })
             }
 
-            $scope.save = function(){
+            $scope.save = function () {
                 var data = {};
                 data.number = $scope.data.registration.number;
                 data.images = $scope.imgs;
                 data._token = $("#token").val();
                 $.ajax({
-                    url:"../../admin/registration/cancellation",
-                    type:'post',
-                    data:data,
-                    success:function(data){
+                    url: "../../admin/registration/cancellation",
+                    type: 'post',
+                    data: data,
+                    success: function (data) {
 
                     },
-                    error:function(data){
+                    error: function (data) {
 
                     }
                 })
@@ -405,21 +395,23 @@
                     "运营证,驾驶证,气瓶检测报告,(旧)气瓶登记使用,证经办人身份证,丢失证明";
             types = types.split(',');
 
-            $scope.getTypeName = function(type){
-                return types[type -1];
+            $scope.getTypeName = function (type) {
+                return types[type - 1];
+            }
+
+            $scope.searchData = {
+                license_plate: "",
+                number: ""
             }
 
             $scope.search = function () {
-                var license_plate =$("#license_plate").val();
-                if (!license_plate) return
                 $.ajax({
-                    url: "../../admin/registration/index",
+                    url: "../../admin/registration/query",
                     type: 'get',
-                    data: {license_plate: license_plate},
+                    data: $scope.searchData,
                     success: function (data) {
                         $scope.$apply(function () {
                             $scope.data = data.data;
-                            console.log($scope.data);
                         })
                     }
                 })

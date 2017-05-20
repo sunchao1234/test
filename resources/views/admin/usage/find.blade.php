@@ -488,7 +488,7 @@
                 return $filter("date")(new Date(str).getTime(), "yyyy年MM月");
             }
             $("#license_plate").select2({
-                placeholder: "请输入车牌号码超找",
+                placeholder: "请输入车牌号码",
                 allowClear: true,
                 ajax:{
                     url:function(params){
@@ -513,7 +513,7 @@
             var obj = ['压缩天然气', '液化天然气', '液化石油气'];
             $scope.getSelect = function (key) {
 
-                return obj[key];
+                return obj[key - 1];
             };
 
 

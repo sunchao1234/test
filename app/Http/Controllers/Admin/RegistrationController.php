@@ -14,7 +14,6 @@ class RegistrationController extends BaseController {
     public function register(MiddleModels $mid) {
         try{
             $message = [
-                'number.required'        => '登记证编号不能为空',
                 'license_plate.required' => '车牌号码不能为空',
                 'product.required'       => '充装介质不能为空',
                 'use_unit.required'      => '使用单位不能为空',
@@ -26,7 +25,6 @@ class RegistrationController extends BaseController {
                 'images.required'        => '图片不能为空'
             ];
             $this->valid([
-                'number'         => 'required',
                 'license_plate'  => 'required',
                 'product'        => 'required',
                 'use_unit'       => 'required',
@@ -67,7 +65,7 @@ class RegistrationController extends BaseController {
                 'license_plate' => 'required',
                 'number'        => 'required'
             ],$msg);
-            $res = $mid->index();
+            $res = $mid->query();
         } catch(\Exception $e) {
             $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
         }

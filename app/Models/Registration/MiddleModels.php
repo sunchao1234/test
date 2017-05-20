@@ -21,7 +21,7 @@ class MiddleModels {
         $this->driverModel->addInfo($number);
         $this->regDetailModel->addDetail($number);
         $this->uploadModel->addData($number);
-        return ['code'=>0,'msg'=>'success','data'=>[]];
+        return ['code'=>0,'msg'=>'success','data'=>$number];
     }
     public function index() {
         $reg = $this->regModel->index();

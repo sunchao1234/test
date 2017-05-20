@@ -10,7 +10,7 @@
 </style>
 <head>
 	<meta charset="utf-8" />
-	<title>管理中心</title>
+	<title>杭州市车用气瓶注册登记信息查询系统</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -63,7 +63,7 @@
 			<div class="container-fluid">
 				<!-- begin mobile sidebar expand / collapse button -->
 				<div class="navbar-header" style="background: #2d353c;">
-					<a href="index.html" class="navbar-brand" style="background-color: #2d353c;"><span class="navbar-logo"></span> 车用气瓶登记中心</a>
+					<a href="index.html" class="navbar-brand" style="background-color: #2d353c;width: auto"><span class="navbar-logo"></span>  杭州市车用气瓶注册登记信息查询系统</a>
 					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>

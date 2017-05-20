@@ -5,7 +5,7 @@
 <!--<![endif]-->
 <head>
 	<meta charset="utf-8" />
-	<title>Login</title>
+	<title>杭州市车用气瓶注册登记信息查询登陆</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -37,10 +37,10 @@
             <!-- begin news-feed -->
             <div class="news-feed">
                 <div class="news-image">
-                    <img src="/assets/img/login-bg/bg-7.jpg" data-id="login-cover-image" alt="" />
+                    <img src="/assets/img/IMG_0091.JPG" data-id="login-cover-image" alt="" />
                 </div>
                 <div class="news-caption">
-                    <h4 class="caption-title"><i class="fa fa-diamond text-success"></i> 车用气瓶使用管理后台</h4>
+                    <h4 class="caption-title"><i class="fa fa-diamond text-success"></i> 杭州市车用气瓶注册登记信息查询系统</h4>
                     <p>
                         {{--快抢车 Pay 管理后台 由杭州快抢车网络科技 技术支持.--}}
                     </p>
@@ -53,7 +53,7 @@
                 <div class="login-header">
                     <div class="brand">
                         <span class="logo"></span> 登陆中心
-                        <small>车 用 气 瓶 管 理 后 台</small>
+                        {{--<small>车 用 气 瓶 管 理 后 台</small>--}}
                     </div>
                     <div class="icon">
                         <i class="fa fa-sign-in"></i>

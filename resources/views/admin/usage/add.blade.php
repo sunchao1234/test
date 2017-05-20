@@ -237,9 +237,9 @@
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
                                                     <select class="form-control" ng-model="data.product">
-                                                        <option value="0">压缩天然气</option>
-                                                        <option value="1">液化天然气</option>
-                                                        <option value="2">液化石油气</option>
+                                                        <option value="1">压缩天然气-CNG</option>
+                                                        <option value="2">液化天然气-LNG</option>
+                                                        <option value="3">液化石油气-LPG</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -673,7 +673,7 @@
             $scope.data = {
                 number: '',
                 license_plate: "",
-                product: "0",
+                product: "1",
                 use_unit: "",
                 car_brand: "",
                 install_unit: "",

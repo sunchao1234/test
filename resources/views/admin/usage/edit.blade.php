@@ -89,9 +89,9 @@
 
                                             <div class="col-md-6 col-xs-12 p_top2">
                                                 <select class="form-control" ng-model="data.registration.product">
-                                                    <option value="0">压缩天然气</option>
-                                                    <option value="1">液化天然气</option>
-                                                    <option value="2">液化石油气</option>
+                                                    <option value="1">压缩天然气-CNG</option>
+                                                    <option value="2">液化天然气-LNG</option>
+                                                    <option value="3">液化石油气-LPG</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -360,7 +360,7 @@
         app.controller('findController', function ($scope,$filter) {
 
             $("#license_plate").select2({
-                placeholder: "请输入车牌号码超找",
+                placeholder: "请输入车牌号码",
                 allowClear: true,
                 ajax:{
                     url:function(params){
@@ -385,7 +385,7 @@
             var obj = ['压缩天然气', '液化天然气', '液化石油气'];
             $scope.getSelect = function (key) {
 
-                return obj[key];
+                return obj[key - 1];
             };
 
 

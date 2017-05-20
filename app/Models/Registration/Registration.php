@@ -41,7 +41,7 @@ class Registration extends BaseModel {
         if(!res) {
             throw new \Exception('写入数据失败');
         }
-        $number = str_pad($number,5,'0',STR_PAD_LEFT).'('.date('y').')';
+        $number = str_pad($id,5,'0',STR_PAD_LEFT).'('.date('y').')';
         app('db')->table('admin_registration')
             ->where('delete_time',0)
             ->where('id',$id)

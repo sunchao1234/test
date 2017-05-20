@@ -84,6 +84,10 @@ class RoleController extends BaseController
         return view('admin.usage.look');
     }
 
+    public function getReadusage(){
+        return view('admin.usage.read');
+    }
+
     /**
      * @action Create User Role
      * @return array and json
