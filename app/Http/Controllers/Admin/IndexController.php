@@ -12,12 +12,14 @@
 use DB;
 use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
+use App\Models\Registration\MiddleModels;
 class IndexController extends BaseController
 {
     public $is_debug = false;
-    public function index()
+    public function index(MiddleModels $mid)
     {
-        return view('admin.index');
+        $res = $mid->regList();
+        return view('admin.index',['res'=>$res]);
     }
 
     public function setCache($key, $data, $expires = NULL) {

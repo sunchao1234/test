@@ -206,7 +206,11 @@ class RegistrationController extends BaseController {
         return response()->json($res);
     }
     public function regList(MiddleModels $mid) {
-        $res = $mid->regList();
-        return view('admin.index',$res);
+        try{
+            $res = $mid->regList();
+        }catch(\Exception $e) {
+            $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
+        }
+        return response()->json($res);
     }
 }
