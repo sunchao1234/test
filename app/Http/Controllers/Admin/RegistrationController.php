@@ -211,6 +211,7 @@ class RegistrationController extends BaseController {
         }catch(\Exception $e) {
             $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
         }
-        return response()->json($res);
+        return view('admin.index',$res);
+        // return response()->json($res);
     }
 }
