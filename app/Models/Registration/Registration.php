@@ -70,8 +70,9 @@ class Registration extends BaseModel {
     }
     public function query() {
         $request = Request::input();
+        $number  = $this->getNumber();
         $db = app('db')->table('admin_registration');
-        $db = $db->where('number',$request['number'])
+        $db = $db->where('number',$number)
             ->where('license_plate',$request['license_plate']);
 
         $result = $db->select('id','number','license_plate','product','use_unit',
@@ -85,6 +86,18 @@ class Registration extends BaseModel {
 
         return $result;
     }
+    private function getNumber() {
+        $product_number = Request::input('product_number','');
+        if(empty($product_number)) {
+            throw new \Exception('产品编号不能为空');
+        }
+        $res = app('db')->table('admin_registration_detail')
+             ->where('product_number',$product_number)
+             ->where('delete_time',0)
+             ->select('number')
+             ->first();
+        return !empty($res)?$res->number:'';
+    }
     public function updateData($update = []) {
 
         $number = Request::input('number');
@@ -92,7 +105,7 @@ class Registration extends BaseModel {
             throw new \Exception('number不能为空');
         }
         $request = Request::input();
-        $columns = ['number','license_plate','product','use_unit','car_brand','install_unit','install_date'];
+        $columns = ['license_plate','product','use_unit','car_brand','install_unit','install_date'];
 
         $updateData = array_where($request,function($key,$val) use ($columns) {
             return in_array($key,$columns);
@@ -103,13 +116,12 @@ class Registration extends BaseModel {
         if(!empty($update)) {
             $updateData = array_merge($updateData,$update);
         }
-        if(empty($updateData)) {
-            throw new \Exception('没有更新数据');
-        }
-        $updateData = array_add($updateData,'update_time',time());
-        $res = app('db')->table('admin_registration')->where('number',$number)->update($updateData);
-        if(!$res) {
-            throw new \Exception('更新数据失败');
+        if(!empty($updateData)) {
+            $updateData = array_add($updateData,'update_time',time());
+            $res = app('db')->table('admin_registration')->where('number',$number)->update($updateData);
+            if(!$res) {
+                throw new \Exception('更新数据失败');
+            }
         }
         return $number;
     }

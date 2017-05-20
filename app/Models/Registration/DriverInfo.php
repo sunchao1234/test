@@ -56,4 +56,22 @@ class DriverInfo extends BaseModel {
             throw new \Exception('删除失败');
         }
     }
+    public function updateData() {
+        $request = Request::input('driver_data');
+        $number  = Request::input('number');
+        $where   = ['name','id_card','remark'];
+        $update  = array_where($request,function($key,$val) use ($where) {
+            return in_array($key,$where);
+        });
+        if(!empty($update)) {
+
+            $res = app('db')->table('admin_dirver_info')
+                 ->where('delete_time',0)
+                 ->where('number',$number)
+                 ->update($update);
+            if(!$res) {
+                throw new \Exception('更新数据失败');
+            }
+        }
+    }
 }

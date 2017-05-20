@@ -20,7 +20,7 @@ class MiddleModels {
         $number = $this->regModel->register();
         $this->driverModel->addInfo($number);
         $this->regDetailModel->addDetail($number);
-        $this->uploadModel->addData($number);
+        // $this->uploadModel->addData($number);
         return ['code'=>0,'msg'=>'success','data'=>$number];
     }
     public function index() {
@@ -55,6 +55,11 @@ class MiddleModels {
     public function upload() {
 
         $res = $this->uploadModel->upload();
+        return ['code'=>0,'msg'=>'success','data'=>$res];
+    }
+    public function singleUpload() {
+
+        $res = $this->uploadModel->singleUpload();
         return ['code'=>0,'msg'=>'success','data'=>$res];
     }
     public function fillPermit() {
@@ -96,5 +101,15 @@ class MiddleModels {
     public function regList() {
         $res = $this->regModel->regList();
         return $res;
+    }
+    public function addPicInfo() {
+        $this->uploadModel->addData($number);
+        return ['code'=>0,'msg'=>'success','data'=>[]];
+    }
+    public function updateInfo() {
+        $this->regModel->updateData();
+        $this->driverModel->updateData();
+        $this->regDetailModel->updateData();
+        return ['code'=>0,'msg'=>'success','data'=>[]];
     }
 }

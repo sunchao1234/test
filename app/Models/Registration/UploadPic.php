@@ -32,7 +32,32 @@ class UploadPic extends BaseModel {
         $new_path = array_merge($url,$type);
         return $new_path;
     }
-    public function addData($number) {
+    public function singleUpload() {
+
+        if(!Request::hasFile('file')) {
+
+            throw new \Exception('file不能为空');
+        }
+        $pic  = Request::file('file');
+        $type = Request::input('type');
+        $type = ['type'=>$type];
+        $file_path = 'upload';
+        if(!file_exists($file_path)) mkdir($file_path,0777,true);
+
+        $new_path = [];
+        $url = [];
+
+        $client_name = $pic->getClientOriginalName();
+        $extension   = $pic->getClientOriginalExtension();
+        $new_name    = md5(date('ymdhis').$client_name).".".$extension;
+        $path        = $pic->move($file_path,$new_name);
+        array_push($url, $file_path . '/' . $new_name);
+        $url = ['imgs'=>$url];
+        $new_path = array_merge($url,$type);
+        return $new_path;
+    }
+    public function addData() {
+        $number = Reuquest::input('number');
         $request = Request::input('images',[]);
         if(empty($request)) {
             throw new \Exception('images不能为空');

@@ -14,7 +14,7 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     Route::get('/registration/query', 'RegistrationController@query');
     // 添加登记表数据
     Route::post('/registration/register', 'RegistrationController@register');
-    // 文件上传
+    // 文件上传(多个文件上传)
     Route::post('/registration/upload', 'RegistrationController@upload');
     // 变更
     Route::post('/registration/fillpermit', 'RegistrationController@fillPermit');
@@ -34,5 +34,9 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     Route::post('/registration/deldriver', 'RegistrationController@delDriver');
     // 首页列表，显示20条信息
     Route::get('/registration/reglist', 'RegistrationController@regList');
+    // 文件上传（单个文件上传）
+    Route::get('/registration/singleupload', 'RegistrationController@singleUpload');
+    // 更新内容
+    Route::post('/registration/updateinfo', 'RegistrationController@updateInfo');
 });
 
