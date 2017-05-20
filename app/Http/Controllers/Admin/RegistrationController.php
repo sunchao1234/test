@@ -22,7 +22,6 @@ class RegistrationController extends BaseController {
                 'install_date.required'  => '安装日期不能为空',
                 'driver_data.required'   => '驾驶人员信息不能为空',
                 'reg_det_data.required'  => '汽车气瓶使用登记证不能为空',
-                'images.required'        => '图片不能为空'
             ];
             $this->valid([
                 'license_plate'  => 'required',
@@ -33,7 +32,6 @@ class RegistrationController extends BaseController {
                 'install_date'   => 'required',
                 'reg_det_data'   => 'required',
                 'driver_data'    => 'required',
-                'images'          => 'required'
             ],$message);
             $res = $mid->register();
         } catch(\Exception $e) {
@@ -59,11 +57,11 @@ class RegistrationController extends BaseController {
         try{
             $msg = [
                 'license_plate.required' => '车牌号不能为空',
-                'number.required'        => '编号不能为空',
+                'product_number.required'=> '产品编号不能为空',
             ];
             $this->valid([
                 'license_plate' => 'required',
-                'number'        => 'required'
+                'product_number'=> 'required'
             ],$msg);
             $res = $mid->query();
         } catch(\Exception $e) {
@@ -177,6 +175,20 @@ class RegistrationController extends BaseController {
         }
         return response()->json($res);
     }
+    public function singleUpload(MiddleModels $middle) {
+        try{
+            $msg = [
+                'type.required' => '图片类型不能为空',
+            ];
+            $this->valid([
+                'type' => 'required'
+            ],$msg);
+            $res = $middle->singleUpload();
+        }catch(\Exception $e) {
+            $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
+        }
+        return response()->json($res);
+    }
     public function delDetail(MiddleModels $mid) {
         try{
             $msg = [
@@ -208,6 +220,34 @@ class RegistrationController extends BaseController {
     public function regList(MiddleModels $mid) {
         try{
             $res = $mid->regList();
+        }catch(\Exception $e) {
+            $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
+        }
+        return response()->json($res);
+    }
+    public function addPicInfo(MiddleModels $mid) {
+        try{
+            $msg = [
+                'images.required' => '图片不能为空'
+            ];
+            $this->valid([
+                'images' => 'required'
+            ],$msg);
+            $res = $mid->addPicInfo();
+        }catch(\Exception $e) {
+            $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
+        }
+        return response()->json($res);
+    }
+    public function updateInfo(MiddleModels $mid) {
+        try{
+            $msg = [
+                'number.required' => '编号不能为空',
+            ];
+            $this->valid([
+                'number'         => 'required',
+            ],$msg);
+            $res = $mid->updateInfo();
         }catch(\Exception $e) {
             $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
         }
