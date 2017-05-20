@@ -9,11 +9,11 @@ class UploadPic extends BaseModel {
 
     public function upload() {
 
-        if(!Request::hasFile('img')) {
+        if(!Request::hasFile('file')) {
 
             throw new \Exception('img不能为空');
         }
-        $pics = Request::file('img');
+        $pics = Request::file('file');
         $type = Request::input('type');
         $type = ['type'=>$type];
         $file_path = 'upload';

@@ -186,6 +186,7 @@
 			<script src="/assets/plugins/gritter/js/jquery.gritter.js"></script>
 
 			<script src="/assets/js/apps.min.js"></script>
+			<script src="/assets/plugins/plupload/plupload.full.min.js"></script>
 			<!-- ================== END PAGE LEVEL JS ================== -->
 			
 			<script>

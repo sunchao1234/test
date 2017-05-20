@@ -158,11 +158,11 @@
                         rules: {
                             user_name: {
                                 required: true,
-                                rangelength:[4, 64]
+                                rangelength:[1, 64]
                             },
                             password:{
                                 required:true,
-                                rangelength:[4, 16]
+                                rangelength:[1, 16]
                             }
                         },
 
