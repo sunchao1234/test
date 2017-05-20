@@ -95,6 +95,6 @@ class MiddleModels {
     }
     public function regList() {
         $res = $this->regModel->regList();
-        return ['code'=>0,'msg'=>'success','data'=>$res];
+        return $res;
     }
 }
