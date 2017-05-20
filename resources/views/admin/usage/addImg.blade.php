@@ -67,7 +67,7 @@
                                         <input type="file" multiple="multiple" id='uploadFile' name='img[]'>
                                     </form>
 
-                                    <div id="validate" role="form" name="create_form"
+                                    <div id="validate" role="form" name="create_form" style="display: none"
                                          class="form-horizontal form-bordered">
                                         <div class="form-body">
                                             <!-- 默认开启了 csrf验证 非POST请求token必须加  -->
@@ -77,13 +77,14 @@
                                                 </label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
-                                                    <div>
-                                                        <a ng-repeat="item in imgs[1]" style="margin: 5px;float:left">
-                                                            <img width="100px" ;height="100px">
-                                                        </a>
-                                                    </div>
+
                                                     <button type="button" id="upload1" class='btn btn-info'>上传
                                                     </button>
+                                                    <div>
+                                                        <a style="margin: 5px;float:left" id="upload1-container">
+
+                                                        </a>
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -95,13 +96,13 @@
                                                 </label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
+                                                    <button type="button" class='btn  btn-info' id="upload2">上传
+                                                    </button>
                                                     <div>
-                                                        <a ng-repeat="item in imgs[2]" style="margin: 5px;float:left">
-                                                            <img width="100px" ;height="100px">
+                                                        <a id="upload2-container" style="margin: 5px;float:left">
+
                                                         </a>
                                                     </div>
-                                                    <button type="button" class='btn  btn-info' ng-click="upload(2)">上传
-                                                    </button>
                                                 </div>
 
                                             </div>
@@ -113,13 +114,15 @@
                                                 </label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
+
+                                                    <button type="button" id="upload3" class='btn btn-info'>上传
+                                                    </button>
+
                                                     <div>
-                                                        <a ng-repeat="item in imgs[3]" style="margin: 5px;float:left">
-                                                            <img width="100px" ;height="100px">
+                                                        <a id='upload3-container' style="margin: 5px;float:left">
+
                                                         </a>
                                                     </div>
-                                                    <button type="button" ng-click="upload(3)" class='btn btn-info'>上传
-                                                    </button>
                                                 </div>
 
                                             </div>
@@ -130,13 +133,12 @@
                                                 </label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
+                                                    <button type="button" id='upload4' class='btn btn-info'>上传
+                                                    </button>
                                                     <div>
-                                                        <a ng-repeat="item in imgs[4]" style="margin: 5px;float:left">
-                                                            <img width="100px" ;height="100px">
+                                                        <a id='upload4-container' style="margin: 5px;float:left">
                                                         </a>
                                                     </div>
-                                                    <button type="button" ng-click="upload(4)" class='btn btn-info'>上传
-                                                    </button>
                                                 </div>
 
 
@@ -148,13 +150,14 @@
                                                 </label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
+
+                                                    <button type="button" id="upload5" class='btn btn-info'>上传
+                                                    </button>
                                                     <div>
-                                                        <a ng-repeat="item in imgs[5]" style="margin: 5px;float:left">
-                                                            <img width="100px" ;height="100px">
+                                                        <a id='upload5-container' style="margin: 5px;float:left">
+
                                                         </a>
                                                     </div>
-                                                    <button type="button" ng-click="upload(5)" class='btn btn-info'>上传
-                                                    </button>
                                                 </div>
 
                                             </div>
@@ -166,13 +169,14 @@
                                                 </label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
+
+                                                    <button type="button" id="upload7" class='btn btn-info'>上传
+                                                    </button>
                                                     <div>
-                                                        <a ng-repeat="item in imgs[7]" style="margin: 5px;float:left">
-                                                            <img width="100px" ;height="100px">
+                                                        <a id='upload5-container7' style="margin: 5px;float:left">
+
                                                         </a>
                                                     </div>
-                                                    <button type="button" ng-click="upload(7)" class='btn btn-info'>上传
-                                                    </button>
                                                 </div>
 
                                             </div>
@@ -184,26 +188,32 @@
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
                                                     <label for="isPerson" style='float:left'>是否为个人名字</label>
-                                                    <input type='checkbox' ng-model="data.is_personal" name="isPerson"/>
+                                                    <input type='checkbox' id="isPerson" name="isPerson"/>
 
-                                                    <div ng-model="data.is_personal">
-                                                        <a ng-repeat="item in imgs[6]" style="margin: 5px;float:left">
-                                                            <img width="100px" ;height="100px">
-                                                        </a>
-                                                    </div>
-                                                    <button type="button" ng-click="upload(6)" ng-if="data.is_personal"
+
+                                                    <button type="button" id="upload6"
                                                             class='btn btn-info'>
                                                         上传
                                                     </button>
+
+                                                    <div >
+                                                        <a id='upload5-container7' style="margin: 5px;float:left">
+                                                            <img width="100px" ;height="100px">
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
 
 
                                         <div class="panel-footer text-right">
-                                            <button class="btn btn-primary pull-right" type="submit" ng-click="save()">
+                                            <button class="btn btn-primary pull-right" type="submit" id="save">
                                                 保存
                                             </button>
+
+                                            <a class="btn btn-primary pull-right"  href="/editusage">
+                                                修改基础信息
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -228,181 +238,72 @@
     <script type="text/javascript" src="/assets/app/common.js"></script>
 
     <script type="text/javascript">
+        window.onload = function(){
+            var saveData =[];
 
-        //        $("#uploadFile").on('change',function(){
-        //            console.log('sss');
-        //        });
-        var uploader = new plupload.Uploader({
-            // General settings
-            browse_button: 'upload1',
-            url: "/admin/registration/upload",
-            chunk_size : '1mb',
+            var token =  "{{csrf_token()}}";
+            uploadImg('upload1',$("#upload1-container"),1,token,saveData,function(data){
+                $("#upload1-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">');
+            });
+            uploadImg('upload2',$("#upload2-container"),2,token,function(data){
+                $("#upload2-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">');
+            });
+            uploadImg('upload3',$("#upload3-container"),3,token,function(data){
+                $("#upload3-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">');
+            });
+            uploadImg('upload4',$("#upload4-container"),4,token,function(data){
+                $("#upload4-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">')
+            });
+            uploadImg('upload5',$("#upload5-container"),5,token,function(data){
+                $("#upload5-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">')
+            });
+
+            uploadImg('upload6',$("#upload6-container"),6,token,function(data){
+                $("#upload6-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">')
+            });
+            uploadImg('upload7',$("#upload7-container"),7,token,function(data){
+                $("#upload7-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">')
+            });
 
 
-//         url: "/admin/registration/upload",
-            flash_swf_url : '/assets/plugins/plupload/Moxie.swf',
-            silverlight_xap_url : '/assets/plugins/plupload/Moxie.xap',
-            // PreInit events, bound before the internal events
-            multipart_params: {  //附加参数
-            _token: "{{csrf_token()}}",
-            type: 1
-            },
-
-            // Post init events, bound after the internal events
-            init : {
-                PostInit: function() {
-                    // Called after initialization is finished and internal event handlers bound
-                    log('[PostInit]');
-
-//                    document.getElementById('uploadfiles').onclick = function() {
-//                        uploader.start();
-//                        return false;
-//                    };
-                },
-
-                Browse: function(up) {
-                    // Called when file picker is clicked
-                    log('[Browse]');
-                },
-
-                Refresh: function(up) {
-                    // Called when the position or dimensions of the picker change
-                    log('[Refresh]');
-                },
-
-                StateChanged: function(up) {
-                    // Called when the state of the queue is changed
-                    log('[StateChanged]', up.state == plupload.STARTED ? "STARTED" : "STOPPED");
-                },
-
-                QueueChanged: function(up) {
-                    // Called when queue is changed by adding or removing files
-                    log('[QueueChanged]');
-                },
-
-                OptionChanged: function(up, name, value, oldValue) {
-                    // Called when one of the configuration options is changed
-                    log('[OptionChanged]', 'Option Name: ', name, 'Value: ', value, 'Old Value: ', oldValue);
-                },
-
-                BeforeUpload: function(up, file) {
-                    // Called right before the upload for a given file starts, can be used to cancel it if required
-                    log('[BeforeUpload]', 'File: ', file);
-                },
-
-                UploadProgress: function(up, file) {
-                    // Called while file is being uploaded
-                    log('[UploadProgress]', 'File:', file, "Total:", up.total);
-                },
-
-                FileFiltered: function(up, file) {
-                    // Called when file successfully files all the filters
-                    log('[FileFiltered]', 'File:', file);
-                },
-
-                FilesAdded: function(up, files) {
-                    // Called when files are added to queue
-                    log('[FilesAdded]');
-                    uploader.start();
-                    plupload.each(files, function(file) {
-                        log('  File:', file);
-                    });
-                },
-
-                FilesRemoved: function(up, files) {
-                    // Called when files are removed from queue
-                    log('[FilesRemoved]');
-
-                    plupload.each(files, function(file) {
-                        log('  File:', file);
-                    });
-                },
-
-                FileUploaded: function(up, file, info) {
-                    // Called when file has finished uploading
-                    var data = JSON.parse(info.response);
-//                    console.log(info.response);
-                    log('[FileUploaded] File:', file, "Info:", info);
-                },
-
-                ChunkUploaded: function(up, file, info) {
-                    // Called when file chunk has finished uploading
-                    log('[ChunkUploaded] File:', file, "Info:", info);
-                },
-
-                UploadComplete: function(up, files) {
-                    // Called when all files are either uploaded or failed
-                    log('[UploadComplete]');
-                },
-
-                Destroy: function(up) {
-                    // Called when uploader is destroyed
-                    log('[Destroy] ');
-                },
-
-                Error: function(up, args) {
-                    // Called when error occurs
-                    log('[Error] ', args);
+            $("#upload6").hide();
+            $("#isPerson").on("change",function(){
+                if(this.checked){
+                    $("#upload6").show()
+                }else{
+                    $("#upload6").hide();
                 }
-            }
-        });
-        uploader.init();
+            });
 
-        function log(){
-            console.log('11');
+            $("#search_submit").on("click",function(){
+                getSearchData(function(data){
+                   if(data.code == 0){
+                       $("#validate").show();
+                       var imgs = data.data.imgs;
+                       for(var i = 0;i < imgs.length;i++){
+                           if(imgs[i].pic_url){
+                               var picUrlArray = imgs[i].pic_url.split(",");
+                               saveData[imgs[i].type] = [];
+                               for(var j = 0 ;j < picUrlArray.length; j++){
+                                   saveData[imgs[i].type].push(picUrlArray[i]);
+                                   $("#upload"+ imgs[i].type +"-container").append('<img width="50px" height="50px" src="/'+picUrlArray[j] +'">');
+                               }
+                           }
+
+                       }
+                   }
+                })
+            });
+
+            searchSelect2();
+
+            $("#save").on("click",function(){
+                console.log(saveData);
+            })
+
         }
 
-        {{--var uploader = new plupload.Uploader({--}}
-            {{--browse_button: 'upload1',--}}
-            {{--url: "/admin/registration/upload",--}}
-            {{--flash_swf_url : '/assets/plugins/plupload/Moxie.swf',--}}
-            {{--silverlight_xap_url : '/assets/plugins/plupload/Moxie.xap',--}}
-            {{--filters: {--}}
-{{--//                mime_types : [ //只允许上传图片--}}
-{{--//                    { title : 'Image files', extensions : 'jpg,jpeg,png' }--}}
-{{--//                ],--}}
-{{--//                max_file_size:''--}}
-            {{--},--}}
-            {{--multipart_params: {  //附加参数--}}
-                {{--_token: "{{csrf_token()}}",--}}
-                {{--type: 1--}}
-            {{--},--}}
-            {{--unique_names: true,--}}
-            {{--multi_selection: true--}}
-        {{--});--}}
 
-        {{--uploader.init();--}}
-        {{--uploader.bind('FilesAdded', function (uploader, files) {--}}
-            {{--uploader.start(); //开始上传--}}
-        {{--});--}}
-
-        {{--uploader.bind('UploadComplete', function(uploader, files){--}}
-{{--//            $('#logo').html(uploaded_html);--}}
-{{--//            uploaded_html = '';--}}
-{{--//            $('#path').val(path);--}}
-            {{--console.log('2222222');--}}
-            {{--console.log('-------3333-------');--}}
-            {{--console.log(files);--}}
-            {{--uploader.files.length = 0;  //清空上传队列--}}
-        {{--});--}}
-
-
-        {{--uploader.bind('FileUploaded', function(uploader, file, res){--}}
-            {{--console.log('---22-');--}}
-            {{--var r = JSON.parse(res.response);--}}
-            {{--var path = r.code;--}}
-            {{--console.log(path);--}}
-{{--//            uploaded_html = '<img width="100px;" src="/data/attachment/brand/' +  path + '" />';--}}
-        {{--});--}}
-
-        {{--uploader.bind('Error',function(){--}}
-            {{--console.log('111111');--}}
-        {{--});--}}
-
-
-        {{--function fileUpdate(type) {--}}
-            {{--$("#uploadFile").click();--}}
-        {{--}--}}
 
     </script>
 

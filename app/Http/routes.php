@@ -35,7 +35,7 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     // 首页列表，显示20条信息
     Route::get('/registration/reglist', 'RegistrationController@regList');
     // 文件上传（单个文件上传）
-    Route::get('/registration/singleupload', 'RegistrationController@singleUpload');
+    Route::post('/registration/singleupload', 'RegistrationController@singleUpload');
     // 更新内容
     Route::post('/registration/updateinfo', 'RegistrationController@updateInfo');
 });

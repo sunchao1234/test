@@ -1,23 +1,22 @@
-Date.prototype.Format = function(fmt)
-{
+Date.prototype.Format = function (fmt) {
     var o = {
-        "M+" : this.getMonth()+1,                 //月份
-        "d+" : this.getDate(),                    //日
-        "h+" : this.getHours(),                   //小时
-        "m+" : this.getMinutes(),                 //分
-        "s+" : this.getSeconds(),                 //秒
-        "q+" : Math.floor((this.getMonth()+3)/3), //季度
-        "S"  : this.getMilliseconds()             //毫秒
+        "M+": this.getMonth() + 1,                 //月份
+        "d+": this.getDate(),                    //日
+        "h+": this.getHours(),                   //小时
+        "m+": this.getMinutes(),                 //分
+        "s+": this.getSeconds(),                 //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds()             //毫秒
     };
-    if(/(y+)/.test(fmt))
-        fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
-    for(var k in o)
-        if(new RegExp("("+ k +")").test(fmt))
-            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+    if (/(y+)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 }
 
-var uploadFile = function (callBack,imgType) {
+var uploadFile = function (callBack, imgType) {
     var formData = new FormData($("#uploadForm")[0]);
     $.ajax({
         url: '../../admin/registration/upload',  //server script to process data
@@ -30,7 +29,6 @@ var uploadFile = function (callBack,imgType) {
             }
         },
         error: function () {
-            console.log('error');
         },
         // Form数据
         data: formData,
@@ -42,7 +40,84 @@ var uploadFile = function (callBack,imgType) {
 
 var obj = ['压缩天然气', '液化天然气', '液化石油气'];
 
-var getSelect = function(key){
+var getSelect = function (key) {
     return obj[key - 1];
 }
+
+
+var uploadImg = function (id, node, type, token,data, callBack) {
+    var uploader = new plupload.Uploader({
+        // General settings
+        browse_button: id,
+        url: "/admin/registration/singleupload",
+        chunk_size: '1mb',
+        flash_swf_url: '/assets/plugins/plupload/Moxie.swf',
+        silverlight_xap_url: '/assets/plugins/plupload/Moxie.xap',
+        // PreInit events, bound before the internal events
+        multipart_params: {  //附加参数
+            _token: token,
+            type: type
+        },
+        init: {
+            FilesAdded: function (up, files) {
+                data[type] = [];
+                node.html("");
+                uploader.start();
+            },
+            FileUploaded: function (up, file, info) {
+                var data = JSON.parse(info.response);
+                data[type].push(data.data.imgs[0]);
+                callBack(data);
+            },
+
+            Destroy: function (up) {
+            },
+
+            Error: function (up, args) {
+                log('[Error] ', args);
+            }
+        }
+    });
+    uploader.init();
+}
+
+var searchSelect2 = function () {
+    $("#license_plate").select2({
+        placeholder: "请输入车牌号码",
+        allowClear: true,
+        ajax: {
+            url: function (params) {
+                console.log(params);
+                return '../../admin/registration/name?license_plate=' + params.term
+            },
+            processResults: function (data) {
+                var dataArray = [];
+                if (data) {
+                    for (var i = 0; i < data.data.length; i++) {
+                        dataArray.push({id: data.data[i].license_plate, text: data.data[i].license_plate});
+                    }
+                }
+                return {
+                    results: dataArray
+                }
+            }
+        }
+    });
+};
+
+var getSearchData = function (callBack) {
+    var license_plate = $("#license_plate").val();
+    if (!license_plate) return
+    $.ajax({
+        url: "../../admin/registration/index",
+        type: 'get',
+        data: {license_plate: license_plate},
+        success: function (data) {
+            if (data.code == 0){
+                callBack(data);
+            }
+        }
+    })
+}
+
 
