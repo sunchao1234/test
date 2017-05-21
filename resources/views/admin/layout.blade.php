@@ -170,6 +170,8 @@
 			<script src="/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
 			<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 			<script src="/assets/plugins/select2/dist/js/select2.full.min.js"></script>
+			<script src="/assets/plugins/plupload/moxie.js"></script>
+			<script src="/assets/plugins/plupload/plupload.dev.js"></script>
 
 			<!--[if lt IE 9]>
 				<script src="/assets/crossbrowserjs/html5shiv.js"></script>
@@ -186,7 +188,8 @@
 			<script src="/assets/plugins/gritter/js/jquery.gritter.js"></script>
 
 			<script src="/assets/js/apps.min.js"></script>
-			<script src="/assets/plugins/plupload/plupload.full.min.js"></script>
+			<script src="/assets/app/common.js"></script>
+
 			<!-- ================== END PAGE LEVEL JS ================== -->
 			
 			<script>

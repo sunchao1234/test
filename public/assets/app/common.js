@@ -65,9 +65,9 @@ var uploadImg = function (id, node, type, token,data, callBack) {
                 uploader.start();
             },
             FileUploaded: function (up, file, info) {
-                var data = JSON.parse(info.response);
-                data[type].push(data.data.imgs[0]);
-                callBack(data);
+                var resdata = JSON.parse(info.response);
+                data[type].push(resdata.data.imgs[0]);
+                callBack(resdata);
             },
 
             Destroy: function (up) {
@@ -81,33 +81,86 @@ var uploadImg = function (id, node, type, token,data, callBack) {
     uploader.init();
 }
 
+var saveImageUrl = function(data){
+    $.ajax({
+        url:"../../admin/registration/newfillpermit",
+        type:'post',
+        data:data,
+        success:function(data){
+            if(data.code == 0){
+                swal('','成功','success');
+            }else{
+                swal('',data.msg,'error');
+            }
+        },
+        error:function(data){
+
+        }
+    })
+};
+
 var searchSelect2 = function () {
-    $("#license_plate").select2({
-        placeholder: "请输入车牌号码",
-        allowClear: true,
-        ajax: {
-            url: function (params) {
-                console.log(params);
-                return '../../admin/registration/name?license_plate=' + params.term
+
+
+    var license_plate = getQueryString("license_plate");
+    if(license_plate){
+        $("#license_plate").select2({
+            placeholder: "请输入车牌号码",
+            allowClear: true,
+            initSelection:function(ele,callBack){
+                var license_plate = getQueryString("license_plate");
+                console.log(license_plate);
+                if(license_plate){
+                    callBack({label:license_plate,value:license_plate,id:license_plate,text:license_plate});
+                }
             },
-            processResults: function (data) {
-                var dataArray = [];
-                if (data) {
-                    for (var i = 0; i < data.data.length; i++) {
-                        dataArray.push({id: data.data[i].license_plate, text: data.data[i].license_plate});
+            ajax: {
+                url: function (params) {
+                    return '../../admin/registration/name?license_plate=' + params.term
+                },
+                processResults: function (data) {
+                    var dataArray = [];
+                    if (data) {
+                        for (var i = 0; i < data.data.length; i++) {
+                            dataArray.push({id: data.data[i].license_plate, text: data.data[i].license_plate});
+                        }
+                    }
+                    return {
+                        results: dataArray
                     }
                 }
-                return {
-                    results: dataArray
+            }
+        });
+    }else{
+        $("#license_plate").select2({
+            placeholder: "请输入车牌号码",
+            allowClear: true,
+            ajax: {
+                url: function (params) {
+                    return '../../admin/registration/name?license_plate=' + params.term
+                },
+                processResults: function (data) {
+                    var dataArray = [];
+                    if (data) {
+                        for (var i = 0; i < data.data.length; i++) {
+                            dataArray.push({id: data.data[i].license_plate, text: data.data[i].license_plate});
+                        }
+                    }
+                    return {
+                        results: dataArray
+                    }
                 }
             }
-        }
-    });
+        });
+    }
+
+
 };
 
 var getSearchData = function (callBack) {
     var license_plate = $("#license_plate").val();
-    if (!license_plate) return
+    license_plate =getQueryString("license_plate");
+    if (!license_plate) return;
     $.ajax({
         url: "../../admin/registration/index",
         type: 'get',
@@ -119,5 +172,12 @@ var getSearchData = function (callBack) {
         }
     })
 }
+
+function getQueryString(key){
+    var reg = new RegExp("(^|&)"+key+"=([^&]*)(&|$)");
+    var result = window.location.search.substr(1).match(reg);
+    return result?decodeURIComponent(result[2]):null;
+}
+
 
 

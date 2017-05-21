@@ -244,6 +244,7 @@
                                                     <button class="btn btn-success pull-right" id="print2">打印反面</button>
                                                     <button class="btn pull-right btn-success" id="print1">打印正面</button>
                                                     <button class="btn btn-primary pull-right" type="submit" ng-click="save()">保存</button>
+                                                    <a class="btn btn-primary pull-right" type="submit" href="./editusage?license_plate=@{{data.registration.license_plate}}">编辑基础信息</a>
 
                                                 </div>
                                             </div>

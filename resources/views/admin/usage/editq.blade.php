@@ -31,8 +31,8 @@
                 </div>
             </div>
         </div>
-        <div class="vertical-box-column" ng-app="app">
-            <div class="vertical-box" ng-controller="findController">
+        <div class="vertical-box-column">
+            <div class="vertical-box">
                 <div class="vertical-box-row">
                     <div class="vertical-box-cell">
                         <div class="vertical-box-inner-cell">
@@ -65,12 +65,13 @@
                                         </div>
                                     </div>
 
-                                    <div  class="form-horizontal form-bordered" style="display:none">
+                                    <div class="form-horizontal form-bordered" id="form_v" style="display: none">
                                         <div class="form-group">
                                             <label class='control-label col-md-2'>登记证编号</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control" ng-model="data.registration.number"
+                                                <input id="" name="number" class="form-control"
+                                                       ng-model="data.registration.number"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -79,7 +80,7 @@
                                             <label class="control-label col-md-2">车牌号码</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control"
+                                                <input id="" name="license_plate" class="form-control"
                                                        ng-model="data.registration.license_plate" type="text"/>
                                             </div>
                                         </div>
@@ -88,7 +89,8 @@
                                             <label class="control-label col-md-2">充装介质</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <select class="form-control" ng-model="data.registration.product">
+                                                <select class="form-control" name="product"
+                                                        ng-model="data.registration.product">
                                                     <option value="1">压缩天然气-CNG</option>
                                                     <option value="2">液化天然气-LNG</option>
                                                     <option value="3">液化石油气-LPG</option>
@@ -100,7 +102,8 @@
                                             <label class="control-label col-md-2">使用单位</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control" ng-model="data.registration.use_unit"
+                                                <input id="" name="use_unit" class="form-control"
+                                                       ng-model="data.registration.use_unit"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -109,7 +112,8 @@
                                             <label class="control-label col-md-2">车 种</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control" ng-model="data.registration.car_brand"
+                                                <input id="" name="car_brand" class="form-control"
+                                                       ng-model="data.registration.car_brand"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -118,7 +122,7 @@
                                             <label class="control-label col-md-2">安装单位</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control"
+                                                <input id="" name="install_unit" class="form-control"
                                                        ng-model="data.registration.install_unit" type="text"/>
                                             </div>
                                         </div>
@@ -127,8 +131,9 @@
                                             <label class="control-label col-md-2">日期</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="install_date" name="" class="form-control datepicker"
-                                                       ng-model="data.registration.install_date"  type="text"/>
+                                                <input id="install_date" name="install_date"
+                                                       class="form-control datepicker"
+                                                       ng-model="data.registration.install_date" type="text"/>
                                             </div>
                                         </div>
 
@@ -212,17 +217,7 @@
                                                 <td>操作</td>
                                             </tr>
                                             </thead>
-                                            <tbody>
-                                            <tr ng-repeat="item in data.detail track by $index">
-                                                <td>@{{ $index+1 }}</td>
-                                                <td>@{{ item.device_number }}</td>
-                                                <td>@{{ item.made_unit}}</td>
-                                                <td>@{{ item.made_date }}</td>
-                                                <td>@{{ item.product_number }}</td>
-                                                <td>@{{ item.volume }}</td>
-                                                <td>@{{ item.next_time_check_date }}</td>
-                                                <td ng-click="delDetail($index)">删除 </td>
-                                            </tr>
+                                            <tbody id='detail_body'>
                                             </tbody>
                                         </table>
 
@@ -296,13 +291,12 @@
                                             </tbody>
                                         </table>
 
-                                        <button class="btn btn-primary pull-right"  ng-click="save()">保存</button>
+                                        <button class="btn btn-primary pull-right" ng-click="save()">保存</button>
 
 
                                     </div>
 
                                 </div>
-
 
 
                             </div>
@@ -356,119 +350,96 @@
             });
             return o;
         };
-        var app = angular.module('app', []);
-        app.controller('findController', function ($scope,$filter) {
 
-            $("#license_plate").select2({
-                placeholder: "请输入车牌号码",
-                allowClear: true,
-                initSelection:function(ele,callBack){
-                    var license_plate = getQueryString("license_plate");
-                    console.log(license_plate);
-                    if(license_plate){
-                        callBack({label:license_plate,value:license_plate,id:license_plate,text:license_plate});
-                    }
-                },
-                ajax:{
-                    url:function(params){
-                        console.log(params);
-                        return '../../admin/registration/name?license_plate='+params.term
-                    },
-                    processResults:function(data){
-                        var dataArray=[];
-                        if(data){
-                            for(var i = 0 ;i < data.data.length;i++){
-                                dataArray.push({id:data.data[i].license_plate,text:data.data[i].license_plate});
-                            }
-                        }
-                        return {
-                            results:dataArray
-                        }
+        searchSelect2();
 
-                    }
-                }
-            });
-
-            var obj = ['压缩天然气', '液化天然气', '液化石油气'];
-            $scope.getSelect = function (key) {
-
-                return obj[key - 1];
-            };
-
-
-
-            $scope.search = function () {
-                var license_plate =$("#license_plate").val();
-                license_plate =getQueryString("license_plate");
-                console.log(license_plate);
-                if (!license_plate) return;
-                $.ajax({
-                    url: "../../admin/registration/index",
-                    type: 'get',
-                    data: {license_plate: license_plate},
-                    success: function (data) {
-                        $scope.$apply(function () {
-
-                            $scope.data = data.data;
-                            $scope.data.registration.product = $scope.data.registration.product.toString();
-                            $scope.data.registration.install_date = $filter("date")( $scope.data.registration.install_date * 1000,
-                                    "yyyy-MM-dd");
-                            console.log($scope.data);
-                            $(".form-horizontal ").show();
-                        })
-                    }
-                })
+        getSearchData(function (data) {
+            $("#form_v").show();
+            var registration = data.data.registration;
+            for (var i in registration) {
+                $("[name='" + i + "']").val(registration[i]);
             }
 
-            $scope.search();
-
-            $scope.saveDriverData = function () {
-                var data = serializeObject($('#driverData'));
-                data.flag = true;
-                $scope.data.driver_info.push(data);
-                $("#myModal_1").modal('hide');
-                swal('','成功','success');
-            };
-
-            $scope.saveRegDet = function () {
-                var data = serializeObject($('#regDetData'));
-                data.flag = true;
-                $scope.data.detail.push(data);
-                $("#myModal").modal('hide');
-                swal('','成功','success');
-            };
-
-            $scope.delDetail = function(index){
-                $scope.data.detail.splice(index,1);
+            var detail = data.data.detail;
+            for (var i = 0; i < detail.length; i++) {
+                var tr = "<tr>";
+                tr += "<td>" + i + "</td>";
+                tr += "<td>" + detail[i].device_number  + "</td>";
+                tr += "<td>" + detail[i].made_unit+ "</td>";
+                tr += "<td>" + detail[i].made_date   + "</td>";
+                tr += "<td>" + detail[i].product_number    + "</td>";
+                tr += "<td>" + detail[i].volume  + "</td>";
+                tr += "<td>" + detail[i].next_time_check_date + "</td>";
+                tr += "<td><a>删除</a></td></tr>";
+                $("#detail_body").append(tr);
             }
 
-            $scope.delDriver = function(index){
-                $scope.data.driver_info.splice(index,1);
+            var driver_info = data.data.driver_info;
+            for(var i = 0 ; i < driver_info.length;i++){
+                var tr = "<tr>";
+                tr += "<td>"+ i +"</td>";
+                tr += "<td>"+ driver_info[i].name +"</td>";
+                tr += "<td>"+ driver_info[i].id_card  +"</td>";
+                tr += "<td>"+ driver_info[i].remark  +"</td>";
+                tr += "<td><a>删除</a></td>";
             }
 
-            $scope.save = function(){
-                var data = {};
-                $.extend(data,$scope.data.registration);
-                data.reg_det_data = $scope.data.detail;
-                data.driver_data =$scope.data.driver_info;
-                data._token = $("#token").val();
-                $.ajax({
-                    url:"../../admin/registration/newfillpermit1",
-                    type:'post',
-                    data:data,
-                    success:function(data){
-                        if(data.code == 0){
-                            swal('','成功','success');
-                        }else{
-                            swal('',data.msg,'error');
-                        }
-                    },
-                    error:function(data){
-
-                    }
-                })
-            }
         });
+
+        //        var app = angular.module('app', []);
+        //        app.controller('findController', function ($scope,$filter) {
+        //
+        //
+        //
+        //
+        //
+        //            $scope.saveDriverData = function () {
+        //                var data = serializeObject($('#driverData'));
+        //                data.flag = true;
+        //                $scope.data.driver_info.push(data);
+        //                $("#myModal_1").modal('hide');
+        //                swal('','成功','success');
+        //            };
+        //
+        //            $scope.saveRegDet = function () {
+        //                var data = serializeObject($('#regDetData'));
+        //                data.flag = true;
+        //                $scope.data.detail.push(data);
+        //                $("#myModal").modal('hide');
+        //                swal('','成功','success');
+        //            };
+        //
+        //            $scope.delDetail = function(index){
+        //                $scope.data.detail.splice(index,1);
+        //            }
+        //
+        //            $scope.delDriver = function(index){
+        //                $scope.data.driver_info.splice(index,1);
+        //            }
+        //
+        //            $scope.save = function(){
+        //                var data = {};
+        //                $.extend(data,$scope.data.registration);
+        //                data.reg_det_data = $scope.data.detail;
+        //                data.driver_data =$scope.data.driver_info;
+        //                data._token = $("#token").val();
+        //                $.ajax({
+        //                    url:"../../admin/registration/newfillpermit1",
+        //                    type:'post',
+        //                    data:data,
+        //                    success:function(data){
+        //                        if(data.code == 0){
+        //                            swal('','成功','success');
+        //                        }else{
+        //                            swal('',data.msg,'error');
+        //                        }
+        //                    },
+        //                    error:function(data){
+        //
+        //                    }
+        //                })
+        //            }
+        //        });
 
     </script>
 

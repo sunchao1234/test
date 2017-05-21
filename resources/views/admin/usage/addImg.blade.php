@@ -60,13 +60,6 @@
                                     </div>
 
 
-                                    <form id="uploadForm" style="display: none">
-                                        <input name='_token' class='hide' id='token'
-                                               value='<?php echo e(csrf_token()); ?>'>
-                                        <input type="hidden" name="type" id='img_type' value='1'/>
-                                        <input type="file" multiple="multiple" id='uploadFile' name='img[]'>
-                                    </form>
-
                                     <div id="validate" role="form" name="create_form" style="display: none"
                                          class="form-horizontal form-bordered">
                                         <div class="form-body">
@@ -78,7 +71,7 @@
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
 
-                                                    <button type="button" id="upload1" class='btn btn-info'>上传
+                                                    <button type="button" class='btn  btn-info' id="upload1">上传
                                                     </button>
                                                     <div>
                                                         <a style="margin: 5px;float:left" id="upload1-container">
@@ -211,7 +204,7 @@
                                                 保存
                                             </button>
 
-                                            <a class="btn btn-primary pull-right"  href="/editusage">
+                                            <a class="btn btn-primary pull-right"  id="hrefClick">
                                                 修改基础信息
                                             </a>
                                         </div>
@@ -235,35 +228,45 @@
     <script type="text/javascript" src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type='text/javascript' src='/assets/plugins/jquery-validate/jquery.validate.js'></script>
 
-    <script type="text/javascript" src="/assets/app/common.js"></script>
 
     <script type="text/javascript">
+
+
+
         window.onload = function(){
+
+
+
             var saveData =[];
 
             var token =  "{{csrf_token()}}";
-            uploadImg('upload1',$("#upload1-container"),1,token,saveData,function(data){
-                $("#upload1-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">');
-            });
-            uploadImg('upload2',$("#upload2-container"),2,token,function(data){
-                $("#upload2-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">');
-            });
-            uploadImg('upload3',$("#upload3-container"),3,token,function(data){
-                $("#upload3-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">');
-            });
-            uploadImg('upload4',$("#upload4-container"),4,token,function(data){
-                $("#upload4-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">')
-            });
-            uploadImg('upload5',$("#upload5-container"),5,token,function(data){
-                $("#upload5-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">')
-            });
 
-            uploadImg('upload6',$("#upload6-container"),6,token,function(data){
-                $("#upload6-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">')
-            });
-            uploadImg('upload7',$("#upload7-container"),7,token,function(data){
-                $("#upload7-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">')
-            });
+            var init = function(){
+                uploadImg('upload1',$("#upload1-container"),1,token,saveData,function(data){
+                    $("#upload1-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">');
+                });
+                uploadImg('upload2',$("#upload2-container"),2,token,saveData,function(data){
+                    $("#upload2-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">');
+                });
+                uploadImg('upload3',$("#upload3-container"),3,token,saveData,function(data){
+                    $("#upload3-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">');
+                });
+                uploadImg('upload4',$("#upload4-container"),4,token,saveData,function(data){
+                    $("#upload4-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">')
+                });
+                uploadImg('upload5',$("#upload5-container"),5,token,saveData,function(data){
+                    $("#upload5-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">')
+                });
+
+                uploadImg('upload6',$("#upload6-container"),6,token,saveData,function(data){
+                    $("#upload6-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">')
+                });
+                uploadImg('upload7',$("#upload7-container"),7,token,saveData,function(data){
+                    $("#upload7-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">')
+                });
+
+            };
+
 
 
             $("#upload6").hide();
@@ -274,11 +277,16 @@
                     $("#upload6").hide();
                 }
             });
-
+            var number;
+            var license_plate;
             $("#search_submit").on("click",function(){
+                saveData = [];
                 getSearchData(function(data){
                    if(data.code == 0){
+                       number = data.data.registration.number;
+                       license_plate = data.data.registration.license_plate;
                        $("#validate").show();
+                       init();
                        var imgs = data.data.imgs;
                        for(var i = 0;i < imgs.length;i++){
                            if(imgs[i].pic_url){
@@ -298,7 +306,16 @@
             searchSelect2();
 
             $("#save").on("click",function(){
-                console.log(saveData);
+                var data = {
+                    number:number,
+                    _token:token,
+                    images:saveData
+                }
+                saveImageUrl(data);
+            })
+
+            $("#hrefClick").on('click',function(){
+                window.location.href =encodeURI( './editusage?license_plate='+license_plate);
             })
 
         }
