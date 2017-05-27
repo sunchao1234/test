@@ -74,7 +74,11 @@ class Registration extends BaseModel {
 
         $result = $db->select('id','number','license_plate','product','use_unit',
                               'car_brand','install_date','install_unit',
-                              'create_time','is_personal','cancellation')
+                              'create_time','is_personal','cancellation','device_type',
+                              'device_varieties','device_category','product_name','qp_count',
+                              'qp_pressure','inspection_unit','use_unit_address','credit_code',
+                              'postal_number','car_vin','use_date','unit_phone','security_admin',
+                              'mobile')
                 // ->paginate(self::$pageNumber);
                 ->orderBy('id','desc')
                 ->where('delete_time',0)
@@ -88,7 +92,7 @@ class Registration extends BaseModel {
         $number  = $this->getNumber();
         $db = app('db')->table('admin_registration');
         $db = $db->where('number',$number)
-            ->where('license_plate',$request['license_plate']);
+            ->orWhere('license_plate','LIKE','%'.$request['license_plate'].'%');
 
         $result = $db->select('id','number','license_plate','product','use_unit',
                               'car_brand','install_date','install_unit',
