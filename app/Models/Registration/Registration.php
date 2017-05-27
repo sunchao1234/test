@@ -13,10 +13,10 @@ class Registration extends BaseModel {
             throw new \Exception($validData['msg']);
         }
         $request = Request::input();
-        $imgType = array_keys($request['images']);
-        $imgType = array_unique($imgType);
+//        $imgType = array_keys($request['images']);
+//        $imgType = array_unique($imgType);
 //        $typeSum = array_sum($imgType);
-        $request['is_personal'] = $this->is_true($request['is_personal']);
+//        $request['is_personal'] = $this->is_true($request['is_personal']);
 //        if($request['is_personal']) {
 //            if(28 != $typeSum) {
 //                throw new \Exception('少上传文件');

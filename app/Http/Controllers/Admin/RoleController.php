@@ -57,6 +57,7 @@ class RoleController extends BaseController
     //登记基础信息
     public function getAddusage()
     {
+//        return view('admin.usage.add');
         return view('admin.usage.add');
     }
 
@@ -70,35 +71,35 @@ class RoleController extends BaseController
     public
     function getAddusage1()
     {
-        return view('admin.usage.find');
+        return view('admin.usage.findq');
     }
 
 //补证
     public
     function getAddusage2()
     {
-        return view('admin.usage.change');
+        return view('admin.usage.changeq');
     }
 
 //注销
     public
     function getAddusage3()
     {
-        return view('admin.usage.cancel');
+        return view('admin.usage.cancelq');
     }
 
 //变更
     public
     function getAddusage4()
     {
-        return view('admin.usage.amend');
+        return view('admin.usage.amendq');
     }
 
 //编辑
     public
     function getEditusage()
     {
-        return view('admin.usage.edit');
+        return view('admin.usage.editq');
     }
 
     public
@@ -113,6 +114,11 @@ class RoleController extends BaseController
         return view('admin.usage.readq');
     }
 
+
+
+    public function getAddnewusage(){
+        return view('admin.newusage.add');
+    }
 
     /**
      * @action Create User Role

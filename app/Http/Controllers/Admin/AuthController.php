@@ -58,7 +58,7 @@ class AuthController extends Controller
                   AdminUsersModel::updateLastLoginTime($this->auth->user()->id);
                   //$log = "[登录后台系统]：[".date('Y-m-d H:i:s')."]";
                   //adminLog($this->auth->user(),$log);
-                  $json_data = ['code'=>self::HTTP_SUCCESS,'msg'=>'登录验证成功','data'=>null];
+                  $json_data = ['code'=>self::HTTP_SUCCESS,'msg'=>'登录验证成功','data'=>$this->auth->user()->role_id];
               }
             }else{
                 $json_data = ['code'=>self::HTTP_ERROR,'msg'=>'账号/密码错误！','data'=>null];

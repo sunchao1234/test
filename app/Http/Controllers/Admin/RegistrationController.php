@@ -149,12 +149,12 @@ class RegistrationController extends BaseController {
     }
     public function newfillpermit1(MiddleModels $mid) {
         try{
-            $msg = [
-                'images.required' => '图片不能为空'
-            ];
-            $this->valid([
-                'images'  => 'required'
-            ],$msg);
+//            $msg = [
+//                'images.required' => '图片不能为空'
+//            ];
+//            $this->valid([
+//                'images'  => 'required'
+//            ],$msg);
             $res = $mid->reReg();
         }catch(\Exception $e) {
             $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];

@@ -41,7 +41,11 @@
 							<td>液化石油气</td>
 						    @endif
 						    <td>{{ $val->install_unit }}</td>
-						    <td>{{ date("Y-m-d",$val->install_date) }}</td>
+						    <td>
+                                @if($val->install_date != 0)
+                                    {{ date("Y-m-d",$val->install_date) }}
+                                @endif
+                            </td>
 						</tr>
 					    @endforeach
                                         </tbody>

@@ -238,6 +238,8 @@
 
 
             var saveData =[];
+            var number;
+            var license_plate;
 
             var token =  "{{csrf_token()}}";
 
@@ -261,9 +263,7 @@
                 uploadImg('upload6',$("#upload6-container"),6,token,saveData,function(data){
                     $("#upload6-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">')
                 });
-                uploadImg('upload7',$("#upload7-container"),7,token,saveData,function(data){
-                    $("#upload7-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">')
-                });
+
 
             };
 
@@ -272,15 +272,23 @@
             $("#upload6").hide();
             $("#isPerson").on("change",function(){
                 if(this.checked){
-                    $("#upload6").show()
+                    $("#upload6").show();
+                    uploadImg('upload7',$("#upload7-container"),7,token,saveData,function(data){
+                        $("#upload7-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">')
+                    });
                 }else{
                     $("#upload6").hide();
                 }
             });
-            var number;
-            var license_plate;
+
+
+            var clearImgContianer = function(){
+                $(".form-group a").html('');
+            }
+
             $("#search_submit").on("click",function(){
                 saveData = [];
+                clearImgContianer();
                 getSearchData(function(data){
                    if(data.code == 0){
                        number = data.data.registration.number;

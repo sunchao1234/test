@@ -60,13 +60,13 @@ var uploadImg = function (id, node, type, token,data, callBack) {
         },
         init: {
             FilesAdded: function (up, files) {
-                data[type] = [];
+                saveData[type] = [];
                 node.html("");
                 uploader.start();
             },
             FileUploaded: function (up, file, info) {
                 var resdata = JSON.parse(info.response);
-                data[type].push(resdata.data.imgs[0]);
+                saveData[type].push(resdata.data.imgs[0]);
                 callBack(resdata);
             },
 
@@ -159,7 +159,10 @@ var searchSelect2 = function () {
 
 var getSearchData = function (callBack) {
     var license_plate = $("#license_plate").val();
-    license_plate =getQueryString("license_plate");
+    if(!license_plate){
+        license_plate =getQueryString("license_plate");
+    }
+
     if (!license_plate) return;
     $.ajax({
         url: "../../admin/registration/index",

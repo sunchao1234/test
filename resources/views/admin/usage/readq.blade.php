@@ -56,8 +56,8 @@
                                             </div>
 
                                             <div class="btn-group  col-md-2" style="padding-left: 0px;">
-                                                <label class="control-label m-r-10  m-t-10"> 登记编号</label>
-                                                <input type="text" class="form-control" id="number" ng-model="searchData.number"/>
+                                                <label class="control-label m-r-10  m-t-10"> 产品编号</label>
+                                                <input type="text" class="form-control" id="number" ng-model="searchData.product_number"/>
                                             </div>
 
                                             <div class="btn-group  col-md-2  m-t-10" style="padding-left: 0px;">
@@ -75,6 +75,8 @@
                                             margin-top: 10px;
                                         }
                                     </style>
+
+
 
                                     <div id="printContent1" ng-if="data.registration.number"
                                          style="border: 1px solid #000;">
@@ -387,7 +389,7 @@
 
             $scope.searchData = {
                 license_plate: "",
-                number: ""
+                product_number: ""
             }
 
             $scope.search = function () {

@@ -200,9 +200,17 @@
                                         warning.hide();
                                         $('.submit_success').html('验证成功 等待进入！');
                                         success1.show();
-                                        setTimeout(function(){
-                                            location.href = "/admin";},
-                                        2000);
+                                        console.log(result);
+                                        if(result.data == 9){
+                                            setTimeout(function(){
+                                                        location.href = "/admin/role/readusage";},
+                                                    2000);
+                                        }else{
+                                            setTimeout(function(){
+                                                        location.href = "/admin";},
+                                                    2000);
+                                        }
+
                                     }else{
                                         $('.submit_error').html(result.msg);
                                         error1.show();

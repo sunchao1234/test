@@ -1,5 +1,10 @@
 @extends('admin.layout')
 @section('content')
+    <style>
+        .btn-scroll-to-top {
+            display: none !important;
+        }
+    </style>
     <div class="vertical-box">
         <div class="vertical-box-column width-200">
             <div class="vertical-box">
@@ -39,12 +44,6 @@
                             <div data-scrollbar="true" data-height="100%" class="wrapper" style="background:#FFF;">
                                 <div class="panel panel-default" data-sortable-id="ui-widget-1">
 
-                                    <form id="uploadForm" style="display: none">
-                                        <input name='_token' class='hide' id='token'
-                                               value='<?php echo e(csrf_token()); ?>'>
-                                        <input type="hidden" name="type" value='1'/>
-                                        <input type="file" multiple="multiple" id='uploadFile' name='img[]'>
-                                    </form>
 
                                     <div class="panel-body">
                                         <div class="panel-toolbar"
@@ -58,84 +57,87 @@
                                             <div class="btn-group  col-md-2  m-t-10" style="padding-left: 0px;">
                                                 <div class="checkbox m-r-10 ">
                                                     <button class="btn btn-default m-r-5 m-b-5 m-t-10 btn-group"
-                                                            ng-click="search()" id="search_submit">搜索
+                                                            id="search_submit">搜索
                                                     </button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
+                                    <input name='_token' class='hide' id='token'
+                                           value='<?php echo e(csrf_token()); ?>'>
                                     <div class="form-horizontal form-bordered" id="form_v" style="display: none">
-                                        <div class="form-group">
-                                            <label class='control-label col-md-2'>登记证编号</label>
+                                        <form id="form1">
+                                            <div class="form-group">
+                                                <label class='control-label col-md-2'>登记证编号</label>
 
-                                            <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="number" class="form-control"
-                                                       ng-model="data.registration.number"
-                                                       type="text"/>
+                                                <div class="col-md-6 col-xs-12 p_top2">
+                                                    <input id="" name="number" class="form-control"
+                                                           ng-model="data.registration.number"
+                                                           type="text"/>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label col-md-2">车牌号码</label>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2">车牌号码</label>
 
-                                            <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="license_plate" class="form-control"
-                                                       ng-model="data.registration.license_plate" type="text"/>
+                                                <div class="col-md-6 col-xs-12 p_top2">
+                                                    <input id="" name="license_plate" class="form-control"
+                                                           ng-model="data.registration.license_plate" type="text"/>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label col-md-2">充装介质</label>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2">充装介质</label>
 
-                                            <div class="col-md-6 col-xs-12 p_top2">
-                                                <select class="form-control" name="product"
-                                                        ng-model="data.registration.product">
-                                                    <option value="1">压缩天然气-CNG</option>
-                                                    <option value="2">液化天然气-LNG</option>
-                                                    <option value="3">液化石油气-LPG</option>
-                                                </select>
+                                                <div class="col-md-6 col-xs-12 p_top2">
+                                                    <select class="form-control" name="product"
+                                                            ng-model="data.registration.product">
+                                                        <option value="1">压缩天然气-CNG</option>
+                                                        <option value="2">液化天然气-LNG</option>
+                                                        <option value="3">液化石油气-LPG</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label col-md-2">使用单位</label>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2">使用单位</label>
 
-                                            <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="use_unit" class="form-control"
-                                                       ng-model="data.registration.use_unit"
-                                                       type="text"/>
+                                                <div class="col-md-6 col-xs-12 p_top2">
+                                                    <input id="" name="use_unit" class="form-control"
+                                                           ng-model="data.registration.use_unit"
+                                                           type="text"/>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label col-md-2">车 种</label>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2">车 种</label>
 
-                                            <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="car_brand" class="form-control"
-                                                       ng-model="data.registration.car_brand"
-                                                       type="text"/>
+                                                <div class="col-md-6 col-xs-12 p_top2">
+                                                    <input id="" name="car_brand" class="form-control"
+                                                           ng-model="data.registration.car_brand"
+                                                           type="text"/>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label col-md-2">安装单位</label>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2">安装单位</label>
 
-                                            <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="install_unit" class="form-control"
-                                                       ng-model="data.registration.install_unit" type="text"/>
+                                                <div class="col-md-6 col-xs-12 p_top2">
+                                                    <input id="" name="install_unit" class="form-control"
+                                                           ng-model="data.registration.install_unit" type="text"/>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label col-md-2">日期</label>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2">日期</label>
 
-                                            <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="install_date" name="install_date"
-                                                       class="form-control datepicker"
-                                                       ng-model="data.registration.install_date" type="text"/>
+                                                <div class="col-md-6 col-xs-12 p_top2">
+                                                    <input id="install_date" name="install_date"
+                                                           class="form-control datepicker"
+                                                           ng-model="data.registration.install_date" type="text"/>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
 
 
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -195,8 +197,7 @@
                                                         <button type="button" class="btn btn-default"
                                                                 data-dismiss="modal">关闭
                                                         </button>
-                                                        <button type="button" class="btn btn-primary"
-                                                                ng-click="saveRegDet()">保存
+                                                        <button type="button" class="btn btn-primary" id="saveDetail">保存
                                                         </button>
                                                     </div>
                                                 </div>
@@ -262,7 +263,7 @@
                                                                 data-dismiss="modal">关闭
                                                         </button>
                                                         <button type="button" class="btn btn-primary"
-                                                                ng-click="saveDriverData()">确定
+                                                                id="saveDriverInfo">确定
                                                         </button>
                                                     </div>
                                                 </div>
@@ -280,18 +281,12 @@
                                                 <td>编辑</td>
                                             </tr>
                                             </thead>
-                                            <tbody>
-                                            <tr ng-repeat="item in data.driver_info track by $index">
-                                                <td>@{{ $index+1 }}</td>
-                                                <td>@{{item.name}}</td>
-                                                <td>@{{ item.id_card }}</td>
-                                                <td>@{{ item.remark }}</td>
-                                                <td ng-click="delDriver($index)">删除</td>
-                                            </tr>
+                                            <tbody id="driver_info_t">
+
                                             </tbody>
                                         </table>
 
-                                        <button class="btn btn-primary pull-right" ng-click="save()">保存</button>
+                                        <button class="btn btn-primary pull-right" id="saveData">保存</button>
 
 
                                     </div>
@@ -331,13 +326,9 @@
         $(".made_date").datepicker(
                 {
                     format: 'yyyy-mm',
-                    autoclose: true,
-                    startView: 'year',
-                    maxView: 'year'
+                    autoclose: true
                 }
-        ).on("changeMonth", function (ev) {
-            console.log(ev);
-        });
+        );
 
         var serializeObject = function (form) {
             var o = {};
@@ -353,94 +344,113 @@
 
         searchSelect2();
 
-        getSearchData(function (data) {
+        //        $("#search_submit").on("click", getSearchData(callFun));
+
+        var detail;
+        var driver_info;
+        function callFun1(data) {
             $("#form_v").show();
             var registration = data.data.registration;
             for (var i in registration) {
                 $("[name='" + i + "']").val(registration[i]);
             }
 
-            var detail = data.data.detail;
+            detail = data.data.detail;
+            setDriveData(detail);
+
+            driver_info = data.data.driver_info;
+            setDetailData(driver_info);
+        }
+
+        var setDetailData = function (driver_info) {
+            $("#driver_info_t").html('');
+            for (var i = 0; i < driver_info.length; i++) {
+                var tr = "<tr>";
+                tr += "<td>" + i + "</td>";
+                tr += "<td>" + driver_info[i].name + "</td>";
+                tr += "<td>" + driver_info[i].id_card + "</td>";
+                tr += "<td>" + driver_info[i].remark + "</td>";
+                tr += "<td><a>删除</a></td>";
+                $("#driver_info_t").append(tr);
+            }
+        }
+        var setDriveData = function (detail) {
+            $("#detail_body").html('');
             for (var i = 0; i < detail.length; i++) {
                 var tr = "<tr>";
                 tr += "<td>" + i + "</td>";
-                tr += "<td>" + detail[i].device_number  + "</td>";
-                tr += "<td>" + detail[i].made_unit+ "</td>";
-                tr += "<td>" + detail[i].made_date   + "</td>";
-                tr += "<td>" + detail[i].product_number    + "</td>";
-                tr += "<td>" + detail[i].volume  + "</td>";
+                tr += "<td>" + detail[i].device_number + "</td>";
+                tr += "<td>" + detail[i].made_unit + "</td>";
+                tr += "<td>" + detail[i].made_date + "</td>";
+                tr += "<td>" + detail[i].product_number + "</td>";
+                tr += "<td>" + detail[i].volume + "</td>";
                 tr += "<td>" + detail[i].next_time_check_date + "</td>";
                 tr += "<td><a>删除</a></td></tr>";
                 $("#detail_body").append(tr);
             }
+        }
 
-            var driver_info = data.data.driver_info;
-            for(var i = 0 ; i < driver_info.length;i++){
-                var tr = "<tr>";
-                tr += "<td>"+ i +"</td>";
-                tr += "<td>"+ driver_info[i].name +"</td>";
-                tr += "<td>"+ driver_info[i].id_card  +"</td>";
-                tr += "<td>"+ driver_info[i].remark  +"</td>";
-                tr += "<td><a>删除</a></td>";
-            }
+        $("#search_submit").on("click", function () {
+            getSearchData(callFun1);
+        })
 
+        $("#search_submit").click();
+
+        $("#saveDetail").on('click', function () {
+            var data = serializeObject($('#regDetData'));
+            detail.push(data);
+            setDriveData(detail);
+            $("#myModal").modal('hide');
+            swal('', '成功', 'success');
         });
 
-        //        var app = angular.module('app', []);
-        //        app.controller('findController', function ($scope,$filter) {
-        //
-        //
-        //
-        //
-        //
-        //            $scope.saveDriverData = function () {
-        //                var data = serializeObject($('#driverData'));
-        //                data.flag = true;
-        //                $scope.data.driver_info.push(data);
-        //                $("#myModal_1").modal('hide');
-        //                swal('','成功','success');
-        //            };
-        //
-        //            $scope.saveRegDet = function () {
-        //                var data = serializeObject($('#regDetData'));
-        //                data.flag = true;
-        //                $scope.data.detail.push(data);
-        //                $("#myModal").modal('hide');
-        //                swal('','成功','success');
-        //            };
-        //
-        //            $scope.delDetail = function(index){
-        //                $scope.data.detail.splice(index,1);
-        //            }
-        //
-        //            $scope.delDriver = function(index){
-        //                $scope.data.driver_info.splice(index,1);
-        //            }
-        //
-        //            $scope.save = function(){
-        //                var data = {};
-        //                $.extend(data,$scope.data.registration);
-        //                data.reg_det_data = $scope.data.detail;
-        //                data.driver_data =$scope.data.driver_info;
-        //                data._token = $("#token").val();
-        //                $.ajax({
-        //                    url:"../../admin/registration/newfillpermit1",
-        //                    type:'post',
-        //                    data:data,
-        //                    success:function(data){
-        //                        if(data.code == 0){
-        //                            swal('','成功','success');
-        //                        }else{
-        //                            swal('',data.msg,'error');
-        //                        }
-        //                    },
-        //                    error:function(data){
-        //
-        //                    }
-        //                })
-        //            }
-        //        });
+        $("#saveDriverInfo").on('click', function () {
+            var data = serializeObject($('#driverData'));
+            driver_info.push(data);
+            setDetailData(driver_info);
+            $("#myModal_1").modal('hide');
+            swal('', '成功', 'success');
+        })
 
+        $("#saveData").on('click', function () {
+            console.log(serializeForm($("#form1").serializeArray()));
+            var saveData = serializeForm($("#form1").serializeArray());
+            saveData.reg_det_data = detail;
+            saveData.driver_data = driver_info;
+
+            saveData._token = $("#token").val();
+            $.ajax({
+                url:"../../admin/registration/newfillpermit1",
+                type:'post',
+                data:saveData,
+                success:function(data){
+                    if(data.code == 0){
+                        swal('','成功','success');
+                    }else{
+                        swal('',data.msg,'error');
+                    }
+                },
+                error:function(data){
+
+                }
+            })
+
+        })
+
+        function serializeForm(data) {
+            var o = {};
+            $.each(data, function () {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        }
     </script>
 
 @endsection

@@ -65,105 +65,19 @@
                                         </div>
                                     </div>
 
-                                    <div ng-if="data && data.length == 0">
-                                        不存在
-                                    </div>
-
-                                    <div ng-if="data.registration.number" style="bottom: 0px;">
-                                        <div style="margin: 10px 5px">
-                                            <span class="label_font">登记证编号:</span><span
-                                                    class="write_font">@{{ data.registration.number }}</span>
-                                        </div>
-                                        <table class="table table-bordered">
-                                            <tr>
-                                                <td class="label_font">车牌号码</td>
-                                                <td class="write_font">@{{ data.registration.license_plate }}</td>
-                                                <td class="label_font">充装介质</td>
-                                                <td class="write_font">@{{getSelect(data.registration.product) }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="label_font">使用单位</td>
-                                                <td colspan="3"
-                                                    class="write_font">@{{ data.registration.use_unit }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="label_font">车种</td>
-                                                <td colspan="3"
-                                                    class="write_font">@{{ data.registration.car_brand }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="label_font">安装单位</td>
-                                                <td colspan="3"
-                                                    class="write_font">@{{ data.registration.install_unit }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="label_font">安装日期</td>
-                                                <td colspan="3"
-                                                    class="write_font">@{{ data.registration.install_date }}</td>
-                                            </tr>
-                                        </table>
-
-
-                                        <table class="table table-bordered" style="background-color:#fff">
-                                            <thead>
-                                            <tr>
-                                                <td>序号</td>
-                                                <td>设备代码</td>
-                                                <td>制造单位</td>
-                                                <td>制造日期</td>
-                                                <td>产品编号</td>
-                                                <td>容积(L)</td>
-                                                <td>下次检测日期</td>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr ng-repeat="item in data.detail track by $index">
-                                                <td>@{{ $index+1 }}</td>
-                                                <td>@{{ item.device_number }}</td>
-                                                <td>@{{ item.made_unit}}</td>
-                                                <td>@{{ item.made_date }}</td>
-                                                <td>@{{ item.product_number }}</td>
-                                                <td>@{{ item.volume }}</td>
-                                                <td>@{{ item.next_time_check_date }}</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-
-                                        <table class="table table-bordered" style="background-color:#fff">
-                                            <thead>
-                                            <tr>
-                                                <td>序号</td>
-                                                <td>姓名</td>
-                                                <td>身份证号</td>
-                                                <td>备注</td>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr ng-repeat="item in data.driver_info track by $index">
-                                                <td>@{{ $index+1 }}</td>
-                                                <td>@{{item.name}}</td>
-                                                <td>@{{ item.id_card }}</td>
-                                                <td>@{{ item.remark }}</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-
-                                          <div id="validate" role="form" name="create_form"
-                                                class="form-horizontal form-bordered">
+                                    <div>
+                                        <div id="validate" role="form" name="create_form" style="display: none"
+                                             class="form-horizontal form-bordered">
                                             <div class="form-body">
                                                 <div class="form-group">
                                                     <label class='control-label col-md-2'>新一期气瓶检测报告</label>
 
                                                     <div class="col-md-6 col-xs-12 p_top2">
-                                                        <div>
-                                                            <a ng-repeat="item in imgs[8]"
-                                                               style="margin: 5px;float:left">
-                                                                <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                            </a>
-                                                        </div>
-                                                        <button type="button" class='btn  btn-info'
-                                                                ng-click="upload(8)">上传
+                                                        <button type="button" class='btn  btn-info' id="upload8">上传
                                                         </button>
+                                                        <div>
+                                                            <a id="upload8-container" style="margin: 5px;float:left"></a>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -171,18 +85,16 @@
                                                     <label class='control-label col-md-2'>汽车行驶证</label>
 
                                                     <div class="col-md-6 col-xs-12 p_top2">
+
+                                                        <button type="button" class='btn  btn-info'
+                                                                id="upload5">上传
+                                                        </button>
                                                         <div>
-                                                            <a ng-repeat="item in imgs[5]"
-                                                               style="margin: 5px;float:left">
-                                                                <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                            <a id="upload5-container" style="margin: 5px;float:left">
                                                             </a>
                                                         </div>
-                                                        <button type="button" class='btn  btn-info'
-                                                                ng-click="upload(5)">上传
-                                                        </button>
                                                     </div>
                                                 </div>
-
 
 
                                                 <div class="form-group">
@@ -191,13 +103,14 @@
                                                     </label>
 
                                                     <div class="col-md-6 col-xs-12 p_top2">
+
+                                                        <button type="button" id="upload7" class='btn btn-info'>
+                                                            上传
+                                                        </button>
                                                         <div>
-                                                            <a ng-repeat="item in imgs[7]" style="margin: 5px;float:left">
-                                                                <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                            <a id="upload7-container" style="margin: 5px;float:left">
                                                             </a>
                                                         </div>
-                                                        <button type="button" ng-click="upload(7)" class='btn btn-info'>上传
-                                                        </button>
                                                     </div>
 
                                                 </div>
@@ -208,13 +121,15 @@
                                                     </label>
 
                                                     <div class="col-md-6 col-xs-12 p_top2">
+
+                                                        <button type="button" id="upload9" class='btn btn-info'>
+                                                            上传
+                                                        </button>
                                                         <div>
-                                                            <a ng-repeat="item in imgs[9]" style="margin: 5px;float:left">
-                                                                <img src="/@{{ item }}" width="100px" ;height="100px">
+                                                            <a id="upload9-container"
+                                                                    style="margin: 5px;float:left">
                                                             </a>
                                                         </div>
-                                                        <button type="button" ng-click="upload(9)" class='btn btn-info'>上传
-                                                        </button>
                                                     </div>
                                                 </div>
 
@@ -225,34 +140,36 @@
 
                                                     <div class="col-md-6 col-xs-12 p_top2">
                                                         <label for="isPerson" style='float:left'>是否为个人名字</label>
-                                                        <input type='checkbox' ng-model="data.is_personal"/>
-
-                                                        <div ng-model="data.is_personal">
-                                                            <a ng-repeat="item in imgs[6]" style="margin: 5px;float:left">
-                                                                <img src="/@{{ item }}" width="100px" ;height="100px">
-                                                            </a>
-                                                        </div>
-                                                        <button type="button" ng-click="upload(6)" ng-if="data.is_personal"
+                                                        <input type='checkbox' id="isPerson"/>
+                                                        <button type="button" id="upload6"
+                                                                ng-if="data.is_personal"
                                                                 class='btn btn-info'>上传
                                                         </button>
+                                                        <div>
+                                                            <a id="upload6-container"
+                                                                    style="margin: 5px;float:left">
+                                                            </a>
+                                                        </div>
                                                     </div>
 
                                                 </div>
 
 
                                             </div>
+
+                                            <div class="panel-footer text-right">
+
+                                                <button class="btn btn-success pull-right" id="print2">打印反面</button>
+                                                <button class="btn pull-right btn-success" id="print1">打印正面</button>
+                                                <button id='save' class="btn btn-primary pull-right" type="submit">
+                                                    保存
+                                                </button>
+                                                <a class="btn btn-primary pull-right" type="submit" id="hrefClick">编辑基础信息</a>
+
+                                            </div>
+
+
                                         </div>
-
-
-                                        <div class="panel-footer text-right">
-
-                                            <button class="btn btn-success pull-right" id="print2">打印反面</button>
-                                            <button class="btn pull-right btn-success" id="print1">打印正面</button>
-                                            <button class="btn btn-primary pull-right" type="submit" ng-click="save()">保存</button>
-                                            <a class="btn btn-primary pull-right" type="submit" href="./editusage?license_plate=@{{data.registration.license_plate}}">编辑基础信息</a>
-
-                                        </div>
-
 
                                     </div>
 
@@ -266,17 +183,22 @@
                                     }
                                 </style>
 
-                                <div id="printContent1" style="border: 1px solid #000;">
-                                    <h1 style="padding: 180px  0px;font-weight:bolder;text-align: center">
+                                <div id="printContent1" style="border: 2px solid #000;">
+                                    <h1 style="padding: 180px  0px;font-size:50px;font-weight:bolder;text-align: center">
                                         车用气瓶使用登记证</h1>
                                     <style>
                                         .label_font {
-                                            font-size: 15px;
+                                            font-size:18px;
                                             font-weight: bolder;
+                                            text-align: center;
                                         }
 
                                         .write_font {
-                                            font-size: 16px;
+                                            font-size: 20px;
+                                            text-align: center;
+                                        }
+                                        .printContentTable td{
+                                            border: 2px solid #000 !important;
                                         }
                                     </style>
                                     <div style="bottom: 0px;">
@@ -419,6 +341,8 @@
                                         </p>
                                     </div>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -440,138 +364,125 @@
 
 
     <script type="text/javascript">
-        $('body').on("click",'#print1',function(){
+        $('body').on("click", '#print1', function () {
             $("#printContent1").printArea();
         })
-        $('body').on("click",'#print2',function(){
+        $('body').on("click", '#print2', function () {
             $("#printContent2").printArea();
-        })
-        var imgType;
-        var uploadFile = function () {
-            var formData = new FormData($("#uploadForm")[0]);
-            $.ajax({
-                url: '../../admin/registration/upload',  //server script to process data
-                type: 'POST',
-                //Ajax事件
-                success: function (data) {
-                    if (data.code == 0) {
-                        var type = imgType;
-                        addImg(data.data.imgs, type);
-                        console.log(imgType);
-                    }
-                },
-                error: function () {
-                    console.log('error');
-                },
-                // Form数据
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false
+        });
+
+        var saveData =[];
+        var number;
+        var license_plate;
+
+        var token =  "{{csrf_token()}}";
+
+        var init = function(){
+            uploadImg('upload8',$("#upload8-container"),8,token,saveData,function(data){
+                $("#upload8-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">');
             });
+            uploadImg('upload5',$("#upload5-container"),5,token,saveData,function(data){
+                $("#upload5-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">');
+            });
+            uploadImg('upload7',$("#upload7-container"),7,token,saveData,function(data){
+                $("#upload7-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">');
+            });
+            uploadImg('upload9',$("#upload9-container"),9,token,saveData,function(data){
+                $("#upload9-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">');
+            });
+
+
         };
 
+        var clearImgContianer = function(){
+            $(".form-group a").html('');
+        }
 
+        var flag = true;
         var app = angular.module('app', []);
         app.controller('findController', function ($scope,$filter) {
-
-            $scope.getToday =function(){
+            $scope.getToday = function () {
                 return $filter("date")(new Date().getTime(), "yyyy年MM月dd日");
             }
-            $scope.DateShow = function(str){
-                if(!str) return
-                return $filter("date")(new Date(str).getTime(), "yyyy年MM月dd日");
-            }
-
-
-            $scope.DateShow1 = function(str){
-                if(!str) return;
-                return $filter("date")(new Date(str).getTime(), "yyyy年MM月");
-            }
-            $("#license_plate").select2({
-                placeholder: "请输入车牌号码",
-                allowClear: true,
-                ajax:{
-                    url:function(params){
-                        console.log(params);
-                        return '../../admin/registration/name?license_plate='+params.term
-                    },
-                    processResults:function(data){
-                        var dataArray=[];
-                        if(data){
-                            for(var i = 0 ;i < data.data.length;i++){
-                                dataArray.push({id:data.data[i].license_plate,text:data.data[i].license_plate});
-                            }
-                        }
-                        return {
-                            results:dataArray
-                        }
-
-                    }
-                }
-            });
 
             var obj = ['压缩天然气', '液化天然气', '液化石油气'];
             $scope.getSelect = function (key) {
 
-                return obj[key - 1];
+                return obj[key];
             };
 
 
-            $scope.upload = function (action) {
-                imgType = action;
-                $("#uploadFile").click();
-            };
-            $("#uploadFile").on("change", function (e) {
-                uploadFile();
-            });
-            $scope.imgs ={};
-            addImg = function (data, type) {
-                $scope.$apply(function () {
-                    $scope.imgs[type] = data;
-                })
+            $scope.DateShow = function (str) {
+                if (!str || new Date(str).getTime() == 0) return;
+                return $filter("date")(new Date(str).getTime(), "yyyy年MM月dd日");
             }
-
-
-
-            $scope.save = function(){
-                var data = {};
-                data.number = $scope.data.registration.number;
-                data.images = $scope.imgs;
-                data._token = $("#token").val();
-                $.ajax({
-                    url:"../../admin/registration/replacement",
-                    type:'post',
-                    data:data,
-                    success:function(data){
-                        if(data.code == 0){
-                            swal('','成功','success');
-                        }else{
-                            swal('',data.msg,'error');
-                        }
-                    },
-                    error:function(data){
-
-                    }
-                })
+            $scope.DateShow1 = function (str) {
+                if (!str || new Date(str).getTime() == 0) return;
+                return $filter("date")(new Date(str).getTime(), "yyyy年MM月");
             }
-
-            $scope.search = function () {
-                var license_plate = $("#license_plate").val();
-                if (!license_plate) return
-                $.ajax({
-                    url: "../../admin/registration/index",
-                    type: 'get',
-                    data: {license_plate: license_plate},
-                    success: function (data) {
+            $("#search_submit").on("click",function(){
+                saveData = [];
+                clearImgContianer();
+                getSearchData(function(data){
+                    if(data.code == 0){
                         $scope.$apply(function () {
                             $scope.data = data.data;
-                            console.log($scope.data);
                         })
+                        number = data.data.registration.number;
+                        license_plate = data.data.registration.license_plate;
+                        $("#validate").show();
+                        if(flag){
+                            init();
+                            flag = false;
+                        }
+
+                        var imgs = data.data.imgs;
+                        for(var i = 0;i < imgs.length;i++){
+                            if(imgs[i].pic_url){
+                                var picUrlArray = imgs[i].pic_url.split(",");
+                                saveData[imgs[i].type] = [];
+                                for(var j = 0 ;j < picUrlArray.length; j++){
+                                    saveData[imgs[i].type].push(picUrlArray[i]);
+                                    $("#upload"+ imgs[i].type +"-container").append('<img width="50px" height="50px" src="/'+picUrlArray[j] +'">');
+                                }
+                            }
+
+                        }
                     }
                 })
+            });
+
+        })
+
+
+
+        $("#upload6").hide();
+        $("#isPerson").on("change", function () {
+            if (this.checked) {
+                $("#upload6").show();
+                uploadImg('upload6',$("#upload6-container"),1,token,saveData,function(data){
+                    $("#upload6-container").append('<img width="50px" height="50px" src="/'+data.data.imgs[0] +'">');
+                });
+            } else {
+                $("#upload6").hide();
             }
         });
+
+        searchSelect2();
+
+
+        $("#save").on("click",function(){
+            var data = {
+                number:number,
+                _token:token,
+                images:saveData
+            }
+            saveImageUrl(data);
+        })
+
+        $("#hrefClick").on('click',function(){
+            window.location.href =encodeURI( './editusage?license_plate='+license_plate);
+        })
 
     </script>
 
