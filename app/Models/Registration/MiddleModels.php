@@ -23,6 +23,11 @@ class MiddleModels {
         // $this->uploadModel->addData($number);
         return ['code'=>0,'msg'=>'success','data'=>$number];
     }
+    public function newReister() {
+        $number = $this->regModel->register();
+        $this->regDetailModel->addDetail($number);
+        return ['code'=>0,'msg'=>'success','data'=>$number];
+    }
     public function index() {
         $reg = $this->regModel->index();
         if(!empty($reg)) {

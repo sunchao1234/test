@@ -40,5 +40,7 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     Route::post('/registration/updateinfo', 'RegistrationController@updateInfo');
     // 添加图片信息
     Route::post('/registration/addpicinfo', 'RegistrationController@addPicInfo');
+    // 新的录入登记表数据接口
+    Route::post('/registration/newregister', 'RegistrationController@newRegister');
 });
 

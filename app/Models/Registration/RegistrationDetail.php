@@ -16,12 +16,13 @@ class RegistrationDetail extends BaseModel {
             $insertData = array_map(function($val)use ($number) {
                 return [
                     'number'        => $number,
-                    'device_number' => $val['device_number'],
-                    'made_unit'     => $val['made_unit'],
-                    'made_date'     => strtotime($val['made_date']),
-                    'product_number'=> $val['product_number'],
-                    'volume'        => $val['volume'],
-                    'next_time_check_date'  => strtotime($val['next_time_check_date']),
+                    'device_number' => $this->set_def($val['device_number']),
+                    'made_unit'     => $this->set_def($val['made_unit']),
+                    'made_date'     => $this->set_def(strtotime($val['made_date']),0),
+                    'product_number'=> $this->set_def($val['product_number']),
+                    'volume'        => $this->set_def($val['volume'],0),
+                    'next_time_check_date'  => $this->set_def(strtotime($val['next_time_check_date']),0),
+                    'in_unit_number'=> $this->set_def($val['in_unit_number']),
                     'create_time'   => time(),
                     'update_time'   => time()
                 ];
@@ -44,7 +45,8 @@ class RegistrationDetail extends BaseModel {
         // }
         $result = app('db')->table('admin_registration_detail')->where('number',$number)
                 ->select('id','number','device_number','made_unit','made_date',
-                         'product_number','volume','next_time_check_date','create_time')
+                         'product_number','volume','next_time_check_date','create_time',
+                         'in_unit_number')
                 ->where('delete_time',0)
                 ->get();
         foreach($result as $v) {

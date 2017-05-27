@@ -27,13 +27,28 @@ class Registration extends BaseModel {
 //            }
 //        }
         $insertData = [
-            'license_plate' => $request['license_plate'],
-            'product'       => $request['product'],
-            'use_unit'      => $request['use_unit'],
-            'car_brand'     => $request['car_brand'],
-            'install_unit'  => $request['install_unit'],
-            'install_date'  => strtotime($request['install_date']),
-            'is_personal'   => (int)$request['is_personal'],
+            'license_plate' => $this->set_def($request['license_plate']),
+            'product'       => $this->set_def($request['product'],0),
+            'use_unit'      => $this->set_def($request['use_unit']),
+            'car_brand'     => $this->set_def($request['car_brand']),
+            'install_unit'  => $this->set_def($request['install_unit']),
+            'install_date'  => $this->set_def(strtotime(Request::input('install_date',0)),0),
+            'is_personal'   => $this->set_def((int)$request['is_personal'],0),
+            'device_type'     => $this->set_def($request['device_type']),
+            'device_varieties'=> $this->set_def($request['device_varieties']),
+            'device_category' => $this->set_def($request['device_category']),
+            'product_name'    => $this->set_def($request['product_name']),
+            'qp_count'        => $this->set_def($request['qp_count'],0),
+            'qp_pressure'     => $this->set_def($request['qp_pressure'],0),
+            'inspection_unit' => $this->set_def($request['inspection_unit']),
+            'use_unit_address'=> $this->set_def($request['use_unit_address']),
+            'credit_code'     => $this->set_def($request['credit_code']),
+            'postal_number'   => $this->set_def($request['postal_number']),
+            'car_vin'         => $this->set_def($request['car_vin']),
+            'use_date'        => $this->set_def($request['use_date'],0),
+            'unit_phone'      => $this->set_def($request['unit_phone']),
+            'security_admin'  => $this->set_def($request['security_admin']),
+            'mobile'          => $this->set_def($request['mobile']),
             'create_time'   => time(),
             'update_time'   => time()
         ];
@@ -77,7 +92,11 @@ class Registration extends BaseModel {
 
         $result = $db->select('id','number','license_plate','product','use_unit',
                               'car_brand','install_date','install_unit',
-                              'create_time','is_personal','cancellation')
+                              'create_time','is_personal','cancellation','device_type',
+                              'device_varieties','device_category','product_name','qp_count',
+                              'qp_pressure','inspection_unit','use_unit_address','credit_code',
+                              'postal_number','car_vin','use_date','unit_phone','security_admin',
+                              'mobile')
                 // ->paginate(self::$pageNumber);
                 ->orderBy('id','desc')
                 ->where('delete_time',0)

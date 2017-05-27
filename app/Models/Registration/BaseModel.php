@@ -15,4 +15,7 @@ class BaseModel {
         }
         return $request;
     }
+    protected function set_def($val,$def='') {
+        return !empty($val)?$val:$def;
+    }
 }
