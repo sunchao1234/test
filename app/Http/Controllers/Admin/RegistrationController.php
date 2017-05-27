@@ -15,23 +15,9 @@ class RegistrationController extends BaseController {
         try{
             $message = [
                 'license_plate.required' => '车牌号码不能为空',
-                'product.required'       => '充装介质不能为空',
-                'use_unit.required'      => '使用单位不能为空',
-                'car_brand.required'     => '车种不能为空',
-                'install_unit.required'  => '安装单位不能为空',
-                'install_date.required'  => '安装日期不能为空',
-                'driver_data.required'   => '驾驶人员信息不能为空',
-                'reg_det_data.required'  => '汽车气瓶使用登记证不能为空',
             ];
             $this->valid([
                 'license_plate'  => 'required',
-                'product'        => 'required',
-                'use_unit'       => 'required',
-                'car_brand'      => 'required',
-                'install_unit'   => 'required',
-                'install_date'   => 'required',
-                'reg_det_data'   => 'required',
-                'driver_data'    => 'required',
             ],$message);
             $res = $mid->register();
         } catch(\Exception $e) {
@@ -57,11 +43,9 @@ class RegistrationController extends BaseController {
         try{
             $msg = [
                 'license_plate.required' => '车牌号不能为空',
-                'product_number.required'=> '产品编号不能为空',
             ];
             $this->valid([
                 'license_plate' => 'required',
-                'product_number'=> 'required'
             ],$msg);
             $res = $mid->query();
         } catch(\Exception $e) {
