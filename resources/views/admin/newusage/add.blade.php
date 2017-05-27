@@ -401,7 +401,7 @@
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
                                                     <input id="" name="" class="form-control"
-                                                           ng-model="data.license_plate" type="text"/>
+                                                           ng-model="data.device_varieties" type="text"/>
                                                 </div>
                                             </div>
 
@@ -411,7 +411,7 @@
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
                                                     <input id="" name="" class="form-control"
-                                                           ng-model="data.license_plate" type="text"/>
+                                                           ng-model="data.device_category" type="text"/>
                                                 </div>
                                             </div>
 
@@ -420,26 +420,26 @@
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
                                                     <input id="" name="" class="form-control"
-                                                           ng-model="data.license_plate" type="text"/>
+                                                           ng-model="data.device_type" type="text"/>
                                                 </div>
                                             </div>
 
 
-                                            <div class="form-group">
-                                                <label class="control-label col-md-2">设备代码</label>
-
-                                                <div class="col-md-6 col-xs-12 p_top2">
-                                                    <input id="" name="" class="form-control"
-                                                           ng-model="data.license_plate" type="text"/>
-                                                </div>
-                                            </div>
+                                            {{--<div class="form-group">--}}
+                                            {{--<label class="control-label col-md-2">设备代码</label>--}}
+                                            {{--//缺--}}
+                                            {{--<div class="col-md-6 col-xs-12 p_top2">--}}
+                                            {{--<input id="" name="" class="form-control"--}}
+                                            {{--ng-model="data." type="text"/>--}}
+                                            {{--</div>--}}
+                                            {{--</div>--}}
 
                                             <div class="form-group">
                                                 <label class="control-label col-md-2">产品名称</label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
                                                     <input id="" name="" class="form-control"
-                                                           ng-model="data.license_plate" type="text"/>
+                                                           ng-model="data.product_name" type="text"/>
                                                 </div>
                                             </div>
 
@@ -448,7 +448,7 @@
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
                                                     <input id="" name="" class="form-control"
-                                                           ng-model="data.license_plate" type="text"/>
+                                                           ng-model="data.qp_count" type="text"/>
                                                 </div>
                                             </div>
 
@@ -469,34 +469,36 @@
                                                 <label class="control-label col-md-2">气瓶公称工作压力</label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
-                                                    <input id="" name="" class="form-control" ng-model="data.use_unit"
+                                                    <input id="" name="" class="form-control"
+                                                           ng-model="data.qp_pressure"
                                                            type="text"/>Mpa
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label class="control-label col-md-2">气瓶容积</label>
+                                            {{--<div class="form-group">--}}
+                                            {{--<label class="control-label col-md-2">气瓶容积</label>--}}
+                                            {{--//缺--}}
+                                            {{--<div class="col-md-6 col-xs-12 p_top2">--}}
+                                            {{--<input id="" name="" class="form-control" ng-model="data.car_brand"--}}
+                                            {{--type="text"/>--}}
+                                            {{--</div>--}}
+                                            {{--</div>--}}
 
-                                                <div class="col-md-6 col-xs-12 p_top2">
-                                                    <input id="" name="" class="form-control" ng-model="data.car_brand"
-                                                           type="text"/>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label col-md-2">施工单位名称</label>
-
-                                                <div class="col-md-6 col-xs-12 p_top2">
-                                                    <input id="" name="" class="form-control" ng-model="data.car_brand"
-                                                           type="text"/>
-                                                </div>
-                                            </div>
+                                            {{--<div class="form-group">--}}
+                                            {{--<label class="control-label col-md-2">施工单位名称</label>--}}
+                                            {{--//缺--}}
+                                            {{--<div class="col-md-6 col-xs-12 p_top2">--}}
+                                            {{--<input id="" name="" class="form-control" ng-model="data.car_brand"--}}
+                                            {{--type="text"/>--}}
+                                            {{--</div>--}}
+                                            {{--</div>--}}
 
                                             <div class="form-group">
                                                 <label class="control-label col-md-2">监督检验机构名称</label>
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
-                                                    <input id="" name="" class="form-control" ng-model="data.car_brand"
+                                                    <input id="" name="" class="form-control"
+                                                           ng-model="data.inspection_unit"
                                                            type="text"/>
                                                 </div>
                                             </div>
@@ -508,14 +510,31 @@
                                             </button>
 
                                             <table style="width: 100%">
+                                                <thead>
                                                 <tr>
+                                                    <td>设备代码</td>
+                                                    <td>施工单位名称</td>
+                                                    <td>容积</td>
                                                     <td>制造单位名称</td>
                                                     <td>制造日期</td>
                                                     <td>产品编号</td>
                                                     <td>单位内编号</td>
                                                 </tr>
-                                            </table>
+                                                </thead>
 
+                                                <tbody>
+                                                <tr ng-repeat="item in data.reg_det_data track by $index">
+                                                    <td>@{{ item.device_number }}</td>
+                                                    <td>@{{ item.install_unit }}</td>
+                                                    <td>@{{ item.volume }}</td>
+                                                    <td>@{{ item.made_unit }}</td>
+                                                    <td>@{{ item.made_date }}</td>
+                                                    <td>@{{ item.product_number }}</td>
+                                                    <td>@{{ item.in_unit_number }}</td>
+
+                                                </tr>
+                                                </tbody>
+                                            </table>
 
 
                                             <!-- Modal -->
@@ -532,6 +551,24 @@
                                                         <div class="modal-body">
                                                             <form id="regDetData">
                                                                 <div class="form-group">
+                                                                    <label for="">设备代码</label>
+                                                                    <input type="text" class="form-control"
+                                                                           name="device_number">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="">施工单位名称</label>
+                                                                    <input type="text" class="form-control"
+                                                                           name="install_unit">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="">气瓶容积</label>
+                                                                    <input type="text" class="form-control"
+                                                                           name="volume">
+                                                                </div>
+
+                                                                <div class="form-group">
                                                                     <label for="">制造单位名称</label>
                                                                     <input type="text" class="form-control"
                                                                            name="made_unit">
@@ -539,7 +576,7 @@
 
                                                                 <div class="form-group">
                                                                     <label for="recipient-name">制造日期</label>
-                                                                    <input type="text" class="form-control"
+                                                                    <input type="text" class="form-control made_date"
                                                                            name="made_date">
                                                                 </div>
 
@@ -552,7 +589,7 @@
                                                                 <div class='form-group'>
                                                                     <label>单位内编号</label>
                                                                     <input class="form-control"
-                                                                           name="product_number">
+                                                                           name="in_unit_number">
                                                                 </div>
 
                                                             </form>
@@ -572,14 +609,13 @@
 
                                         </div>
 
-
                                         <h1>设备使用情况</h1>
 
                                         <div class="form-group">
                                             <label class="control-label col-md-2">使用单位名称</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control" ng-model="data.car_brand"
+                                                <input id="" name="" class="form-control" ng-model="data.use_unit"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -588,7 +624,8 @@
                                             <label class="control-label col-md-2">使用单位地址</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control" ng-model="data.car_brand"
+                                                <input id="" name="" class="form-control"
+                                                       ng-model="data.use_unit_address"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -598,7 +635,7 @@
                                             <label class="control-label col-md-2">使用率单位统一社会信用代码</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control" ng-model="data.car_brand"
+                                                <input id="" name="" class="form-control" ng-model="data.credit_code"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -607,7 +644,7 @@
                                             <label class="control-label col-md-2">邮政编码</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control" ng-model="data.car_brand"
+                                                <input id="" name="" class="form-control" ng-model="data.postal_number"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -616,7 +653,7 @@
                                             <label class="control-label col-md-2">车牌号</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control" ng-model="data.car_brand"
+                                                <input id="" name="" class="form-control" ng-model="data.license_plate"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -625,7 +662,7 @@
                                             <label class="control-label col-md-2">车辆VIN码</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control" ng-model="data.car_brand"
+                                                <input id="" name="" class="form-control" ng-model="data.car_vin"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -634,7 +671,8 @@
                                             <label class="control-label col-md-2">投入使用日期</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control datepicker" ng-model="data.car_brand"
+                                                <input id="" name="" class="form-control datepicker"
+                                                       ng-model="data.use_date"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -643,7 +681,7 @@
                                             <label class="control-label col-md-2">单位固定电话</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control" ng-model="data.car_brand"
+                                                <input id="" name="" class="form-control" ng-model="data.unit_phone"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -652,7 +690,7 @@
                                             <label class="control-label col-md-2">安全管理员</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control" ng-model="data.car_brand"
+                                                <input id="" name="" class="form-control" ng-model="data.security_admin"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -661,7 +699,7 @@
                                             <label class="control-label col-md-2">移动电话</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control" ng-model="data.car_brand"
+                                                <input id="" name="" class="form-control" ng-model="data.mobile"
                                                        type="text"/>
                                             </div>
                                         </div>
@@ -721,32 +759,7 @@
             console.log(ev);
         });
 
-        var imgType;
-        var uploadFile = function () {
 
-            $("#img_type").val(imgType);
-            var formData = new FormData($("#uploadForm")[0]);
-            $.ajax({
-                url: '../../admin/registration/upload',  //server script to process data
-                type: 'POST',
-                //Ajax事件
-                success: function (data) {
-                    if (data.code == 0) {
-                        var type = imgType;
-                        addImg(data.data.imgs, data.data.type);
-                        console.log(imgType);
-                    }
-                },
-                error: function () {
-                    console.log('error');
-                },
-                // Form数据
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false
-            });
-        };
         var serializeObject = function (form) {
             var o = {};
             $.each(form.serializeArray(), function (index) {
@@ -763,17 +776,36 @@
         app.controller('addController', function ($scope, $filter) {
             $scope.domain = document.domain;
             $scope.data = {
-                number: '',
-                license_plate: "",
-                product: "1",
-                use_unit: "",
-                car_brand: "",
-                install_unit: "",
-                install_date: "",
-                is_personal: true,//1
-                reg_det_data: [],
-                driver_data: []
+                device_varieties: '',
+                device_category: '',
+                device_type: '',
+                product_name: '',
+                qp_count: '',
+                product: '',
+                qp_pressure: '',
+//施工单位名称
+                inspection_unit: '',
+                use_unit: '',
+                use_unit_address: '',
+                credit_code: '',
+                postal_number: '',
+                license_plate: '',
+                postal_number: '',
+                use_date: '',
+                unit_phone: '',
+                security_admin: '',
+                mobile: "",
+                reg_det_data: []
+
             };
+
+            $scope.saveRegDet = function () {
+                var data = serializeObject($('#regDetData'))
+                $scope.data.reg_det_data.push(data);
+                $("#myModal").modal('hide');
+                swal('', '成功', 'success');
+            }
+
 
             $scope.getToday = function () {
                 return $filter("date")(new Date().getTime(), "yyyy年MM月dd日");
@@ -788,60 +820,24 @@
                 return $filter("date")(new Date(str).getTime(), "yyyy年MM月dd日");
             }
 
-
             $scope.DateShow1 = function (str) {
                 if (!str) return;
                 return $filter("date")(new Date(str).getTime(), "yyyy年MM月");
             }
 
-            $scope.upload = function (action) {
-                imgType = action;
-                $("#uploadFile").click();
-            }
 
-
-            addImg = function (data, type) {
-                $scope.$apply(function () {
-                    $scope.imgs[type] = data;
-                })
-            }
-
-            $("#uploadFile").on("change", function (e) {
-                uploadFile();
-            });
-
-            $scope.saveDriverData = function () {
-                var data = serializeObject($('#driverData'));
-                $scope.data.driver_data.push(data);
-                $("#myModal_1").modal('hide');
-                swal('', '成功', 'success');
-            };
-
-            $scope.saveRegDet = function () {
-                var data = serializeObject($('#regDetData'))
-                $scope.data.reg_det_data.push(data);
-                $("#myModal").modal('hide');
-                swal('', '成功', 'success');
-            }
             var obj = ['压缩天然气', '液化天然气', '液化石油气'];
             $scope.getSelect = function (key) {
 
                 return obj[key];
             };
 
-            $('#install_date').on("change", function () {
-                var self = this;
-                $scope.$apply(function () {
-                    $scope.data.install_date = $(self).val();
-                })
-            })
 
             $scope.save = function () {
                 var data = $scope.data;
-                data.images = $scope.imgs;
                 data._token = $("#token").val();
                 $.ajax({
-                    url: "../../admin/registration/register",
+                    url: "../../admin/registration/register2",
                     data: data,
                     type: 'post',
                     success: function (data) {

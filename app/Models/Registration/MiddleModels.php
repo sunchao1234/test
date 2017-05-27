@@ -23,7 +23,7 @@ class MiddleModels {
         // $this->uploadModel->addData($number);
         return ['code'=>0,'msg'=>'success','data'=>$number];
     }
-    public function newReister() {
+    public function newRegister() {
         $number = $this->regModel->register();
         $this->regDetailModel->addDetail($number);
         return ['code'=>0,'msg'=>'success','data'=>$number];
@@ -108,7 +108,7 @@ class MiddleModels {
         return $res;
     }
     public function addPicInfo() {
-        $this->uploadModel->addData($number);
+        $this->uploadModel->addData();
         return ['code'=>0,'msg'=>'success','data'=>[]];
     }
     public function updateInfo() {
