@@ -41,6 +41,6 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     // 添加图片信息
     Route::post('/registration/addpicinfo', 'RegistrationController@addPicInfo');
     // 新的录入登记表数据接口
-    Route::post('/registration/newregister', 'RegistrationController@newRegister');
+    Route::post('/registration/register2', 'RegistrationController@register2');
 });
 

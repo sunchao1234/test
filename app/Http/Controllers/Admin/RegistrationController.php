@@ -237,7 +237,7 @@ class RegistrationController extends BaseController {
         }
         return response()->json($res);
     }
-    public function newRegister(MiddleModels $mid) {
+    public function register2(MiddleModels $mid) {
         try{
             // $this->valid([]);
             $res = $mid->newRegister();
