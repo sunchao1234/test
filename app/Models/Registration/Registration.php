@@ -49,6 +49,7 @@ class Registration extends BaseModel {
             'unit_phone'      => $this->set_def($request['unit_phone']),
             'security_admin'  => $this->set_def($request['security_admin']),
             'mobile'          => $this->set_def($request['mobile']),
+            'register_type'   => $this->set_def($request['register_type']),
             'create_time'   => time(),
             'update_time'   => time()
         ];
@@ -78,7 +79,7 @@ class Registration extends BaseModel {
                               'device_varieties','device_category','product_name','qp_count',
                               'qp_pressure','inspection_unit','use_unit_address','credit_code',
                               'postal_number','car_vin','use_date','unit_phone','security_admin',
-                              'mobile')
+                              'mobile','register_type')
                 // ->paginate(self::$pageNumber);
                 ->orderBy('id','desc')
                 ->where('delete_time',0)
@@ -100,7 +101,7 @@ class Registration extends BaseModel {
                               'device_varieties','device_category','product_name','qp_count',
                               'qp_pressure','inspection_unit','use_unit_address','credit_code',
                               'postal_number','car_vin','use_date','unit_phone','security_admin',
-                              'mobile')
+                              'mobile','register_type')
                 // ->paginate(self::$pageNumber);
                 ->orderBy('id','desc')
                 ->where('delete_time',0)
