@@ -38,347 +38,6 @@
                         <div class="vertical-box-inner-cell">
                             <div data-scrollbar="true" data-height="100%" class="wrapper" style="background:#FFF;">
                                 <div class="panel panel-default" data-sortable-id="ui-widget-1">
-                                    <style>
-                                        #printContent1, #printContent2 {
-                                            display: none;
-                                        }
-                                    </style>
-
-
-                                    <div id="printContent1" style="border: 1px solid #000;">
-                                        <h1 style="padding: 50px  0px;text-align: center;font-size: 38px">
-                                            特种设备使用登记证
-                                        </h1>
-                                        <style>
-                                            #printContent1 {
-                                                padding: 20px;
-                                                font-family: '黑体';
-                                            }
-
-                                            .label_font {
-                                                font-size: 15px;
-                                                font-weight: bolder;
-                                            }
-
-                                            .write_font {
-                                                font-size: 16px;
-                                            }
-
-                                            #printContent1 table {
-                                                font-size: 24px;
-                                            }
-
-                                            #printContent1 table td {
-                                                padding: 10px 0px;
-                                            }
-
-                                            .letter4 {
-                                                letter-spacing: 2px;
-                                            }
-
-                                            .letter5 {
-                                                letter-spacing: 4.5px;
-                                            }
-
-                                            .letter6 {
-                                                letter-spacing: 1px;
-                                            }
-                                        </style>
-                                        <p style="text-align: center;font-size: 24px">编号:</p>
-
-                                        <p style="text-indent:50px;font-size: 30px;padding: 50px 0px;line-height: 50px">
-                                            按照《中华人民共和国特种设备安全法》的规定，依据特种设备安全技术规范要求，
-                                            予以使用登记。</p>
-
-                                        <table cellPadding=10 style="width: 100%;margin-top: 20px">
-                                            <tr>
-                                                <td colspan="2">
-                                                    <span class='letter6'>使用单位名称</span>
-                                                    <span>:</span>
-                                                    <span>@{{data.use_unit}}</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <span class='letter6'>设备使用地点</span>
-                                                    <span>:</span>
-                                                    <span>@{{ data.use_unit_address }}</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class='letter4'>设 备 种 类</span>
-                                                    <span>:</span>
-                                                    <span>@{{ data.device_type }}</span>
-                                                </td>
-                                                <td>
-                                                    <span class='letter4'>设 备 类 别</span>
-                                                    <span>:</span>
-
-                                                    <span>@{{ data.device_category }}</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class='letter4'>设 备 品 种</span>
-                                                    <span>:</span>
-
-                                                    <span>@{{ data.device_varieties }}</span>
-                                                </td>
-                                                <td>
-                                                    <span class='letter5'>单位内编号</span>
-                                                    <span>:</span>
-
-                                                    <span>@{{ data.reg_det_data[0].in_unit_number }}</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class='letter4'>设 备 代 码</span>
-                                                    <span>:</span>
-
-                                                    <span>@{{ data.reg_det_data[0].device_number }}</span>
-                                                </td>
-                                                <td>
-                                                    <span class='letter4'>产 品 编 号</span>
-                                                    <span>:</span>
-
-                                                    <span>@{{ data.reg_det_data[0].product_number }}</span>
-                                                </td>
-                                            </tr>
-                                        </table>
-
-
-                                        <div>
-                                            <img width="150px" height="110px" src="/assets/img/timg.jpg"/>
-                                        </div>
-
-                                        <div class="write_font"
-                                             style="text-align: right;margin-top: 0px;font-size:21px">
-                                            <p style="margin: 10px 10px">登记机关:(名称与公章)</p>
-
-                                            <p style="margin: 20px 10px">发证日期:2017年4月1日 </p>
-                                        </div>
-
-                                        <p style="text-indent:50px;font-size: 18px">
-                                            依据安全技术规范的要求，应当在定期检验确定的有效期和技术参数范围内使用
-                                        </p>
-                                    </div>
-
-
-                                    <div id="printContent2" style="">
-                                        <style>
-                                            #printContent2 {
-                                                font-family: '黑体';
-                                            }
-
-                                            #printContent2 table {
-                                                font-size: 18px;
-                                                border-collapse: collapse;
-                                                border: 1px solid #ccc;
-                                            }
-
-                                            #printContent2 table td {
-                                                text-align: center;
-                                                border: 1px solid #ccc;
-                                                width: 5.55%;
-                                                padding: 5px;
-                                            }
-
-
-                                        </style>
-                                        {{--<h2 style="margin: 20px  0px;font-size: 38px;text-align: center">--}}
-                                        {{--特种设备使用登记表</h2>--}}
-
-                                        <div>
-
-                                            <table style="width:100%">
-
-                                                <tr>
-                                                    <td rowspan="@{{ 6 +  data.reg_det_data.length }}" colspan='2'>设备基础情况</td>
-                                                    <td colspan="4">设备品种</td>
-                                                    <td colspan="4">@{{ data.device_varieties }}</td>
-                                                    <td colspan="4">产品名称</td>
-                                                    <td colspan="4">@{{ data.product_name }}</td>
-                                                </tr>
-                                                <tr style="display: none">
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="4">气瓶数量</td>
-                                                    <td colspan="4">@{{ data.qp_count }}</td>
-                                                    <td colspan="4">充装介质</td>
-                                                    <td colspan="4">@{{ getSelect(data.product) }}</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td colspan="4">气瓶公称工作压力</td>
-                                                    <td colspan="4">
-                                                        <span>@{{ data.qp_pressure }}</span>
-                                                        <span>Mpa</span>
-                                                    </td>
-                                                    <td colspan="4">气瓶容积</td>
-                                                    <td colspan="4">
-                                                        <span>@{{ data.reg_det_data[0].volume }}</span>
-                                                        <span>L</span>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td colspan="7">制造单位名称</td>
-                                                    <td colspan="3">制造日期</td>
-                                                    <td colspan="3">产品编号</td>
-                                                    <td colspan="3">单位内编号</td>
-                                                </tr>
-                                                <tr  ng-repeat="item in data.reg_det_data track by $index">
-                                                    <td  colspan='7'>@{{ item.made_unit }}</td>
-                                                    <td colspan="3">@{{ item.made_date }}</td>
-                                                    <td colspan="3">@{{ item.product_number }}</td>
-                                                    <td colspan="3">@{{ item.in_unit_number }}</td>
-                                                </tr>
-                                                {{--<tr>--}}
-                                                    {{--<td colspan="7">&nbsp</td>--}}
-                                                    {{--<td colspan="3"></td>--}}
-                                                    {{--<td colspan="3"></td>--}}
-                                                    {{--<td colspan="3"></td>--}}
-                                                {{--</tr>--}}
-                                                {{--<tr>--}}
-                                                    {{--<td colspan="7">&nbsp</td>--}}
-                                                    {{--<td colspan="3"></td>--}}
-                                                    {{--<td colspan="3"></td>--}}
-                                                    {{--<td colspan="3"></td>--}}
-                                                {{--</tr>--}}
-                                                {{--<tr>--}}
-                                                    {{--<td colspan="7">&nbsp</td>--}}
-                                                    {{--<td colspan="3"></td>--}}
-                                                    {{--<td colspan="3"></td>--}}
-                                                    {{--<td colspan="3"></td>--}}
-                                                {{--</tr>--}}
-                                                {{--<tr>--}}
-                                                    {{--<td colspan="7">&nbsp</td>--}}
-                                                    {{--<td colspan="3"></td>--}}
-                                                    {{--<td colspan="3"></td>--}}
-                                                    {{--<td colspan="3"></td>--}}
-                                                {{--</tr>--}}
-                                                <tr>
-                                                    <td colspan="4">施工单位名称</td>
-                                                    <td colspan='12'>@{{ data.reg_det_data[0].install_unit }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="4">监督检验机构名称</td>
-                                                    <td colspan='12'>@{{ data.inspection_unit }}</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td rowspan="6" colspan='2'>设备基础情况</td>
-                                                    <td colspan="4">使用单位名称</td>
-                                                    <td colspan='12'>@{{ data.use_unit }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="4">使用单位地址</td>
-                                                    <td colspan='12'>@{{ data.use_unit_address }}</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td colspan="4">使用单位统一社会信用代码</td>
-                                                    <td colspan='5'>@{{ data.credit_code }}</td>
-                                                    <td colspan='3'>邮政编码</td>
-                                                    <td colspan='4'>@{{ data.postal_number }}</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td colspan="4">车牌号</td>
-                                                    <td colspan='5'>@{{ data.license_plate }}</td>
-                                                    <td colspan='3'>车辆VIM码</td>
-                                                    <td colspan='4'>@{{ data.car_vin }}</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td colspan="4">投入使用日期</td>
-                                                    <td colspan='5'>@{{ DateShow(data.use_date) }}</td>
-                                                    <td colspan='3'>单位固定电话</td>
-                                                    <td colspan='4'>@{{ data.unit_phone }}</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td colspan="4">安全管理员</td>
-                                                    <td colspan='5'>@{{ data.security_admin }}</td>
-                                                    <td colspan='3'>移动电话</td>
-                                                    <td colspan='4'>@{{ data.mobile }}</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td colspan="18" style="position: relative">
-                                                        <p style="text-align: left;text-indent:50px;">
-                                                            在此申明：所申报的内容真实；在使用过程中，将严格执行《中国人
-                                                            民共和国特种设备安全法》及相关规定，
-                                                            并且接受特种设备安全监督管理部门的监督管理。</p>
-
-                                                        <div style="height: 20px;margin: 30px 0px">
-                                                            <p style="width: 50%;float:left">使用单位填表人员</p>
-
-                                                            <p style="width: 50%;float:left;text-align: left">日期:</p>
-                                                        </div>
-                                                        <div>
-                                                            <p style="width: 50%;float:left">使用单位安全管理人员</p>
-
-                                                            <p style="width: 50%;float:left;text-align: left">日期:</p>
-                                                        </div>
-                                                        <div style="position: absolute;bottom:0px;right:10px">
-                                                            <p>(使用单位公章)</p>
-
-                                                            <p>2017年 12月 01日</p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td colspan="18" style="position: relative">
-                                                        <p style="text-align: left">说明:</p>
-
-                                                        <div style="height: 20px;margin: 30px 0px">
-                                                            <p style="width: 50%;float:left">登记机关登记人员</p>
-
-                                                            <p style="width: 50%;float:left;text-align: left">日期:</p>
-                                                        </div>
-
-                                                        <div>
-                                                            <p style="width: 50%;float:left">使用登记证编号</p>
-                                                        </div>
-
-                                                        <div style="position: absolute;bottom:0px;right:10px">
-                                                            <p>(登记机关专用章)</p>
-
-                                                            <p>2017年 12月 01日</p>
-                                                        </div>
-
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-
-                                        {{--<div>--}}
-                                        {{--<p>《特种设备安全法》第三十三条规定：“特种设备使用单位应当在特种设--}}
-                                        {{--备投入使用前或者投入使用后三十日内，向负责特种设备安全监督的部门办理使用--}}
-                                        {{--登记，取得使用登记证书。登记标志应当置于该特种设备的显著位置。”--}}
-                                        {{--</p>--}}
-                                        {{--</div>--}}
-                                    </div>
 
                                     <form id="uploadForm" style="display: none">
                                         <input name='_token' class='hide' id='token'
@@ -386,6 +45,25 @@
                                         <input type="hidden" name="type" id='img_type' value='1'/>
                                         <input type="file" multiple="multiple" id='uploadFile' name='img[]'>
                                     </form>
+
+                                    <div class="panel-body">
+                                        <div class="panel-toolbar"
+                                             style="border-bottom:1px solid #fff;padding: 10px 0px;">
+
+                                            <div class="btn-group  col-md-2" style="padding-left: 0px;">
+                                                <label class="control-label m-r-10  m-t-10"> 车牌号码</label>
+                                                <select type="text" class="form-control" id="license_plate"></select>
+                                            </div>
+
+                                            <div class="btn-group  col-md-2  m-t-10" style="padding-left: 0px;">
+                                                <div class="checkbox m-r-10 ">
+                                                    <button class="btn btn-default m-r-5 m-b-5 m-t-10 btn-group"
+                                                            ng-click="search()" id="search_submit">搜索
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div id="validate" role="form" name="create_form"
                                          class="form-horizontal form-bordered">
@@ -778,6 +456,8 @@
             return o;
         };
 
+        searchSelect2();
+
         var app = angular.module('add', []);
         app.controller('addController', function ($scope, $filter) {
             $scope.domain = document.domain;
@@ -859,6 +539,18 @@
                     }
                 })
             }
+
+            function callFun1(data) {
+                $scope.$apply(function(){
+                    $.extend($scope.data,data.data.registration);
+                    $scope.data.product = $scope.data.product.toString();
+                    $scope.data.reg_det_data = data.data.detail;
+                })
+            }
+
+            $("#search_submit").on("click", function () {
+                getSearchData(callFun1);
+            })
 
         });
 
