@@ -129,7 +129,11 @@ class Registration extends BaseModel {
             throw new \Exception('number不能为空');
         }
         $request = Request::input();
-        $columns = ['license_plate','product','use_unit','car_brand','install_unit','install_date'];
+        $columns = ['license_plate','product','use_unit','car_brand','install_unit',
+                    'install_date','device_type','device_varieties','device_category',
+                    'product_name','qp_count','qp_pressure','inspection_unit','use_unit_address',
+                    'credit_code','postal_number','car_vin','use_date','unit_phone','security_admin',
+                    'mobile','register_type'];
 
         $updateData = array_where($request,function($key,$val) use ($columns) {
             return in_array($key,$columns);

@@ -36,11 +36,13 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin'],function(){
     Route::get('/registration/reglist', 'RegistrationController@regList');
     // 文件上传（单个文件上传）
     Route::post('/registration/singleupload', 'RegistrationController@singleUpload');
-    // 更新内容
+    // 更新内容（老页面数据）
     Route::post('/registration/updateinfo', 'RegistrationController@updateInfo');
     // 添加图片信息
     Route::post('/registration/addpicinfo', 'RegistrationController@addPicInfo');
     // 新的录入登记表数据接口
     Route::post('/registration/register2', 'RegistrationController@register2');
+    // 更新数据(新页面数据)
+    Route::post('/registration/newupdatedata', 'RegistrationController@newUpdateData');
 });
 

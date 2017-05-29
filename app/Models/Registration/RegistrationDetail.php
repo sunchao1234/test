@@ -86,7 +86,8 @@ class RegistrationDetail extends BaseModel {
     public function updateData() {
         $request = Request::input('reg_det_data');
         $number  = Request::input('number');
-        $where   = ['device_number','made_unit','made_date','product_number','volume','next_time_check_date'];
+        $where   = ['device_number','made_unit','made_date','product_number','volume',
+                    'next_time_check_date','in_unit_number'];
         $update   = array_where($request,function($key,$val) use ($where) {
             return in_array($key,$where);
         });

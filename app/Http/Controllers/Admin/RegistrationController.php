@@ -246,4 +246,13 @@ class RegistrationController extends BaseController {
         }
         return response()->json($res);
     }
+    public function newUpdateData(MiddleModels $mid) {
+        try{
+            // $this->valid([]);
+            $res = $mid->newUpdateData();
+        } catch(\Exception $e) {
+            $res = ['code'=> 5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
+        }
+        return response()->json($res);
+    }
 }

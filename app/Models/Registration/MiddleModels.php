@@ -117,4 +117,9 @@ class MiddleModels {
         $this->regDetailModel->updateData();
         return ['code'=>0,'msg'=>'success','data'=>[]];
     }
+    public function newUpdateData() {
+        $this->regModel->updateData();
+        $this->regDetailModel->updateData();
+        return ['code'=>0,'msg'=>'success','data'=>[]];
+    }
 }
