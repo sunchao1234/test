@@ -120,6 +120,10 @@ class RoleController extends BaseController
         return view('admin.newusage.add');
     }
 
+    public function getEditnewusage(){
+        return view('admin.newusage.edit');
+    }
+
     /**
      * @action Create User Role
      * @return array and json
