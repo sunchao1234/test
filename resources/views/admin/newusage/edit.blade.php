@@ -76,7 +76,7 @@
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
                                                     <input id="" name="" class="form-control"
-                                                           type="text"/>
+                                                           type="text" ng-model="data.register_type"/>
                                                 </div>
                                             </div>
 
@@ -193,7 +193,7 @@
                                                 添加
                                             </button>
 
-                                            <table style="width: 100%">
+                                            <table class="table table-bordered" style="width: 100%">
                                                 <thead>
                                                 <tr>
                                                     <td>设备代码</td>
@@ -390,8 +390,8 @@
 
                                         <div class="panel-footer text-right">
 
-                                            <button class="btn btn-success pull-right" id="print2">打印反面</button>
-                                            <button class="btn pull-right btn-success" id="print1">打印正面</button>
+                                            {{--<button class="btn btn-success pull-right" id="print2">打印反面</button>--}}
+                                            {{--<button class="btn pull-right btn-success" id="print1">打印正面</button>--}}
                                             <button class="btn btn-primary pull-right" type="submit" ng-click="save()">
                                                 保存
                                             </button>
@@ -462,6 +462,7 @@
         app.controller('addController', function ($scope, $filter) {
             $scope.domain = document.domain;
             $scope.data = {
+                register_type:'',
                 device_varieties: '',
                 device_category: '',
                 device_type: '',
@@ -525,7 +526,7 @@
                 var data = $scope.data;
                 data._token = $("#token").val();
                 $.ajax({
-                    url: "../../admin/registration/register2",
+                    url: "../../admin/registration/newupdatedata",
                     data: data,
                     type: 'post',
                     success: function (data) {

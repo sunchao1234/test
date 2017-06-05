@@ -84,7 +84,11 @@ class Registration extends BaseModel {
                 ->orderBy('id','desc')
                 ->where('delete_time',0)
                 ->first();
-        $result->install_date = date("Y-m-d",$result->install_date);
+        if(!empty($result)) {
+            $result->install_date = date("Y-m-d",$result->install_date);
+            $result->use_date     = date("Y-m-d",$result->use_date);
+            $result->create_time  = date("Y-m-d",$result->create_time);
+        }
 
         return $result;
     }
@@ -106,7 +110,11 @@ class Registration extends BaseModel {
                 ->orderBy('id','desc')
                 ->where('delete_time',0)
                 ->first();
-        $result->install_date = date("Y-m-d",$result->install_date);
+        if(!empty($result)) {
+            $result->install_date = date("Y-m-d",$result->install_date);
+            $result->use_date     = date("Y-m-d",$result->use_date);
+            $result->create_time  = date("Y-m-d",$result->create_time);
+        }
 
         return $result;
     }
@@ -138,8 +146,11 @@ class Registration extends BaseModel {
         $updateData = array_where($request,function($key,$val) use ($columns) {
             return in_array($key,$columns);
         });
-        if(isset($updateData['install_date'])) {
+        if(!empty($updateData['install_date'])) {
             $updateData['install_date'] = strtotime($updateData['install_date']);
+        }
+        if(!empty($updateData['use_date'])) {
+            $updateData['use_date'] = strtotime($updateData['use_date']);
         }
         if(!empty($update)) {
             $updateData = array_merge($updateData,$update);

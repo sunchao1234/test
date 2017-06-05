@@ -84,7 +84,7 @@
                                                 letter-spacing: 1px;
                                             }
                                         </style>
-                                        <p style="text-align: center;font-size: 24px">编号:</p>
+                                        <p style="text-align: center;font-size: 24px">编号:@{{ data.number }}</p>
 
                                         <p style="text-indent:50px;font-size: 30px;padding: 50px 0px;line-height: 50px">
                                             按照《中华人民共和国特种设备安全法》的规定，依据特种设备安全技术规范要求，
@@ -398,7 +398,7 @@
 
                                                 <div class="col-md-6 col-xs-12 p_top2">
                                                     <input id="" name="" class="form-control"
-                                                           type="text"/>
+                                                           type="text" ng-model="data.register_type"/>
                                                 </div>
                                             </div>
 
@@ -515,7 +515,7 @@
                                                 添加
                                             </button>
 
-                                            <table style="width: 100%">
+                                            <table class="table table-bordered" style="background-color:#fff">
                                                 <thead>
                                                 <tr>
                                                     <td>设备代码</td>
@@ -677,7 +677,7 @@
                                             <label class="control-label col-md-2">投入使用日期</label>
 
                                             <div class="col-md-6 col-xs-12 p_top2">
-                                                <input id="" name="" class="form-control datepicker"
+                                                <input id="" name="use_date" class="form-control datepicker"
                                                        ng-model="data.use_date"
                                                        type="text"/>
                                             </div>
@@ -782,12 +782,13 @@
         app.controller('addController', function ($scope, $filter) {
             $scope.domain = document.domain;
             $scope.data = {
+                register_type:'',
                 device_varieties: '',
                 device_category: '',
                 device_type: '',
                 product_name: '',
                 qp_count: '',
-                product: '',
+                product: '1',
                 qp_pressure: '',
 //施工单位名称
                 inspection_unit: '',
@@ -843,6 +844,7 @@
 
             $scope.save = function () {
                 var data = $scope.data;
+                data.use_date = $("[name='use_date']").val();
                 data._token = $("#token").val();
                 $.ajax({
                     url: "../../admin/registration/register2",
@@ -850,6 +852,10 @@
                     type: 'post',
                     success: function (data) {
                         if (data.code == 0) {
+                            $scope.$apply(function(){
+                                $scope.number = data.data;
+                            })
+
                             swal('', '成功', 'success');
                         } else {
                             swal('', data.msg, 'error');

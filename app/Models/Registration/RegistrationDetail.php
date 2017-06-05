@@ -50,8 +50,8 @@ class RegistrationDetail extends BaseModel {
                 ->where('delete_time',0)
                 ->get();
         foreach($result as $v) {
-            $v->made_date = date("Y-m",$v->made_date);
-            $v->next_time_check_date = date("Y-m",$v->next_time_check_date);
+            $v->made_date = date("Y-m-d",$v->made_date);
+            $v->next_time_check_date = date("Y-m-d",$v->next_time_check_date);
         }
         return $result;
     }
@@ -88,16 +88,35 @@ class RegistrationDetail extends BaseModel {
         $number  = Request::input('number');
         $where   = ['device_number','made_unit','made_date','product_number','volume',
                     'next_time_check_date','in_unit_number'];
-        $update   = array_where($request,function($key,$val) use ($where) {
-            return in_array($key,$where);
-        });
-        if(!empty($update)) {
-            $res = app('db')->table('admin_dirver_info')
-                 ->where('delete_time',0)
-                 ->where('number',$number)
-                 ->update($update);
-            if(!$res) {
-                throw new \Exception('更新数据失败');
+        foreach($request as $k=>$v) {
+            $update   = array_where($v,function($key,$val) use ($where) {
+                return in_array($key,$where);
+            });
+            if(!empty($update['made_date'])) {
+                $update['made_date'] = strtotime($update['made_date']);
+            }
+            if(!empty($update['next_time_check_date'])) {
+                $update['next_time_check_date'] = strtotime($update['next_time_check_date']);
+            }
+            $request[$k] = $update;
+        }
+        if(!empty($request)) {
+            foreach($request as $val) {
+                if(app('db')->table('admin_registration_detail')
+                    ->where('delete_time',0)
+                    ->where('number',$number)
+                    ->where('product_number',$val['product_number'])
+                    ->exists()) {
+                    $dd = array_merge($val,['update_time'=>time()]);
+                    $res = app('db')->table('admin_registration_detail')
+                        ->where('delete_time',0)
+                        ->where('number',$number)
+                        ->update($dd);
+                }else {
+                    $res = app('db')->table('admin_registration_detail')
+                        ->insert(array_merge($val,['number'=>$number,
+                            'create_time'=>time(),'update_time'=>time()]));
+                }
             }
         }
     }
