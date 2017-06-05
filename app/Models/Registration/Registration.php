@@ -50,18 +50,38 @@ class Registration extends BaseModel {
             'security_admin'  => $this->set_def($request['security_admin']),
             'mobile'          => $this->set_def($request['mobile']),
             'register_type'   => $this->set_def($request['register_type']),
+            'number'          => $this->create_number(),
             'create_time'   => time(),
             'update_time'   => time()
         ];
-        $id = app('db')->table('admin_registration')->insertGetId($insertData);
+        $res = app('db')->table('admin_registration')->insert($insertData);
         if(!res) {
             throw new \Exception('写入数据失败');
         }
-        $number = str_pad($id,5,'0',STR_PAD_LEFT).'('.date('y').')';
-        app('db')->table('admin_registration')
-            ->where('delete_time',0)
-            ->where('id',$id)
-            ->update(['number'=>$number]);
+        return $insertData['number'];
+    }
+    // 创建编号 规则：五位数，如果超过99999,第一个变A,以此累加，B,C,D,每过一年，将重新累加
+    protected function create_number() {
+        $reg = app('db')->table('admin_registration')
+             ->orderBy('id','desc')->select('number')->first();
+        if(empty($reg)) {
+            $number = str_pad(1,5,'0',STR_PAD_LEFT).'('.date('y').')';
+        }else {
+            $first_num = ord(substr($reg->number,0,1));
+            $tow_num   = (int)substr($reg->number,1,4);
+            $three_num = substr($reg->number,6,2);
+            if($three_num == date('y')) {
+                $new_num   = $first_num * 10000 + $tow_num + 1;
+                if($new_num == 580000) {
+                    $new_num += 70000;
+                }
+                $first_num = chr(substr($new_num,0,2));
+                $tow_num   = (int)substr($new_num,2,4);
+                $number    = $first_num.str_pad($tow_num,4,'0',STR_PAD_LEFT).'('.$three_num.')';
+            }else {
+                $number = str_pad(1,5,'0',STR_PAD_LEFT).'('.date('y').')';
+            }
+        }
         return $number;
     }
     protected function is_true($val, $return_null=false){
