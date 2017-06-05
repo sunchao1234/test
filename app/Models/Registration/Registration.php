@@ -114,21 +114,25 @@ class Registration extends BaseModel {
     }
     public function query() {
         $request = Request::input();
-        $number  = $this->getNumber();
-        $db = app('db')->table('admin_registration');
-        $db = $db->where('number',$number)
-            ->orWhere('license_plate','LIKE','%'.$request['license_plate'].'%');
+        if(empty($request['product_number'])) {
+            throw new \Exception('产品编号不能为空');
+        }
+        $db = app('db')->table('admin_registration as reg');
+        $db = $db->leftJoin('admin_registration_detail as reg_detail','reg.number',
+                            '=','reg_detail.number');
+        $db = $db->where('reg_detail.product_number','LIKE','%'.$request['product_number'].'%')
+            ->orWhere('reg.license_plate',$request['license_plate']);
 
-        $result = $db->select('id','number','license_plate','product','use_unit',
-                              'car_brand','install_date','install_unit',
-                              'create_time','is_personal','cancellation','device_type',
-                              'device_varieties','device_category','product_name','qp_count',
-                              'qp_pressure','inspection_unit','use_unit_address','credit_code',
-                              'postal_number','car_vin','use_date','unit_phone','security_admin',
-                              'mobile','register_type')
+        $result = $db->select('reg.id','reg.number','reg.license_plate','reg.product','reg.use_unit',
+                              'reg.car_brand','reg.install_date','reg.install_unit',
+                              'reg.create_time','reg.is_personal','reg.cancellation','reg.device_type',
+                              'reg.device_varieties','reg.device_category','reg.product_name','reg.qp_count',
+                              'reg.qp_pressure','reg.inspection_unit','reg.use_unit_address','reg.credit_code',
+                              'reg.postal_number','reg.car_vin','reg.use_date','reg.unit_phone','reg.security_admin',
+                              'reg.mobile','reg.register_type')
                 // ->paginate(self::$pageNumber);
-                ->orderBy('id','desc')
-                ->where('delete_time',0)
+                ->orderBy('reg.id','desc')
+                ->where('reg.delete_time',0)
                 ->first();
         if(!empty($result)) {
             $result->install_date = date("Y-m-d",$result->install_date);
