@@ -84,7 +84,7 @@ class RegistrationDetail extends BaseModel {
         }
     }
     public function deleteDatas() {
-        $ids = Request::input('del_ids',[]);
+        $ids = Request::input('detail_del_ids',[]);
         if(!empty($ids)) {
             $this->deleteData($ids);
         }

@@ -46,14 +46,20 @@ class DriverInfo extends BaseModel {
                 ->get();
         return $result;
     }
-    public function deleteData() {
-        $id = Request::input('id');
+    public function deleteData($ids = []) {
+        $id = !empty($ids)?$ids:Request::input('id');
         $res = app('db')->table('admin_driver_info')
             ->where('delete_time',0)
-            ->where('id',$id)
+            ->whereIn('id',$id)
             ->update(['delete_time'=>time()]);
         if(!$res) {
             throw new \Exception('删除失败');
+        }
+    }
+    public function deleteDatas() {
+        $ids = Request::input('driver_del_ids',[]);
+        if(!empty($ids)) {
+            $this->deleteData($ids);
         }
     }
     public function updateData() {

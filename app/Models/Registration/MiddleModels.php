@@ -115,6 +115,8 @@ class MiddleModels {
         $this->regModel->updateData();
         $this->driverModel->updateData();
         $this->regDetailModel->updateData();
+        $this->driverModel->deleteDatas();
+        $this->regDetailModel->deleteDatas();
         return ['code'=>0,'msg'=>'success','data'=>[]];
     }
     public function newUpdateData() {
