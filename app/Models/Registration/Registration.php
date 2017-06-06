@@ -121,7 +121,7 @@ class Registration extends BaseModel {
         $db = $db->leftJoin('admin_registration_detail as reg_detail','reg.number',
                             '=','reg_detail.number');
         $db = $db->where('reg_detail.product_number','LIKE','%'.$request['product_number'].'%')
-            ->orWhere('reg.license_plate',$request['license_plate']);
+            ->where('reg.license_plate',$request['license_plate']);
 
         $result = $db->select('reg.id','reg.number','reg.license_plate','reg.product','reg.use_unit',
                               'reg.car_brand','reg.install_date','reg.install_unit',
