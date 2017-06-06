@@ -73,14 +73,20 @@ class RegistrationDetail extends BaseModel {
             return ['code'=>5000+$e->getLine(),'msg'=>$e->getMessage(),'data'=>[]];
         }
     }
-    public function deleteData() {
-        $id = Request::input('id');
+    public function deleteData($ids=[]) {
+        $id = !empty($ids)?$ids:Request::input('id');
         $res = app('db')->table('admin_registration_detail')
             ->where('delete_time',0)
-            ->where('id',$id)
+            ->whereIn('id',$id)
             ->update(['delete_time'=>time()]);
         if(!$res) {
             throw new \Exception('删除失败');
+        }
+    }
+    public function deleteDatas() {
+        $ids = Request::input('del_ids',[]);
+        if(!empty($ids)) {
+            $this->deleteData($ids);
         }
     }
     public function updateData() {

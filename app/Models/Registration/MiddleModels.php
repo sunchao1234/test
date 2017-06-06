@@ -120,6 +120,7 @@ class MiddleModels {
     public function newUpdateData() {
         $this->regModel->updateData();
         $this->regDetailModel->updateData();
+        $this->regDetailModel->deleteDatas();
         return ['code'=>0,'msg'=>'success','data'=>[]];
     }
 }
